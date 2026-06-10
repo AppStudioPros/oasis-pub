@@ -101,7 +101,7 @@ export default function DrinksGrid() {
                   </div>
 
                   {/* Oversized icon — bleeds off top-right corner, slightly opaque */}
-                  <div className="absolute -top-6 right-0 w-64 h-64 md:w-72 md:h-72 pointer-events-none z-0">
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-64 h-64 md:w-72 md:h-72 pointer-events-none z-0">
                     <Image
                       src={tile.icon}
                       alt={tile.label}
