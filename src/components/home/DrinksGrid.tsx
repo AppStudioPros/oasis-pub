@@ -9,42 +9,36 @@ const TILES = [
   {
     label: "Craft Beer",
     sample: "Tox · Fat Orange Cat · Beer'd",
-    accent: "bg-[var(--color-oasis-orange)]",
     rotation: "-rotate-1",
     icon: "/images/icons/craft-beer.png",
   },
   {
     label: "Seltzers & Cans",
     sample: "Truly · Alc-A-Chino · Dogfish",
-    accent: "bg-white",
     rotation: "rotate-1",
     icon: "/images/icons/seltzers.png",
   },
   {
     label: "CBD Drinks",
     sample: "Goodwell · Hooker",
-    accent: "bg-[var(--color-oasis-orange)]/85",
     rotation: "-rotate-2",
     icon: "/images/icons/cbd.png",
   },
   {
     label: "Wine",
     sample: "Archer Roose · Canned & honest",
-    accent: "bg-white/90",
     rotation: "rotate-2",
     icon: "/images/icons/wine.png",
   },
   {
     label: "Alcohol-Free",
     sample: "Recess · Blind Tiger · Athletic",
-    accent: "bg-[var(--color-oasis-orange)]",
     rotation: "-rotate-1",
     icon: "/images/icons/alcohol-free.png",
   },
   {
     label: "Kids Menu",
     sample: "Bud · Yuengling · Miller High Life",
-    accent: "bg-white",
     rotation: "rotate-1",
     icon: "/images/icons/kids-menu.png",
   },
@@ -94,7 +88,7 @@ export default function DrinksGrid() {
                 className={`group relative block w-full ${tile.rotation} hover:rotate-0 transition-transform duration-500`}
               >
                 <div
-                  className={`relative ${tile.accent} aspect-[4/3] border-2 border-black shadow-[5px_5px_0_0_#000] group-hover:shadow-[7px_7px_0_0_#000] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all overflow-hidden p-4 md:p-5 flex flex-col justify-between`}
+                  className="relative bg-white aspect-[4/3] border-2 border-black shadow-[5px_5px_0_0_#000] group-hover:shadow-[7px_7px_0_0_#000] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all overflow-hidden p-4 md:p-5 flex flex-col justify-between"
                 >
                   {/* Noise texture */}
                   <div className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none">
@@ -113,7 +107,7 @@ export default function DrinksGrid() {
                       alt={tile.label}
                       fill
                       className="object-contain"
-                      style={{ mixBlendMode: "multiply", opacity: 0.45 }}
+                      style={{ mixBlendMode: "multiply", opacity: 0.7 }}
                       sizes="144px"
                     />
                   </div>
@@ -123,7 +117,7 @@ export default function DrinksGrid() {
                     <div className="text-black/55 text-[9px] font-bold uppercase tracking-[0.25em] mb-1">
                       Menu /
                     </div>
-                    <h3 className="poster-title text-black leading-[0.95] text-2xl md:text-3xl">
+                    <h3 className="poster-title text-[var(--color-oasis-orange)] leading-[0.95] text-2xl md:text-3xl">
                       {tile.label}
                     </h3>
                   </div>
