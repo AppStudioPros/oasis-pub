@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: Request) {
   try {
@@ -10,6 +11,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
     }
 
+    // Save to Supabase messages table
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
+    await supabase.from("messages").insert({
+      name,
+      email,
+      phone,
+      message: message || null,
+      source: "jobs-oasis",
+      venue: "oasis",
+      is_read: false,
+      is_archived: false,
+      starred: false,
+      metadata: { position, experience: experience || null },
+    });
+
+    // Send email via Resend
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("[work-with-us] RESEND_API_KEY not set");
