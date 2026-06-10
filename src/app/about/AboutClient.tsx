@@ -86,7 +86,7 @@ export default function AboutClient() {
               the beer list rotates weekly, and the crowd actually knows every word.
             </p>
             <p>
-              No bottle service. No bouncer attitude. No cover charge bullshit. Just twenty-plus
+              No bottle service. No bouncer attitude. No cover charge. Just twenty-plus
               craft beers on draught — mostly microbrews, a lot of local — a wall covered in show
               posters, and a stage where you might catch the band that&apos;s about to be your favorite
               before anybody else has heard of them.
