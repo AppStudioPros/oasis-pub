@@ -1,7 +1,10 @@
 import type { MetadataRoute } from "next";
-import eventsData from "@/data/events.json";
+import { getAllEvents } from "@/lib/supabase";
+import staticEvents from "@/data/events.json";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://oasisnewlondon.com";
   const lastModified = new Date();
 
@@ -14,8 +17,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  const eventRoutes = eventsData.map((e) => ({
-    url: `${base}/events/${e.slug}`,
+  // Try live events, fall back to static
+  const liveEvents = await getAllEvents();
+  const eventSlugs =
+    liveEvents.length > 0
+      ? liveEvents.map((e) => e.slug)
+      : staticEvents.map((e) => e.slug);
+
+  const eventRoutes = eventSlugs.map((slug) => ({
+    url: `${base}/events/${slug}`,
     lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.6,

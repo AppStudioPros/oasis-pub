@@ -6,15 +6,47 @@ import DrinksGrid from "@/components/home/DrinksGrid";
 import UpcomingShows from "@/components/home/UpcomingShows";
 import HiringBanner from "@/components/home/HiringBanner";
 import FindUs from "@/components/home/FindUs";
-import eventsData from "@/data/events.json";
+import { getUpcomingEvents } from "@/lib/supabase";
+import staticEvents from "@/data/events.json";
 
-export default function HomePage() {
-  // Sort upcoming events by date asc
-  const upcoming = [...eventsData]
-    .filter((e) => new Date(e.date) >= new Date(new Date().setHours(0, 0, 0, 0)))
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+export const dynamic = "force-dynamic";
 
-  const featured = upcoming[0] || eventsData[0];
+// Map Supabase event → shape expected by home components
+function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
+  return {
+    slug: e.slug,
+    title: e.title,
+    date: e.start_date.split("T")[0],
+    startTime: new Date(e.start_date).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/New_York",
+    }),
+    endTime: e.end_date
+      ? new Date(e.end_date).toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          timeZone: "America/New_York",
+        })
+      : "11:30 PM",
+    image: e.image_url ?? "/images/events/indigo-folly.png",
+    description: e.description ?? "",
+    ticketLink: e.ticket_url ?? null,
+    genre: e.category ?? "Live Music",
+  };
+}
+
+export default async function HomePage() {
+  // Try live DB first, fall back to static JSON
+  const liveEvents = await getUpcomingEvents();
+  const events =
+    liveEvents.length > 0
+      ? liveEvents.map(mapEvent)
+      : staticEvents.filter(
+          (e) => new Date(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))
+        );
+
+  const featured = events[0] ?? null;
 
   return (
     <>
@@ -40,7 +72,7 @@ export default function HomePage() {
 
       <DrinksGrid />
 
-      <UpcomingShows events={upcoming} />
+      <UpcomingShows events={events} />
 
       <Marquee
         items={[
