@@ -101,19 +101,19 @@ export default function DrinksGrid() {
                   </div>
 
                   {/* Oversized icon — bleeds off top-right corner, slightly opaque */}
-                  <div className="absolute -top-6 right-4 w-64 h-64 md:w-72 md:h-72 pointer-events-none">
+                  <div className="absolute -top-6 right-4 w-64 h-64 md:w-72 md:h-72 pointer-events-none z-0">
                     <Image
                       src={tile.icon}
                       alt={tile.label}
                       fill
                       className="object-contain"
-                      style={{ mixBlendMode: "multiply", opacity: 0.7 }}
+                      style={{ mixBlendMode: "multiply", opacity: 0.88 }}
                       sizes="144px"
                     />
                   </div>
 
                   {/* Top row: label only */}
-                  <div className="relative">
+                  <div className="relative z-10">
                     <div className="text-black/55 text-[9px] font-bold uppercase tracking-[0.25em] mb-1">
                       Menu /
                     </div>
@@ -123,7 +123,7 @@ export default function DrinksGrid() {
                   </div>
 
                   {/* Bottom row: sample + arrow */}
-                  <div className="relative flex items-end justify-between gap-2">
+                  <div className="relative z-10 flex items-end justify-between gap-2">
                     <p className="text-black/70 italic text-[10px] md:text-xs leading-tight">
                       {tile.sample}
                     </p>
