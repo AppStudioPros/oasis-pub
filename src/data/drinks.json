@@ -1,0 +1,125 @@
+{
+  "Craft Beer": {
+    "title": "Craft Beer on Tap",
+    "subtitle": "20+ rotating drafts. Mostly microbrews. A lot of local. Always something new.",
+    "note": "Tap list rotates often. Ask your bartender for tonight's pour list.",
+    "categories": [
+      {
+        "name": "What's On Tap",
+        "items": [
+          { "name": "Two Roads Two Juicy IPA", "style": "Hazy IPA", "abv": "6.5%", "origin": "Stratford, CT" },
+          { "name": "Beer'd Hubris Imperial IPA", "style": "DIPA", "abv": "8.4%", "origin": "Stonington, CT" },
+          { "name": "Stony Creek Cranky IPA", "style": "American IPA", "abv": "7.0%", "origin": "Branford, CT" },
+          { "name": "Outer Light Libation Propaganda", "style": "Pale Ale", "abv": "5.5%", "origin": "Groton, CT" },
+          { "name": "Athletic Free Wave", "style": "Non-Alcoholic Hazy IPA", "abv": "0.5%", "origin": "Stratford, CT" },
+          { "name": "Allagash White", "style": "Belgian Witbier", "abv": "5.2%", "origin": "Portland, ME" },
+          { "name": "Founders KBS", "style": "Bourbon Barrel Stout", "abv": "12.0%", "origin": "Grand Rapids, MI" }
+        ],
+        "note": "This is a sample — the real tap list rotates weekly."
+      }
+    ]
+  },
+  "Seltzers & Canned Cocktails": {
+    "title": "Seltzers & Canned Cocktails",
+    "subtitle": "Cold cans for when you want something easy.",
+    "categories": [
+      {
+        "name": "Hard Seltzers",
+        "items": [
+          { "name": "High Noon — Pineapple", "abv": "4.5%" },
+          { "name": "High Noon — Watermelon", "abv": "4.5%" },
+          { "name": "High Noon — Black Cherry", "abv": "4.5%" },
+          { "name": "White Claw — Mango", "abv": "5.0%" },
+          { "name": "White Claw — Lime", "abv": "5.0%" }
+        ]
+      },
+      {
+        "name": "Canned Cocktails",
+        "items": [
+          { "name": "Cutwater Tequila Margarita", "abv": "12.5%" },
+          { "name": "Cutwater Vodka Mule", "abv": "7.0%" },
+          { "name": "On the Rocks Cosmopolitan", "abv": "20.0%" }
+        ]
+      }
+    ]
+  },
+  "CBD Drinks": {
+    "title": "CBD Drinks",
+    "subtitle": "Chill without the booze. Hemp-derived, non-alcoholic, locally available.",
+    "note": "Effects vary. Don't mix with driving.",
+    "categories": [
+      {
+        "name": "Cans",
+        "items": [
+          { "name": "Wynk Sparkling Hemp — Black Cherry", "thc": "5mg THC + 5mg CBD" },
+          { "name": "Wynk Sparkling Hemp — Lime Twist", "thc": "2.5mg THC + 2.5mg CBD" },
+          { "name": "Cann Social Tonic — Grapefruit Rosemary", "thc": "2mg THC + 4mg CBD" },
+          { "name": "Hi5 Seltzer — Mango", "thc": "5mg THC" }
+        ]
+      }
+    ]
+  },
+  "Wine": {
+    "title": "Wine",
+    "subtitle": "Short, honest list. Reds, whites, bubbles.",
+    "categories": [
+      {
+        "name": "By the Glass",
+        "items": [
+          { "name": "House Red", "style": "Cabernet blend" },
+          { "name": "House White", "style": "Pinot Grigio" },
+          { "name": "Sparkling", "style": "Prosecco" }
+        ]
+      },
+      {
+        "name": "By the Bottle",
+        "items": [
+          { "name": "Malbec", "origin": "Mendoza, Argentina" },
+          { "name": "Sauvignon Blanc", "origin": "Marlborough, NZ" }
+        ]
+      }
+    ]
+  },
+  "Alcohol-Free": {
+    "title": "Alcohol-Free",
+    "subtitle": "Zero-proof options. Sober-friendly, designated-driver approved.",
+    "categories": [
+      {
+        "name": "Beer & Seltzer",
+        "items": [
+          { "name": "Athletic Free Wave", "style": "Hazy IPA (NA)" },
+          { "name": "Athletic Run Wild", "style": "IPA (NA)" },
+          { "name": "Heineken 0.0", "style": "Lager (NA)" }
+        ]
+      },
+      {
+        "name": "Sodas & Mixers",
+        "items": [
+          { "name": "Coca-Cola", "size": "Can" },
+          { "name": "Diet Coke", "size": "Can" },
+          { "name": "Ginger Beer", "size": "Bottle" },
+          { "name": "Tonic Water", "size": "Bottle" },
+          { "name": "Club Soda", "size": "Bottle" },
+          { "name": "Red Bull", "size": "Can" }
+        ]
+      }
+    ]
+  },
+  "Kids Menu": {
+    "title": "Kids Menu",
+    "subtitle": "We're 21+ inside, but if you're at a private event or daytime gathering, here's what we've got for the under-21 crew.",
+    "note": "Only available during private events / family-friendly daytime hours.",
+    "categories": [
+      {
+        "name": "Drinks",
+        "items": [
+          { "name": "Shirley Temple" },
+          { "name": "Roy Rogers" },
+          { "name": "Lemonade" },
+          { "name": "Apple Juice" },
+          { "name": "Sodas" }
+        ]
+      }
+    ]
+  }
+}

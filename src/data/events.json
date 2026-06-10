@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "indigo-folly-w-haunting-titans",
+    "title": "Indigo Folly w/ Haunting Titans",
+    "date": "2026-06-20",
+    "startTime": "9:00 PM",
+    "endTime": "11:30 PM",
+    "image": "/images/events/indigo-folly.png",
+    "description": "Indigo Folly brings their genre-bending sound to Oasis with support from Haunting Titans. Doors at 8pm, music starts at 9.",
+    "ticketLink": null,
+    "genre": "Indie Rock"
+  },
+  {
+    "slug": "huntress-the-holder-of-hands-w-a-former-friend",
+    "title": "The Huntress & The Holder of Hands w/ A Former Friend",
+    "date": "2026-06-21",
+    "startTime": "9:00 PM",
+    "endTime": "11:30 PM",
+    "image": "/images/events/huntress.png",
+    "description": "A heavy night at the Oasis. The Huntress & The Holder of Hands headline with A Former Friend opening. 21+.",
+    "ticketLink": null,
+    "genre": "Metal / Hardcore"
+  },
+  {
+    "slug": "sea-shanty-night-1",
+    "title": "Sea Shanty Night w/ My Druthers & Bards of Gungywamp",
+    "date": "2026-06-27",
+    "startTime": "9:00 PM",
+    "endTime": "11:30 PM",
+    "image": "/images/events/sea-shanty.png",
+    "description": "Sea Shanty Night is back! My Druthers and Bards of Gungywamp bring the rope-pulling sing-alongs. Bring your beer voice.",
+    "ticketLink": null,
+    "genre": "Folk / Shanty"
+  }
+]

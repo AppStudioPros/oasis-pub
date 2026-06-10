@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://oasisnewlondon.com"),
   title: {
     default: "The Oasis Pub — New London CT | Live Music, Craft Beer, Dive Bar",
     template: "%s | The Oasis Pub",
