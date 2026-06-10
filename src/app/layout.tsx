@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | The Oasis Pub",
   },
   description:
-    "New London's home for live music. Local craft beers on tap, emerging bands before they blow up, loud nights at 16 Bank Street. Open 365 days a year.",
+    "New London CT's rock club and music venue. Emerging bands, 20+ craft beers, live music 365 nights a year at 16 Bank Street.",
   keywords: [
     "Oasis Pub New London",
     "live music New London CT",

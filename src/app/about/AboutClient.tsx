@@ -40,7 +40,7 @@ export default function AboutClient() {
         eyebrow="Our Story"
         title="About"
         accent="The Oasis"
-        subtitle="Local. Loud. Where New London's music lives."
+        subtitle="Emerging bands. Cold drafts. No pretense."
       />
 
       <SectionDivider
@@ -82,10 +82,8 @@ export default function AboutClient() {
             className="space-y-5 text-white/75 text-base md:text-lg leading-relaxed"
           >
             <p>
-              We&apos;re at 16 Bank Street in downtown New London — the room where the city&apos;s
-              music scene actually lives. The bands that play here are local, hungry, and good.
-              The beer list rotates with the season. The crowd shows up because they genuinely
-              care about what&apos;s on that stage.
+              We&apos;re the room at 16 Bank Street where emerging bands play before they blow up,
+              the beer list rotates weekly, and the crowd actually knows every word.
             </p>
             <p>
               No bottle service. No bouncer attitude. No cover charge bullshit. Just twenty-plus
