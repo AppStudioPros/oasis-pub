@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import PageHero from "@/components/PageHero";
+import SectionDivider from "@/components/SectionDivider";
 
 interface DrinkItem {
   name: string;
@@ -41,26 +43,27 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[35vh] min-h-[260px] flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/heroes/poster-collage.jpg"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 text-center px-6">
-          <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-3">
-            Pick Your Poison
-          </p>
-          <h1 className="poster-title text-5xl md:text-7xl text-white">Drinks</h1>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Pick Your Poison"
+        title="The"
+        accent="Drinks."
+        subtitle="20+ drafts. Canned cocktails. CBD chill. Mocktails. Whatever your night needs."
+      />
+
+      <SectionDivider
+        items={[
+          "✦ 20+ DRAFTS ✦",
+          "CRAFT BEER",
+          "CANNED COCKTAILS",
+          "CBD CHILL",
+          "ZERO PROOF",
+          "ALWAYS COLD",
+        ]}
+        speed={40}
+      />
 
       {/* Tab nav */}
-      <section className="bg-[var(--color-oasis-ink)] sticky top-16 md:top-20 z-30 border-b border-white/10">
+      <section className="bg-[var(--color-oasis-ink)] sticky top-16 md:top-20 z-30 border-b-2 border-[var(--color-oasis-orange)]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-1 overflow-x-auto scrollbar-hide">
             {tabs.map((tab) => (
@@ -81,64 +84,91 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
       </section>
 
       {/* Menu content */}
-      <section className="bg-[var(--color-oasis-ink)] py-12 md:py-16 min-h-[60vh]">
+      <section className="relative bg-[var(--color-oasis-ink)] py-12 md:py-16 min-h-[60vh] overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="poster-title text-4xl md:text-5xl text-white mb-3">
-              {active.title}
-            </h2>
-            {active.subtitle && (
-              <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
-                {active.subtitle}
-              </p>
-            )}
-            {active.note && (
-              <p className="text-[var(--color-oasis-orange)] text-sm italic mt-4 max-w-2xl mx-auto">
-                {active.note}
-              </p>
-            )}
-          </div>
-
-          <div className="space-y-12">
-            {active.categories.map((cat) => (
-              <div key={cat.name}>
-                <h3 className="display text-2xl md:text-3xl uppercase tracking-wider text-[var(--color-oasis-orange)] mb-3 pb-2 border-b-2 border-[var(--color-oasis-orange)]/40">
-                  {cat.name}
-                </h3>
-                {cat.note && (
-                  <p className="text-white/50 text-sm italic mb-4">{cat.note}</p>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="text-center mb-12">
+                <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-3">
+                  ✦ {activeTab} ✦
+                </p>
+                <h2 className="poster-title text-4xl md:text-6xl text-white mb-3 leading-[0.9]">
+                  {active.title}
+                </h2>
+                {active.subtitle && (
+                  <p className="text-white/70 text-sm md:text-base max-w-2xl mx-auto">
+                    {active.subtitle}
+                  </p>
                 )}
-                {/* Subcategories (Craft Beer style) */}
-                {cat.subcategories && cat.subcategories.length > 0 && (
-                  <div className="space-y-8 mt-4">
-                    {cat.subcategories.map((sub) => (
-                      <div key={sub.name}>
-                        <h4 className="display text-base uppercase tracking-[0.2em] text-white/60 mb-3 pb-1 border-b border-white/10">
-                          {sub.name}
-                        </h4>
-                        <ItemList items={sub.items} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {/* Flat items list */}
-                {cat.items && cat.items.length > 0 && (
-                  <div className="mt-2">
-                    <ItemList items={cat.items} />
-                  </div>
+                {active.note && (
+                  <p className="text-[var(--color-oasis-orange)] text-sm italic mt-4 max-w-2xl mx-auto">
+                    {active.note}
+                  </p>
                 )}
               </div>
-            ))}
-          </div>
 
-          {/* Disclaimer */}
-          {activeTab === "Craft Beer" && (
-            <p className="text-center text-white/40 text-xs italic mt-12">
-              Tap list rotates often. Ask your bartender for tonight&apos;s pour list.
-            </p>
-          )}
+              <div className="space-y-12">
+                {active.categories.map((cat, ci) => (
+                  <motion.div
+                    key={cat.name}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: ci * 0.05 }}
+                  >
+                    <h3 className="display text-2xl md:text-3xl uppercase tracking-wider text-[var(--color-oasis-orange)] mb-3 pb-2 border-b-2 border-[var(--color-oasis-orange)]/40">
+                      {cat.name}
+                    </h3>
+                    {cat.note && (
+                      <p className="text-white/50 text-sm italic mb-4">{cat.note}</p>
+                    )}
+                    {cat.subcategories && cat.subcategories.length > 0 && (
+                      <div className="space-y-8 mt-4">
+                        {cat.subcategories.map((sub) => (
+                          <div key={sub.name}>
+                            <h4 className="display text-base uppercase tracking-[0.2em] text-white/60 mb-3 pb-1 border-b border-white/10">
+                              {sub.name}
+                            </h4>
+                            <ItemList items={sub.items} />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {cat.items && cat.items.length > 0 && (
+                      <div className="mt-2">
+                        <ItemList items={cat.items} />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {activeTab === "Craft Beer" && (
+                <p className="text-center text-white/40 text-xs italic mt-12">
+                  ✦ Tap list rotates often — ask your bartender for tonight&apos;s pour list ✦
+                </p>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
+
+      <SectionDivider
+        items={[
+          "✦ COLD CRAFT BEER ✦",
+          "CT LOCAL",
+          "ROTATING TAPS",
+          "21+",
+          "OPEN 365",
+        ]}
+        reverse
+        speed={45}
+      />
     </>
   );
 }

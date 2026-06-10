@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import PageHero from "@/components/PageHero";
+import SectionDivider from "@/components/SectionDivider";
 
 export default function WorkClient() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -33,52 +36,130 @@ export default function WorkClient() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/heroes/poster-collage.jpg"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 text-center px-6">
-          <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-3">
-            Now Hiring
-          </p>
-          <h1 className="poster-title text-5xl md:text-7xl text-white">Work With Us</h1>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Now Hiring"
+        title="Join"
+        accent="The Crew."
+        subtitle="Bartenders. Door staff. Sound engineers. Booking help."
+      />
 
-      {/* Intro */}
-      <section className="bg-[var(--color-oasis-ink)] py-12 md:py-16">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-xl text-white/90 mb-3 leading-snug">
-            We&apos;re always looking for the right people.
-          </p>
-          <p className="text-white/60 leading-relaxed">
-            Bartenders, door staff, sound engineers, booking help. If you love live music,
-            keep a cool head behind a bar at 1am on a Friday, and don&apos;t mind the smell of
-            stale beer on your jacket — drop us a line.
-          </p>
+      <SectionDivider
+        items={["✦ NOW HIRING ✦", "BARTENDERS", "DOOR STAFF", "SOUND ENGINEERS", "JOIN THE CREW"]}
+        speed={40}
+      />
+
+      {/* Intro w/ rotating stamp */}
+      <section className="relative bg-black py-16 md:py-24 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(242,99,33,0.4) 40px, rgba(242,99,33,0.4) 42px)",
+          }}
+        />
+        <div className="relative max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-10 items-center">
+          {/* Rotating stamp */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: -8 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, type: "spring" }}
+            className="relative mx-auto md:mx-0"
+          >
+            <div className="relative w-40 h-40 md:w-48 md:h-48">
+              <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full animate-spin-slow-work">
+                <defs>
+                  <path
+                    id="work-circle"
+                    d="M 100,100 m -85,0 a 85,85 0 1,1 170,0 a 85,85 0 1,1 -170,0"
+                  />
+                </defs>
+                <text className="fill-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.4em] text-[13px]">
+                  <textPath href="#work-circle">
+                    NOW HIRING · NOW HIRING · NOW HIRING ·
+                  </textPath>
+                </text>
+              </svg>
+              <div className="absolute inset-6 border-4 border-[var(--color-oasis-orange)] rounded-full flex items-center justify-center bg-black">
+                <div className="text-center">
+                  <div className="text-[var(--color-oasis-orange)] text-[10px] font-bold uppercase tracking-[0.3em]">Join</div>
+                  <div className="poster-title text-2xl md:text-3xl text-white leading-none mt-1">The<br />Crew</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="md:col-span-2"
+          >
+            <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-4">
+              ✦ The Right People ✦
+            </p>
+            <h2 className="poster-title text-3xl md:text-5xl text-white leading-[0.9] mb-6">
+              We&apos;re always looking<br />
+              <span className="text-[var(--color-oasis-orange)]">for our people.</span>
+            </h2>
+            <p className="text-white/70 text-base leading-relaxed">
+              Bartenders, door staff, sound engineers, booking help. If you love live music,
+              keep a cool head behind a bar at 1am on a Friday, and don&apos;t mind the smell of
+              stale beer on your jacket — drop us a line.
+            </p>
+          </motion.div>
         </div>
+
+        <style jsx>{`
+          @keyframes spin-slow-work {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          :global(.animate-spin-slow-work) {
+            animation: spin-slow-work 20s linear infinite;
+          }
+        `}</style>
       </section>
 
       {/* Application form */}
-      <section className="bg-black py-16 md:py-20 border-y border-white/10">
+      <section className="relative bg-[var(--color-oasis-ink)] py-16 md:py-24 border-t-2 border-[var(--color-oasis-orange)]/40 overflow-hidden">
         <div className="max-w-2xl mx-auto px-6">
-          <h2 className="poster-title text-3xl md:text-4xl text-[var(--color-oasis-orange)] mb-8 text-center">
-            Apply Now
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-3">
+              ✦ Apply Now ✦
+            </p>
+            <h2 className="poster-title text-4xl md:text-5xl text-white leading-[0.9]">
+              Tell us<br />
+              <span className="text-[var(--color-oasis-orange)]">about yourself.</span>
+            </h2>
+          </motion.div>
 
           {status === "sent" ? (
-            <div className="border border-[var(--color-oasis-orange)] bg-[var(--color-oasis-orange)]/10 p-8 text-center">
-              <p className="poster-title text-2xl text-[var(--color-oasis-orange)] mb-2">Got it!</p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="border-2 border-[var(--color-oasis-orange)] bg-[var(--color-oasis-orange)]/10 p-8 text-center shadow-[8px_8px_0_0_var(--color-oasis-orange)]"
+            >
+              <p className="poster-title text-3xl text-[var(--color-oasis-orange)] mb-2">Got it!</p>
               <p className="text-white/80">Thanks for applying. We&apos;ll be in touch if there&apos;s a fit. 🍻</p>
-            </div>
+            </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <motion.form
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
               <Field label="Full Name" name="name" required />
               <Field label="Email" name="email" type="email" required />
               <Field label="Phone" name="phone" type="tel" required />
@@ -90,7 +171,7 @@ export default function WorkClient() {
                   name="position"
                   required
                   defaultValue=""
-                  className="w-full bg-[var(--color-oasis-ink)] border border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none"
+                  className="w-full bg-black border-2 border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none"
                 >
                   <option value="" disabled>Choose a role...</option>
                   <option value="Bartender">Bartender</option>
@@ -110,21 +191,32 @@ export default function WorkClient() {
                   name="message"
                   rows={5}
                   placeholder="Why the Oasis? Any music scene experience? Availability?"
-                  className="w-full bg-[var(--color-oasis-ink)] border border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none transition-colors"
+                  className="w-full bg-black border-2 border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none transition-colors"
                 />
               </div>
               {status === "error" && <p className="text-red-400 text-sm">{errorMsg}</p>}
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full bg-[var(--color-oasis-orange)] hover:bg-[var(--color-oasis-orange-dark)] disabled:opacity-60 text-white font-bold uppercase tracking-wider text-sm px-7 py-4 transition-colors"
+                className="group w-full bg-[var(--color-oasis-orange)] hover:bg-[var(--color-oasis-orange-dark)] disabled:opacity-60 text-white font-bold uppercase tracking-wider text-sm px-7 py-4 transition-all hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#000] inline-flex items-center justify-center gap-2"
               >
-                {status === "sending" ? "Submitting..." : "Submit Application"}
+                {status === "sending" ? "Submitting..." : (
+                  <>
+                    Submit Application
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </button>
-            </form>
+            </motion.form>
           )}
         </div>
       </section>
+
+      <SectionDivider
+        items={["✦ JOIN US ✦", "BARTENDERS", "DOOR STAFF", "SOUND ENGINEERS", "BARBACKS"]}
+        reverse
+        speed={45}
+      />
     </>
   );
 }
@@ -152,7 +244,7 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="w-full bg-[var(--color-oasis-ink)] border border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none transition-colors"
+        className="w-full bg-black border-2 border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none transition-colors"
       />
     </div>
   );
