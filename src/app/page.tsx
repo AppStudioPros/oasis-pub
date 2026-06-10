@@ -6,7 +6,7 @@ import DrinksGrid from "@/components/home/DrinksGrid";
 import UpcomingShows from "@/components/home/UpcomingShows";
 import HiringBanner from "@/components/home/HiringBanner";
 import FindUs from "@/components/home/FindUs";
-import { getUpcomingEvents } from "@/lib/supabase";
+import { getUpcomingEvents, toEasternDate } from "@/lib/supabase";
 import staticEvents from "@/data/events.json";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
   return {
     slug: e.slug,
     title: e.title,
-    date: e.start_date.split("T")[0],
+    date: toEasternDate(e.start_date),
     startTime: new Date(e.start_date).toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getEventBySlug, getAllEvents } from "@/lib/supabase";
+import { getEventBySlug, getAllEvents, toEasternDate } from "@/lib/supabase";
 import staticEvents from "@/data/events.json";
 import EventDetailClient from "./EventDetailClient";
 
@@ -26,7 +26,7 @@ function mapLive(e: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>) {
   return {
     slug: e.slug,
     title: e.title,
-    date: e.start_date.split("T")[0],
+    date: toEasternDate(e.start_date),
     startTime: new Date(e.start_date).toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",

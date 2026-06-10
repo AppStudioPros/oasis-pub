@@ -5,6 +5,13 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+/** Convert an ISO date string to YYYY-MM-DD in Eastern time */
+export function toEasternDate(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-CA", {
+    timeZone: "America/New_York",
+  }); // en-CA gives YYYY-MM-DD format
+}
+
 export interface OasisEvent {
   id: string;
   slug: string;
