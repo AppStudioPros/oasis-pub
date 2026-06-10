@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageViewTracker from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://oasisnewlondon.com"),
@@ -110,6 +111,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <PageViewTracker />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
