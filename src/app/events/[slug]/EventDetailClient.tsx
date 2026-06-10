@@ -141,7 +141,7 @@ export default function EventDetailClient({ event }: { event: Event }) {
                 </div>
                 <div className="flex items-center gap-3">
                   <Clock size={18} className="text-[var(--color-oasis-orange)]" />
-                  <span>{event.startTime} – {event.endTime}</span>
+                  <span>{event.startTime}{event.endTime ? ` – ${event.endTime}` : ""}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin size={18} className="text-[var(--color-oasis-orange)]" />

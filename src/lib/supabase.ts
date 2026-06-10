@@ -12,6 +12,16 @@ export function toEasternDate(iso: string): string {
   }); // en-CA gives YYYY-MM-DD format
 }
 
+/** Format a time from ISO string in Eastern time, e.g. "9:00 PM" */
+export function toEasternTime(iso: string): string {
+  return new Date(iso).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/New_York",
+  });
+}
+
 export interface OasisEvent {
   id: string;
   slug: string;

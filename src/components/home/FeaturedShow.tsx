@@ -132,7 +132,7 @@ export default function FeaturedShow({ event }: { event: Event }) {
               </div>
               <div className="flex items-center gap-3">
                 <Clock size={16} className="text-[var(--color-oasis-orange)]" />
-                <span>{event.startTime} – {event.endTime}</span>
+                <span>{event.startTime}{event.endTime ? ` – ${event.endTime}` : ""}</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin size={16} className="text-[var(--color-oasis-orange)]" />

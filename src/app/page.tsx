@@ -6,7 +6,7 @@ import DrinksGrid from "@/components/home/DrinksGrid";
 import UpcomingShows from "@/components/home/UpcomingShows";
 import HiringBanner from "@/components/home/HiringBanner";
 import FindUs from "@/components/home/FindUs";
-import { getUpcomingEvents, toEasternDate } from "@/lib/supabase";
+import { getUpcomingEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
 import staticEvents from "@/data/events.json";
 
 export const dynamic = "force-dynamic";
@@ -17,19 +17,9 @@ function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
     slug: e.slug,
     title: e.title,
     date: toEasternDate(e.start_date),
-    startTime: new Date(e.start_date).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      timeZone: "America/New_York",
-    }),
-    endTime: e.end_date
-      ? new Date(e.end_date).toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          timeZone: "America/New_York",
-        })
-      : "11:30 PM",
-    image: e.image_url ?? "/images/events/indigo-folly.png",
+    startTime: toEasternTime(e.start_date),
+    endTime: e.end_date ? toEasternTime(e.end_date) : "",
+    image: e.image_url ?? "/images/heroes/poster-collage.jpg",
     description: e.description ?? "",
     ticketLink: e.ticket_url ?? null,
     genre: e.category ?? "Live Music",
