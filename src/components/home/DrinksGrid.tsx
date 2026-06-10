@@ -106,27 +106,26 @@ export default function DrinksGrid() {
                     </svg>
                   </div>
 
-                  {/* Top row: label + icon */}
-                  <div className="relative flex items-start justify-between gap-2">
-                    <div>
-                      <div className="text-black/55 text-[9px] font-bold uppercase tracking-[0.25em] mb-1">
-                        Menu /
-                      </div>
-                      <h3 className="poster-title text-black leading-[0.95] text-2xl md:text-3xl">
-                        {tile.label}
-                      </h3>
+                  {/* Oversized icon — bleeds off top-right corner, slightly opaque */}
+                  <div className="absolute -top-4 -right-4 w-32 h-32 md:w-36 md:h-36 pointer-events-none">
+                    <Image
+                      src={tile.icon}
+                      alt={tile.label}
+                      fill
+                      className="object-contain"
+                      style={{ mixBlendMode: "multiply", opacity: 0.45 }}
+                      sizes="144px"
+                    />
+                  </div>
+
+                  {/* Top row: label only */}
+                  <div className="relative">
+                    <div className="text-black/55 text-[9px] font-bold uppercase tracking-[0.25em] mb-1">
+                      Menu /
                     </div>
-                    {/* Graffiti icon — mix-blend-mode:multiply makes white bg disappear */}
-                    <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 relative">
-                      <Image
-                        src={tile.icon}
-                        alt={tile.label}
-                        fill
-                        className="object-contain"
-                        style={{ mixBlendMode: "multiply" }}
-                        sizes="64px"
-                      />
-                    </div>
+                    <h3 className="poster-title text-black leading-[0.95] text-2xl md:text-3xl">
+                      {tile.label}
+                    </h3>
                   </div>
 
                   {/* Bottom row: sample + arrow */}
