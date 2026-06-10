@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   metadataBase: new URL("https://oasisnewlondon.com"),
   title: {
-    default: "The Oasis Pub — New London CT | Live Music, Craft Beer, Dive Bar",
+    default: "The Oasis Pub — New London CT | Live Music, Craft Beer, Rock Club",
     template: "%s | The Oasis Pub",
   },
   description:
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   keywords: [
     "Oasis Pub New London",
     "live music New London CT",
-    "dive bar New London",
+    "music venue New London",
     "rock club Connecticut",
     "craft beer bar New London",
     "16 Bank Street",

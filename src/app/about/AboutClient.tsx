@@ -48,8 +48,8 @@ export default function AboutClient() {
           "EST. 1990s",
           "16 BANK ST",
           "NEW LONDON CT",
-          "DIVE BAR",
           "ROCK CLUB",
+          "LIVE MUSIC",
           "21+",
         ]}
         speed={40}
@@ -95,7 +95,7 @@ export default function AboutClient() {
             </p>
             <p>
               We&apos;re open 365 days a year. Yes, including the ones nobody else is open. If you
-              love rock clubs, dive bars, indie nights, bass drops, sea shanties, or just a really
+              love rock clubs, indie nights, bass drops, sea shanties, or just a really
               good pint with a stranger — you found the right place.
             </p>
           </motion.div>
@@ -149,7 +149,7 @@ export default function AboutClient() {
           "NO COVER",
           "OPEN 365",
           "21+",
-          "DIVE BAR",
+          "CRAFT BEER",
         ]}
         reverse
         speed={45}

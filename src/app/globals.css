@@ -47,7 +47,7 @@ html, body {
   line-height: 0.95;
 }
 
-/* Subtle grain overlay for that dive-bar feel */
+/* Subtle grain overlay for that grunge feel */
 .grain::after {
   content: "";
   position: absolute;

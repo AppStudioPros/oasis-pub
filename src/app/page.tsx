@@ -27,8 +27,8 @@ export default function HomePage() {
           "OPEN 365",
           "NO COVER",
           "16 BANK ST",
-          "DIVE BAR",
           "ROCK CLUB",
+          "CRAFT BEER",
           "NEW LONDON CT",
         ]}
         speed={40}
