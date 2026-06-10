@@ -3,7 +3,7 @@ import AboutClient from "./AboutClient";
 export const metadata = {
   title: "About",
   description:
-    "The Oasis Pub — the epicenter of New London's music scene. 20+ craft beers, emerging bands, loud nights, and the bar it's supposed to be in CT.",
+    "The Oasis Pub — New London CT's home for live music. Local craft beer, emerging bands, and loud nights at 16 Bank Street. The place the city's music scene calls home.",
 };
 
 export default function AboutPage() {

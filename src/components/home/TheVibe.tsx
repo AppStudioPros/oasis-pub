@@ -53,8 +53,8 @@ export default function TheVibe() {
               transition={{ duration: 0.7 }}
               className="poster-title text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9] mb-8"
             >
-              Real haunt.<br />
-              <span className="text-[var(--color-oasis-orange)]">Huge sound.</span>
+              New London&apos;s<br />
+              <span className="text-[var(--color-oasis-orange)]">music home.</span>
             </motion.h2>
             <motion.div
               initial={{ opacity: 0 }}
@@ -64,10 +64,10 @@ export default function TheVibe() {
               className="space-y-4 text-white/70 text-base md:text-lg leading-relaxed max-w-xl mb-8"
             >
               <p>
-                We&apos;re what a real bar is supposed to feel like. No bottle service. No bouncer attitude. No cover charge bullshit.
+                Local bands. Local beer. The kind of place that actually knows what it is and isn&apos;t trying to be anything else.
               </p>
               <p>
-                Just twenty-plus craft beers on draught, a wall covered in show posters, and a stage where you might catch the band that&apos;s about to be your favorite.
+                Twenty-plus rotating craft drafts, walls covered in show posters, and a stage where you catch the band everyone else finds out about six months later.
               </p>
             </motion.div>
             <motion.div
