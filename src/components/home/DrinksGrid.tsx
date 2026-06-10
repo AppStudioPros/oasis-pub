@@ -117,7 +117,7 @@ export default function DrinksGrid() {
                       </h3>
                     </div>
                     {/* Graffiti icon — mix-blend-mode:multiply makes white bg disappear */}
-                    <div className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 relative">
+                    <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 relative">
                       <Image
                         src={tile.icon}
                         alt={tile.label}
