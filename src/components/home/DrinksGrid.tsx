@@ -7,10 +7,9 @@ import { ArrowRight } from "lucide-react";
 const TILES = [
   {
     label: "Craft Beer",
-    sample: "Tox Fugu · Fat Orange Cat · Beer'd",
+    sample: "Tox · Fat Orange Cat · Beer'd",
     accent: "bg-[var(--color-oasis-orange)]",
     rotation: "-rotate-1",
-    big: true,
   },
   {
     label: "Seltzers & Cans",
@@ -21,14 +20,14 @@ const TILES = [
   {
     label: "CBD Drinks",
     sample: "Goodwell · Hooker",
-    accent: "bg-[var(--color-oasis-orange)]/60",
+    accent: "bg-[var(--color-oasis-orange)]/85",
     rotation: "-rotate-2",
   },
   {
     label: "Wine",
     sample: "Archer Roose · Canned & honest",
-    accent: "bg-white/80",
-    rotation: "rotate-1",
+    accent: "bg-white/90",
+    rotation: "rotate-2",
   },
   {
     label: "Alcohol-Free",
@@ -40,13 +39,13 @@ const TILES = [
     label: "Kids Menu",
     sample: "Bud · Yuengling · Miller High Life",
     accent: "bg-white",
-    rotation: "rotate-2",
+    rotation: "rotate-1",
   },
 ];
 
 export default function DrinksGrid() {
   return (
-    <section className="relative bg-[var(--color-oasis-orange)] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-[var(--color-oasis-orange)] py-16 md:py-20 overflow-hidden">
       {/* Texture overlay */}
       <div
         className="absolute inset-0 opacity-10 pointer-events-none"
@@ -56,46 +55,43 @@ export default function DrinksGrid() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <p className="text-black/60 font-bold uppercase tracking-[0.4em] text-xs mb-4">
+          <p className="text-black/60 font-bold uppercase tracking-[0.4em] text-xs mb-3">
             ✦ Pick Your Poison ✦
           </p>
-          <h2 className="poster-title text-6xl md:text-8xl text-black leading-none">
+          <h2 className="poster-title text-5xl md:text-7xl text-black leading-none">
             The Drinks
           </h2>
-          <p className="text-black/70 text-base md:text-lg mt-6 max-w-xl mx-auto">
+          <p className="text-black/70 text-sm md:text-base mt-4 max-w-xl mx-auto">
             Twenty-plus drafts. Canned cocktails. CBD chill. Mocktails. Whatever your night needs.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
           {TILES.map((tile, i) => (
             <motion.div
               key={tile.label}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className={tile.big ? "col-span-2 md:col-span-2 row-span-2" : ""}
             >
               <Link
                 href="/drinks"
-                className={`group relative block w-full h-full ${tile.rotation} hover:rotate-0 transition-transform duration-500`}
+                className={`group relative block w-full ${tile.rotation} hover:rotate-0 transition-transform duration-500`}
               >
                 <div
-                  className={`relative ${tile.accent} ${
-                    tile.big ? "aspect-[4/3] md:aspect-[5/3]" : "aspect-square"
-                  } border-4 border-black shadow-[6px_6px_0_0_#000] group-hover:shadow-[10px_10px_0_0_#000] group-hover:-translate-x-1 group-hover:-translate-y-1 transition-all overflow-hidden p-6 md:p-8 flex flex-col justify-between`}
+                  className={`relative ${tile.accent} aspect-[4/3] border-2 border-black shadow-[5px_5px_0_0_#000] group-hover:shadow-[7px_7px_0_0_#000] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all overflow-hidden p-4 md:p-5 flex flex-col justify-between`}
                 >
                   {/* Noise texture */}
-                  <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none">
+                  <div className="absolute inset-0 opacity-15 mix-blend-multiply pointer-events-none">
                     <svg width="100%" height="100%">
                       <filter id={`grain-${i}`}>
                         <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" />
@@ -105,30 +101,20 @@ export default function DrinksGrid() {
                   </div>
 
                   <div className="relative">
-                    <div className="text-black/60 text-[10px] font-bold uppercase tracking-[0.3em] mb-2">
+                    <div className="text-black/55 text-[9px] font-bold uppercase tracking-[0.25em] mb-1">
                       Menu /
                     </div>
-                    <h3
-                      className={`poster-title text-black leading-[0.9] ${
-                        tile.big
-                          ? "text-5xl md:text-7xl lg:text-8xl"
-                          : "text-2xl md:text-4xl"
-                      }`}
-                    >
+                    <h3 className="poster-title text-black leading-[0.95] text-2xl md:text-3xl">
                       {tile.label}
                     </h3>
                   </div>
 
-                  <div className="relative flex items-end justify-between gap-3">
-                    <p
-                      className={`text-black/70 italic ${
-                        tile.big ? "text-sm md:text-base" : "text-xs"
-                      } leading-snug`}
-                    >
+                  <div className="relative flex items-end justify-between gap-2">
+                    <p className="text-black/70 italic text-[10px] md:text-xs leading-tight">
                       {tile.sample}
                     </p>
-                    <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 bg-black text-[var(--color-oasis-orange)] flex items-center justify-center group-hover:bg-[var(--color-oasis-orange)] group-hover:text-black transition-colors">
-                      <ArrowRight size={tile.big ? 18 : 14} />
+                    <div className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 bg-black text-[var(--color-oasis-orange)] flex items-center justify-center group-hover:bg-[var(--color-oasis-orange)] group-hover:text-black transition-colors">
+                      <ArrowRight size={14} />
                     </div>
                   </div>
                 </div>
@@ -142,7 +128,7 @@ export default function DrinksGrid() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center text-black/60 text-xs italic mt-10"
+          className="text-center text-black/60 text-xs italic mt-8"
         >
           ✦ Tap list rotates often — ask your bartender for tonight&apos;s pour list ✦
         </motion.p>
