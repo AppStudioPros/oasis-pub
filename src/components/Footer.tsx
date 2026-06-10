@@ -84,9 +84,21 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <Mail size={16} className="mt-0.5 flex-shrink-0 text-[var(--color-oasis-orange)]" />
-                <a href="mailto:oasisnewlondon@gmail.com" className="hover:text-[var(--color-oasis-orange)]">
-                  oasisnewlondon@gmail.com
-                </a>
+                <div>
+                  <div className="text-white/40 text-[10px] uppercase tracking-wider font-bold mb-0.5">Email</div>
+                  <a href="mailto:oasisnewlondon@gmail.com" className="hover:text-[var(--color-oasis-orange)]">
+                    oasisnewlondon@gmail.com
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-2">
+                <Mail size={16} className="mt-0.5 flex-shrink-0 text-[var(--color-oasis-orange)]" />
+                <div>
+                  <div className="text-white/40 text-[10px] uppercase tracking-wider font-bold mb-0.5">Booking</div>
+                  <a href="mailto:booking@socialnewlondon.com?subject=Booking%20(Oasis)&cc=oasisnewlondon%40gmail.com" className="hover:text-[var(--color-oasis-orange)]">
+                    booking@socialnewlondon.com
+                  </a>
+                </div>
               </li>
             </ul>
             <Link
