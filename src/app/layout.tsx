@@ -19,20 +19,31 @@ export const metadata: Metadata = {
     "rock club Connecticut",
     "craft beer bar New London",
     "16 Bank Street",
+    "emerging bands New London",
+    "bar New London CT",
   ],
   openGraph: {
     title: "The Oasis Pub — New London CT",
     description:
-      "The epicenter of New London's music scene. Live bands. Craft beer. Open 365 days a year.",
+      "New London CT's rock club. Emerging bands, 20+ craft beers, no cover charge. Open 365 nights a year at 16 Bank Street.",
     url: "https://oasisnewlondon.com",
     siteName: "The Oasis Pub",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/heroes/poster-collage.jpg",
+        width: 1200,
+        height: 630,
+        alt: "The Oasis Pub — New London CT",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Oasis Pub — New London CT",
-    description: "The epicenter of New London's music scene.",
+    description: "New London CT's rock club. Emerging bands, 20+ craft beers, no cover charge.",
+    images: ["/images/heroes/poster-collage.jpg"],
   },
 };
 
@@ -52,6 +63,32 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col">
+        {/* Organization schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "The Oasis Pub",
+              url: "https://oasisnewlondon.com",
+              logo: "https://oasisnewlondon.com/images/logo-white.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+18604473929",
+                contactType: "customer service",
+                email: "oasisnewlondon@gmail.com",
+                areaServed: "US",
+                availableLanguage: "English",
+              },
+              sameAs: [
+                "https://www.facebook.com/theoasispub",
+                "https://www.instagram.com/oasispub",
+              ],
+            }),
+          }}
+        />
+
         {/* LocalBusiness + BarOrPub schema */}
         <script
           type="application/ld+json"

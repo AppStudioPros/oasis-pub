@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, Clock } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import SectionDivider from "@/components/SectionDivider";
 
 export default function ContactClient() {
@@ -36,6 +37,10 @@ export default function ContactClient() {
 
   return (
     <>
+      <BreadcrumbSchema crumbs={[
+        { name: "Home", url: "https://oasisnewlondon.com" },
+        { name: "Contact", url: "https://oasisnewlondon.com/contact" },
+      ]} />
       <PageHero
         eyebrow="Get In Touch"
         title="Find"

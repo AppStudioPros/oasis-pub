@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import SectionDivider from "@/components/SectionDivider";
 
 export default function WorkClient() {
@@ -36,6 +37,10 @@ export default function WorkClient() {
 
   return (
     <>
+      <BreadcrumbSchema crumbs={[
+        { name: "Home", url: "https://oasisnewlondon.com" },
+        { name: "Work With Us", url: "https://oasisnewlondon.com/work-with-us" },
+      ]} />
       <PageHero
         eyebrow="Now Hiring"
         title="Join"

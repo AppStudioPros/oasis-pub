@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Music, Beer, Users, Heart, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import SectionDivider from "@/components/SectionDivider";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const PILLARS = [
   {
@@ -36,6 +37,10 @@ const PILLARS = [
 export default function AboutClient() {
   return (
     <>
+      <BreadcrumbSchema crumbs={[
+        { name: "Home", url: "https://oasisnewlondon.com" },
+        { name: "About", url: "https://oasisnewlondon.com/about" },
+      ]} />
       <PageHero
         eyebrow="Our Story"
         title="About"

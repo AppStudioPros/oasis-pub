@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import SectionDivider from "@/components/SectionDivider";
 
 interface Event {
@@ -51,6 +52,10 @@ export default function EventsClient({ events }: { events: Event[] }) {
 
   return (
     <>
+      <BreadcrumbSchema crumbs={[
+        { name: "Home", url: "https://oasisnewlondon.com" },
+        { name: "Events", url: "https://oasisnewlondon.com/events" },
+      ]} />
       <PageHero
         eyebrow="Live Music · DJ Sets · Bass Nights"
         title="The"

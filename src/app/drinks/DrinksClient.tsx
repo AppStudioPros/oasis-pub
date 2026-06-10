@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "@/components/PageHero";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import SectionDivider from "@/components/SectionDivider";
 
 interface DrinkItem {
@@ -43,6 +44,10 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
 
   return (
     <>
+      <BreadcrumbSchema crumbs={[
+        { name: "Home", url: "https://oasisnewlondon.com" },
+        { name: "Drinks", url: "https://oasisnewlondon.com/drinks" },
+      ]} />
       <PageHero
         eyebrow="Pick Your Poison"
         title="The"

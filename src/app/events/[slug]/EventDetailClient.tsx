@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Clock, MapPin, ArrowLeft, ArrowRight } from "lucide-react";
 import SectionDivider from "@/components/SectionDivider";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 interface Event {
   slug: string;
@@ -60,6 +61,11 @@ export default function EventDetailClient({ event }: { event: Event }) {
 
   return (
     <>
+      <BreadcrumbSchema crumbs={[
+        { name: "Home", url: "https://oasisnewlondon.com" },
+        { name: "Events", url: "https://oasisnewlondon.com/events" },
+        { name: event.title, url: `https://oasisnewlondon.com/events/${event.slug}` },
+      ]} />
       {/* Hero with blurred poster bg */}
       <section ref={ref} className="relative bg-black py-20 md:py-28 overflow-hidden">
         <motion.div style={{ y: bgY }} className="absolute inset-0 opacity-30">
