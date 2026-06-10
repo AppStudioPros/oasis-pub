@@ -13,15 +13,21 @@ interface DrinkItem {
   price?: string;
 }
 
+interface SubCategory {
+  name: string;
+  items: DrinkItem[];
+}
+
 interface DrinkCategory {
   name: string;
   note?: string;
-  items: DrinkItem[];
+  items?: DrinkItem[];
+  subcategories?: SubCategory[];
 }
 
 interface MenuData {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   note?: string;
   categories: DrinkCategory[];
 }
@@ -81,51 +87,86 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
             <h2 className="poster-title text-4xl md:text-5xl text-white mb-3">
               {active.title}
             </h2>
-            <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
-              {active.subtitle}
-            </p>
+            {active.subtitle && (
+              <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+                {active.subtitle}
+              </p>
+            )}
             {active.note && (
-              <p className="text-[var(--color-oasis-orange)] text-sm italic mt-4">{active.note}</p>
+              <p className="text-[var(--color-oasis-orange)] text-sm italic mt-4 max-w-2xl mx-auto">
+                {active.note}
+              </p>
             )}
           </div>
 
           <div className="space-y-12">
             {active.categories.map((cat) => (
               <div key={cat.name}>
-                <h3 className="display text-2xl uppercase tracking-wider text-[var(--color-oasis-orange)] mb-2 pb-2 border-b border-white/10">
+                <h3 className="display text-2xl md:text-3xl uppercase tracking-wider text-[var(--color-oasis-orange)] mb-3 pb-2 border-b-2 border-[var(--color-oasis-orange)]/40">
                   {cat.name}
                 </h3>
                 {cat.note && (
                   <p className="text-white/50 text-sm italic mb-4">{cat.note}</p>
                 )}
-                <ul className="divide-y divide-white/5">
-                  {cat.items.map((item, idx) => (
-                    <li key={idx} className="py-3">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <p className="font-semibold text-white">{item.name}</p>
-                          <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/50 mt-1">
-                            {item.style && <span>{item.style}</span>}
-                            {item.abv && <span>{item.abv} ABV</span>}
-                            {item.thc && <span>{item.thc}</span>}
-                            {item.origin && <span className="italic">{item.origin}</span>}
-                            {item.size && <span>{item.size}</span>}
-                          </div>
-                        </div>
-                        {item.price && (
-                          <span className="text-[var(--color-oasis-orange)] font-bold whitespace-nowrap">
-                            {item.price}
-                          </span>
-                        )}
+                {/* Subcategories (Craft Beer style) */}
+                {cat.subcategories && cat.subcategories.length > 0 && (
+                  <div className="space-y-8 mt-4">
+                    {cat.subcategories.map((sub) => (
+                      <div key={sub.name}>
+                        <h4 className="display text-base uppercase tracking-[0.2em] text-white/60 mb-3 pb-1 border-b border-white/10">
+                          {sub.name}
+                        </h4>
+                        <ItemList items={sub.items} />
                       </div>
-                    </li>
-                  ))}
-                </ul>
+                    ))}
+                  </div>
+                )}
+                {/* Flat items list */}
+                {cat.items && cat.items.length > 0 && (
+                  <div className="mt-2">
+                    <ItemList items={cat.items} />
+                  </div>
+                )}
               </div>
             ))}
           </div>
+
+          {/* Disclaimer */}
+          {activeTab === "Craft Beer" && (
+            <p className="text-center text-white/40 text-xs italic mt-12">
+              Tap list rotates often. Ask your bartender for tonight&apos;s pour list.
+            </p>
+          )}
         </div>
       </section>
     </>
+  );
+}
+
+function ItemList({ items }: { items: DrinkItem[] }) {
+  return (
+    <ul className="divide-y divide-white/5">
+      {items.map((item, idx) => (
+        <li key={`${item.name}-${idx}`} className="py-3.5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-white leading-snug">{item.name}</p>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/55 mt-1">
+                {item.style && <span>{item.style}</span>}
+                {item.abv && <span className="text-[var(--color-oasis-orange)]/80">{item.abv} ABV</span>}
+                {item.thc && <span className="text-[var(--color-oasis-orange)]/80">{item.thc}</span>}
+                {item.origin && <span className="italic">{item.origin}</span>}
+                {item.size && <span>{item.size}</span>}
+              </div>
+            </div>
+            {item.price && (
+              <span className="text-[var(--color-oasis-orange)] font-bold whitespace-nowrap text-base">
+                {item.price}
+              </span>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }

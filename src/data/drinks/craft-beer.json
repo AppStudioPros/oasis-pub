@@ -1,0 +1,465 @@
+{
+  "title": "Craft Beer & Beyond",
+  "subtitle": "20+ rotating drafts and cans. Heavy on local CT microbrews. Tap list rotates often.",
+  "categories": [
+    {
+      "name": "IPA & Pale Ales",
+      "subcategories": [
+        {
+          "name": "AMERICAN IPA",
+          "items": [
+            {
+              "name": "Tox Fugu",
+              "style": "American IPA",
+              "abv": "6.5%",
+              "origin": "New London, CT",
+              "price": "$8",
+              "size": "16oz can"
+            },
+            {
+              "name": "Outer Light Subduction",
+              "style": "American IPA",
+              "abv": "6.8%",
+              "origin": "Groton, CT",
+              "price": "$10",
+              "size": "16oz can"
+            },
+            {
+              "name": "Dogfish Head 60 Minute IPA",
+              "style": "American IPA",
+              "abv": "6%",
+              "origin": "Milton, DE",
+              "price": "$6.5",
+              "size": "12oz can"
+            }
+          ]
+        },
+        {
+          "name": "NEW ENGLAND IPA",
+          "items": [
+            {
+              "name": "Fat Orange Cat Baby Kittens",
+              "style": "New England IPA",
+              "abv": "6.5%",
+              "origin": "East Hampton, CT",
+              "price": "$5",
+              "size": "16oz draft"
+            },
+            {
+              "name": "Barclay Vibrations",
+              "style": "New England IPA",
+              "abv": "6.5%",
+              "origin": "North Haven, CT",
+              "price": "$8",
+              "size": "16oz draft"
+            },
+            {
+              "name": "Fat Orange Cat Stay At Home Dad With No Kids",
+              "style": "New England IPA",
+              "abv": "5.9%",
+              "origin": "East Hampton, CT",
+              "price": "$5",
+              "size": "12oz can"
+            }
+          ]
+        },
+        {
+          "name": "DOUBLE IPA",
+          "items": [
+            {
+              "name": "Transcend Vapourwaves",
+              "style": "Triple New England IPA",
+              "abv": "8%",
+              "origin": "Plainville, CT",
+              "price": "$7.5",
+              "size": "8oz draft"
+            },
+            {
+              "name": "Hoof Hearted Konkey Dong 4Up Evolution Aquatic Ape Theory",
+              "style": "Triple New England IPA",
+              "abv": "9.5%",
+              "origin": "Marengo, OH",
+              "price": "$8",
+              "size": "8oz draft"
+            },
+            {
+              "name": "Beer\u2019d Dogs & Boats",
+              "style": "Double IPA",
+              "abv": "9.1%",
+              "origin": "Stonington, CT",
+              "price": "$11",
+              "size": "16oz can"
+            }
+          ]
+        },
+        {
+          "name": "PALE ALE",
+          "items": [
+            {
+              "name": "Brooklyn Summer",
+              "style": "English Pale Ale",
+              "abv": "5%",
+              "origin": "Brooklyn, NY",
+              "price": "$8",
+              "size": "16oz draft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lagers & Pilsners",
+      "subcategories": [
+        {
+          "name": "LAGER / KOLSCH",
+          "items": [
+            {
+              "name": "New England NEBCO Lager",
+              "style": "American Lager",
+              "abv": "4.8%",
+              "origin": "Woodbridge, CT",
+              "price": "$4",
+              "size": "16oz draft"
+            },
+            {
+              "name": "Alvarium Crispy Roll",
+              "style": "Japanese Rice Lager",
+              "abv": "4.1%",
+              "origin": "New Britain, CT",
+              "price": "$8",
+              "size": "16oz can"
+            },
+            {
+              "name": "Twelve Percent Snappy!",
+              "style": "American Lager",
+              "abv": "5%",
+              "origin": "North Haven, CT",
+              "price": "$4.5",
+              "size": "12oz can"
+            }
+          ]
+        },
+        {
+          "name": "DARK MILD",
+          "items": [
+            {
+              "name": "Kent Falls Northford Pint",
+              "style": "Dark Mild Ale",
+              "abv": "4%",
+              "origin": "Kent, CT",
+              "price": "$8",
+              "size": "16oz draft"
+            }
+          ]
+        },
+        {
+          "name": "PILSNER",
+          "items": [
+            {
+              "name": "Schilling Alexandr",
+              "style": "Czech Pilsner",
+              "abv": "5%",
+              "origin": "Littleton, NH",
+              "price": "$8",
+              "size": "13oz draft"
+            },
+            {
+              "name": "East Rock Pilsner",
+              "style": "German Pilsner",
+              "abv": "5.2%",
+              "origin": "New Haven, CT",
+              "price": "$6.5",
+              "size": "12oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Amber / Bock",
+      "subcategories": [
+        {
+          "name": "AMBER ALE / LAGER",
+          "items": [
+            {
+              "name": "Fat Orange Cat Skipping My First Marriage",
+              "style": "American Amber Ale",
+              "abv": "5.2%",
+              "origin": "North Haven, CT",
+              "price": "$8",
+              "size": "16oz draft"
+            },
+            {
+              "name": "Outer Light Lonesome Boatman",
+              "style": "American Amber Ale",
+              "abv": "5.2%",
+              "origin": "Groton, CT",
+              "price": "$8",
+              "size": "16oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wheat Beers",
+      "subcategories": [
+        {
+          "name": "WHEAT / HEFEWEIZEN",
+          "items": [
+            {
+              "name": "Tox Pitfall",
+              "style": "Cherry Wheat Ale",
+              "abv": "5.5%",
+              "origin": "New London, CT",
+              "price": "$8",
+              "size": "16oz draft"
+            },
+            {
+              "name": "Beer'd Whisker'd Wit",
+              "style": "Witbier w/ Curacao Orange Peel",
+              "abv": "5.2%",
+              "origin": "Stonington, CT",
+              "price": "$8.5",
+              "size": "16oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Belgian Ales",
+      "subcategories": [
+        {
+          "name": "BELGIAN TRIPEL",
+          "items": [
+            {
+              "name": "Tox Hogweed",
+              "style": "Belgian Dubbel",
+              "abv": "6.3%",
+              "origin": "New London, CT",
+              "price": "$8",
+              "size": "13oz draft"
+            },
+            {
+              "name": "Ommegang Manhattan Shine",
+              "style": "Barrel-Aged Imperial Belgian Amber Ale w/ Dark Cherry & Orange",
+              "abv": "12%",
+              "origin": "Cooperstown, NY",
+              "price": "$8",
+              "size": "8oz draft"
+            },
+            {
+              "name": "Victory Golden Monkey",
+              "style": "Belgian Tripel",
+              "abv": "9.5%",
+              "origin": "Downingtown, PA",
+              "price": "$7.5",
+              "size": "12oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fruit Beer",
+      "subcategories": [
+        {
+          "name": "AMBER ALE / LAGER",
+          "items": [
+            {
+              "name": "Abomination Waterboi",
+              "style": "Fruited Ale w/ Watermelon, Coconut Water, Lime & Sea Salt",
+              "abv": "4%",
+              "origin": "North Haven, CT",
+              "price": "$8",
+              "size": "13oz draft"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sours",
+      "subcategories": [
+        {
+          "name": "AMBER ALE / LAGER",
+          "items": [
+            {
+              "name": "Beer\u2019d Cold As Weisse Mango",
+              "style": "Sour w/ Mango",
+              "abv": "5.5%",
+              "origin": "Stonington, CT",
+              "price": "$7.5",
+              "size": "10oz draft"
+            },
+            {
+              "name": "Ommegang x Brouwerij Liefmans Rosetta",
+              "style": "Flanders Red Sour aged on Cherries",
+              "abv": "8%",
+              "origin": "Cooperstown, NY",
+              "price": "$7.5",
+              "size": "10oz draft"
+            },
+            {
+              "name": "Foam Blushing",
+              "style": "Fruited Sour w/ Blackberry & Lemon",
+              "abv": "5%",
+              "origin": "Burlington, VT",
+              "price": "$7.5",
+              "size": "8oz draft"
+            },
+            {
+              "name": "Transcend Granny Candies",
+              "style": "Smoothie Sour w/ Strawberry, Vanilla & Milk Sugar",
+              "abv": "6%",
+              "origin": "Plainville, CT",
+              "price": "$12",
+              "size": "16oz can"
+            },
+            {
+              "name": "Transcend Pastry Shoppe: Strawberry Shortcake Cupcake",
+              "style": "Smoothie Sour w/ Strawberry, Vanilla Cake, Cream, Whipped Cream & Milk Sugar",
+              "abv": "6%",
+              "origin": "Plainville, CT",
+              "price": "$12",
+              "size": "16oz can"
+            },
+            {
+              "name": "Transcend Sex On The Peach\u2026 Rings",
+              "style": "Smoothie Sour w/ Peach Rings, Peach Puree, Apricot & Milk Sugar",
+              "abv": "6%",
+              "origin": "Plainville, CT"
+            },
+            {
+              "name": "Transcend x Ill Will Splitsville",
+              "style": "Banana Split Smoothie Sour w/ Banana, Strawberry, Pineapple, Whipped Cream and Neapolitan Ice Cream",
+              "abv": "6%",
+              "origin": "Plainville, CT",
+              "price": "$12",
+              "size": "16oz can"
+            },
+            {
+              "name": "Victory Sour Monkey",
+              "style": "Sour Belgian Tripel",
+              "abv": "9.5%",
+              "origin": "Downingtown, PA",
+              "price": "$7.5",
+              "size": "12oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stouts",
+      "subcategories": [
+        {
+          "name": "STOUT",
+          "items": [
+            {
+              "name": "False Hope Slammer",
+              "style": "Imperial Stout w/ Irish Cream & Milk Sugar",
+              "abv": "8%",
+              "origin": "North Haven, CT",
+              "price": "$8",
+              "size": "8oz draft"
+            },
+            {
+              "name": "Abomination Midsomer\u2019s Night Snack",
+              "style": "Milk Stout w/ Chocolate, Marshmallow & Graham Cracker",
+              "abv": "7%",
+              "origin": "North Haven, CT",
+              "price": "$7.5",
+              "size": "8oz draft"
+            },
+            {
+              "name": "Guinness Draught",
+              "style": "Irish Dry Stout",
+              "abv": "4.2%",
+              "origin": "Dublin, Ireland",
+              "price": "$8",
+              "size": "16oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ciders / Seltzers",
+      "subcategories": [
+        {
+          "name": "CIDER",
+          "items": [
+            {
+              "name": "Downeast Apple Pie",
+              "style": "Apple Cider w/ Cinnamon & Vanilla",
+              "abv": "5%",
+              "origin": "Boston, MA",
+              "price": "$8",
+              "size": "16oz draft"
+            },
+            {
+              "name": "1911 Cider Orange Creamsicle",
+              "style": "Cider w/ Orange & Vanilla",
+              "abv": "6.9%",
+              "origin": "Lafayette, NY",
+              "price": "$8",
+              "size": "16oz draft"
+            },
+            {
+              "name": "Downeast Original Blend",
+              "style": "Unfiltered Cider",
+              "abv": "5.1%",
+              "origin": "Boston, MA",
+              "price": "$8",
+              "size": "12oz can"
+            },
+            {
+              "name": "Austin Eastciders Original",
+              "style": "Dry Hard Cider",
+              "abv": "5%",
+              "origin": "Austin, TX",
+              "price": "$6.5",
+              "size": "12oz can"
+            },
+            {
+              "name": "Hudson North Strawberry Rhubarb",
+              "style": "Strawberry Rhubarb Cider",
+              "abv": "5%",
+              "origin": "Newburgh, NY",
+              "price": "$7.5",
+              "size": "12oz can"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kombuchas",
+      "subcategories": [
+        {
+          "name": "KOMBUCHA",
+          "items": [
+            {
+              "name": "Juneshine Midnight Painkiller",
+              "style": "Tiki cocktail-inspired hard kombucha w/ pineapple, coconut, orange, activated charcoal & nutmeg",
+              "abv": "6%",
+              "origin": "San Diego, CA",
+              "price": "$7.5",
+              "size": "12oz can"
+            },
+            {
+              "name": "Juneshine Grapefruit Paloma",
+              "style": "Hard kombucha w/ grapefruit, lime & green tea",
+              "abv": "6%",
+              "origin": "San Diego, CA",
+              "price": "$7.5",
+              "size": "12oz can"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

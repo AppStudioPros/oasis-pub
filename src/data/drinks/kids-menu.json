@@ -1,0 +1,56 @@
+{
+  "title": "Kids Menu",
+  "subtitle": "Macro & domestic beer. The basics, done cheap.",
+  "categories": [
+    {
+      "name": "Domestics & Imports",
+      "items": [
+        {
+          "name": "Budweiser",
+          "size": "12oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Bud Light",
+          "size": "12oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Coors Light",
+          "size": "12oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Yuengling",
+          "size": "12oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Heineken",
+          "size": "12oz can",
+          "price": "$5"
+        },
+        {
+          "name": "Miller Lite",
+          "size": "12oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Miller High Life",
+          "size": "16oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Modelo",
+          "size": "12oz can",
+          "price": "$4.5"
+        },
+        {
+          "name": "Guinness",
+          "size": "16oz can",
+          "price": "$8"
+        }
+      ]
+    }
+  ]
+}

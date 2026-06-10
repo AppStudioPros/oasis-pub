@@ -1,0 +1,42 @@
+{
+  "title": "Chill \u2014 CBD Drinks",
+  "subtitle": "Hemp-derived CBD seltzers. No THC. Sober-friendly chill.",
+  "note": "Contains no THC",
+  "categories": [
+    {
+      "name": "CBD Seltzers",
+      "items": [
+        {
+          "name": "Goodwell \u2014 Strawberry CBD Seltzer",
+          "thc": "20mg CBD Seltzer",
+          "size": "12oz can",
+          "price": "$8"
+        },
+        {
+          "name": "Goodwell \u2014 Blackberry CBD Seltzer",
+          "thc": "20mg CBD Seltzer",
+          "size": "12oz can",
+          "price": "$8"
+        },
+        {
+          "name": "Goodwell \u2014 Lemon Lime CBD Seltzer",
+          "thc": "20mg CBD Seltzer",
+          "size": "12oz can",
+          "price": "$8"
+        },
+        {
+          "name": "Goodwell \u2014 Watermelon CBD Seltzer",
+          "thc": "20mg CBD Seltzer",
+          "size": "12oz can",
+          "price": "$8"
+        },
+        {
+          "name": "Hooker \u2014 Double Chill AF Strawberry Lemonade",
+          "thc": "52mg CBD Seltzer",
+          "size": "16oz can",
+          "price": "$12"
+        }
+      ]
+    }
+  ]
+}

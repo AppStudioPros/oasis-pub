@@ -1,0 +1,32 @@
+{
+  "title": "Wine",
+  "subtitle": "All canned. We pour into a proper glass.",
+  "note": "You may notice that we use only canned wines. This is because we don\u2019t go through a ton of wine and cans preserve a product\u2019s freshness better than a bottle would. When ordered, we pour the wine into a proper glass.",
+  "categories": [
+    {
+      "name": "Red",
+      "items": [
+        {
+          "name": "Archer Roose \u2014 Malbec",
+          "style": "Dark ripe fruit, with notes of vanilla, blackberry & plum",
+          "price": "$10"
+        }
+      ]
+    },
+    {
+      "name": "White",
+      "items": [
+        {
+          "name": "Archer Roose \u2014 Ros\u00e9",
+          "style": "Dry and fruit-forward, with notes of strawberry, raspberry & apricot",
+          "price": "$10"
+        },
+        {
+          "name": "Archer Roose \u2014 Sauvignon Blanc",
+          "style": "Tropical citrus & grapefruit notes with a balanced minerality",
+          "price": "$10"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "title": "Seltzers & Other Canned Bevys",
+  "subtitle": "Hard seltzers, canned cocktails, hard coffee, and iced tea drinks.",
+  "categories": [
+    {
+      "name": "Seltzers",
+      "items": [
+        {
+          "name": "Truly Pineapple",
+          "style": "Pineapple seltzer",
+          "abv": "5%",
+          "price": "$7",
+          "size": "12oz can"
+        },
+        {
+          "name": "Truly Wild Berry",
+          "style": "Berry seltzer",
+          "abv": "5%",
+          "price": "$7",
+          "size": "12oz can"
+        }
+      ]
+    },
+    {
+      "name": "Hard Soda",
+      "items": [
+        {
+          "name": "Thimble Island \u2014 Foxon Park Gassosa",
+          "style": "Hard Lemon Lime Soda",
+          "abv": "4.5%",
+          "origin": "Branford, CT",
+          "price": "$7",
+          "size": "12oz can"
+        }
+      ]
+    },
+    {
+      "name": "Hard Coffee Drinks",
+      "items": [
+        {
+          "name": "Alc-A-Chino \u2014 Original",
+          "style": "Oat Milk Hard Latte",
+          "abv": "6%",
+          "origin": "Bernards, NJ",
+          "price": "$10",
+          "size": "12oz can"
+        },
+        {
+          "name": "Alc-A-Chino \u2014 Vanilla",
+          "style": "Oat Milk Hard Vanilla Latte",
+          "abv": "6%",
+          "origin": "Bernards, NJ",
+          "price": "$10",
+          "size": "12oz can"
+        },
+        {
+          "name": "1911 Coffee \u2014 Spiked Nitro Coffee",
+          "style": "Vodka with Vanilla Coffee (no milk added)",
+          "abv": "5.5%",
+          "origin": "Lafayette, NY",
+          "price": "$9",
+          "size": "12oz can"
+        }
+      ]
+    },
+    {
+      "name": "Canned Cocktails",
+      "items": [
+        {
+          "name": "Dogfish Head \u2014 Blood Orange & Mango Vodka Crush",
+          "style": "Vodka w/ blood orange & mango",
+          "abv": "7%",
+          "price": "$9",
+          "size": "12oz can"
+        },
+        {
+          "name": "Dogfish Head \u2014 Strawberry Lime Margarita",
+          "style": "Tequila w/ strawberry & lime",
+          "abv": "12%",
+          "price": "$12",
+          "size": "12oz can"
+        },
+        {
+          "name": "Dogfish Head \u2014 Pineapple Orange Mai Tai",
+          "style": "Rum w/ pineapple & orange",
+          "abv": "12%",
+          "price": "$12",
+          "size": "12oz can"
+        },
+        {
+          "name": "Dogfish Head \u2014 Strawberry Honeyberry Lemonade",
+          "style": "Vodka w/ strawberry, lemon & honeyberry",
+          "abv": "7%",
+          "price": "$9",
+          "size": "12oz can"
+        },
+        {
+          "name": "Sunny D \u2014 Orange",
+          "style": "Vodka seltzer w/ Orange",
+          "abv": "4.5%",
+          "price": "$8",
+          "size": "12oz can"
+        },
+        {
+          "name": "Sunny D \u2014 Orange Strawberry",
+          "style": "Vodka seltzer w/ Orange & Strawberry",
+          "abv": "4.5%",
+          "price": "$8",
+          "size": "12oz can"
+        }
+      ]
+    },
+    {
+      "name": "Hard Iced Tea & Lemonade",
+      "items": [
+        {
+          "name": "Abomination \u2014 Tea Time Terror: Original",
+          "style": "Hard Iced Tea",
+          "abv": "8%",
+          "origin": "North Haven, CT",
+          "price": "$10",
+          "size": "16oz can"
+        },
+        {
+          "name": "Abomination \u2014 Tea Time Terror: Mango",
+          "style": "Hard Iced Tea",
+          "abv": "8%",
+          "origin": "North Haven, CT",
+          "price": "$10",
+          "size": "16oz can"
+        },
+        {
+          "name": "Abomination \u2014 Ghoulade",
+          "style": "Hard Lemonade",
+          "abv": "8%",
+          "origin": "North Haven, CT",
+          "price": "$10",
+          "size": "16oz can"
+        },
+        {
+          "name": "Fishers Island \u2014 Lemonade",
+          "style": "Vodka & whiskey with lemon & honey",
+          "abv": "9%",
+          "price": "$11",
+          "size": "12oz can"
+        },
+        {
+          "name": "Sun Cruiser \u2014 Original",
+          "style": "Iced Tea w/ Vodka",
+          "abv": "4.5%",
+          "price": "$7.5",
+          "size": "12oz can"
+        }
+      ]
+    }
+  ]
+}
