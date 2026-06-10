@@ -40,7 +40,7 @@ export default function AboutClient() {
         eyebrow="Our Story"
         title="About"
         accent="The Oasis"
-        subtitle="Tiny haunt. Huge sound. Open 365 days a year."
+        subtitle="The bar it's supposed to be. Huge sound. Open 365 days a year."
       />
 
       <SectionDivider
@@ -82,7 +82,7 @@ export default function AboutClient() {
             className="space-y-5 text-white/75 text-base md:text-lg leading-relaxed"
           >
             <p>
-              We&apos;re a tiny hipster haunt tucked into 16 Bank Street in downtown New London — the
+              We&apos;re the bar tucked into 16 Bank Street in downtown New London — the
               epicenter of the city&apos;s music scene and the hippest little bar in town. We&apos;ve been
               the home for emerging bands, working DJs, and anyone who needs a place to actually
               hear music played the way it&apos;s supposed to be played.

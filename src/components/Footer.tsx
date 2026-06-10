@@ -30,7 +30,7 @@ export default function Footer() {
               The Oasis Pub
             </h3>
             <p className="text-white/70 text-sm leading-relaxed">
-              The epicenter of New London&apos;s music scene. Tiny hipster haunt. Big sound.
+              The epicenter of New London&apos;s music scene. The bar it&apos;s supposed to be. Big sound.
             </p>
             <div className="flex gap-3 mt-5">
               <a

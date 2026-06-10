@@ -53,7 +53,7 @@ export default function TheVibe() {
               transition={{ duration: 0.7 }}
               className="poster-title text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9] mb-8"
             >
-              Tiny haunt.<br />
+              Real haunt.<br />
               <span className="text-[var(--color-oasis-orange)]">Huge sound.</span>
             </motion.h2>
             <motion.div
