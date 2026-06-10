@@ -4,123 +4,154 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-/* ── Graffiti-style SVG icons ── */
+/* ── Spray paint / graffiti-style SVG icons ──
+   Style: filled silhouettes, thick outlines, drips, splatter dots  ── */
+
+// Shared splatter dots for that spray-can edge feel
+function Splatter({ x, y, r = 1.2 }: { x: number; y: number; r?: number }) {
+  return <circle cx={x} cy={y} r={r} fill="currentColor" opacity="0.5" />;
+}
+
 function PintGlass({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 60 70" fill="none" className={className} aria-hidden>
-      {/* Body */}
-      <path d="M14 12 L10 62 L50 62 L46 12 Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Foam top */}
-      <path d="M13 12 Q18 4 24 10 Q28 3 30 10 Q34 3 38 9 Q43 3 47 12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Bubbles */}
-      <circle cx="24" cy="38" r="2.5" stroke="currentColor" strokeWidth="2" />
-      <circle cx="33" cy="28" r="1.8" stroke="currentColor" strokeWidth="2"/>
-      <circle cx="28" cy="50" r="2" stroke="currentColor" strokeWidth="2"/>
+    <svg viewBox="0 0 64 72" fill="none" className={className} aria-hidden>
+      {/* Splatter */}
+      <Splatter x={4} y={10} r={1.5} /><Splatter x={60} y={18} r={1} /><Splatter x={8} y={55} r={1.2} /><Splatter x={58} y={60} r={1} /><Splatter x={6} y={30} /><Splatter x={60} y={44} />
+      {/* Drip shadow */}
+      <path d="M15 14 L11 63 L53 63 L49 14 Z" fill="currentColor" opacity="0.15" transform="translate(2,2)"/>
+      {/* Body fill */}
+      <path d="M15 14 L11 63 L53 63 L49 14 Z" fill="currentColor" opacity="0.25"/>
+      {/* Bold outline */}
+      <path d="M15 14 L11 63 L53 63 L49 14 Z" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Foam */}
+      <path d="M14 14 Q20 5 26 12 Q30 4 32 12 Q36 4 40 11 Q45 4 50 14" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" opacity="0.3"/>
       {/* Handle */}
-      <path d="M46 20 Q58 20 58 32 Q58 44 46 44" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+      <path d="M49 22 Q62 22 62 36 Q62 50 49 50" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+      {/* Drip from bottom */}
+      <path d="M28 63 Q27 67 28 70 Q29 67 28 63Z" fill="currentColor"/>
+      <path d="M38 63 Q37 68 38 71 Q39 68 38 63Z" fill="currentColor"/>
+      {/* Shine */}
+      <path d="M18 24 Q20 32 18 40" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.35"/>
     </svg>
   );
 }
 
 function SeltzerCan({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 50 70" fill="none" className={className} aria-hidden>
-      {/* Can body */}
-      <rect x="10" y="15" width="30" height="44" rx="4" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/>
-      {/* Top lid */}
-      <path d="M10 15 Q25 8 40 15" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-      {/* Bottom curve */}
-      <path d="M10 59 Q25 66 40 59" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+    <svg viewBox="0 0 52 72" fill="none" className={className} aria-hidden>
+      <Splatter x={3} y={12} r={1.5} /><Splatter x={49} y={20} r={1} /><Splatter x={4} y={58} r={1.2} /><Splatter x={50} y={55} /><Splatter x={2} y={36} r={1} />
+      {/* Shadow */}
+      <rect x="11" y="17" width="30" height="46" rx="5" fill="currentColor" opacity="0.15" transform="translate(2,2)"/>
+      {/* Body fill */}
+      <rect x="11" y="17" width="30" height="46" rx="5" fill="currentColor" opacity="0.2"/>
+      {/* Bold outline */}
+      <rect x="11" y="17" width="30" height="46" rx="5" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/>
+      {/* Top + bottom curves */}
+      <path d="M11 17 Q26 10 41 17" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="currentColor" opacity="0.3"/>
+      <path d="M11 63 Q26 70 41 63" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" fill="currentColor" opacity="0.2"/>
       {/* Pull tab */}
-      <path d="M22 12 Q25 5 28 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-      <circle cx="25" cy="11" r="2" stroke="currentColor" strokeWidth="2"/>
-      {/* Ribbing lines */}
-      <line x1="10" y1="24" x2="40" y2="24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.6"/>
-      <line x1="10" y1="52" x2="40" y2="52" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.6"/>
-      {/* Bubbles */}
-      <circle cx="21" cy="38" r="2" stroke="currentColor" strokeWidth="1.8"/>
-      <circle cx="30" cy="31" r="1.5" stroke="currentColor" strokeWidth="1.8"/>
-      <circle cx="26" cy="44" r="1.5" stroke="currentColor" strokeWidth="1.8"/>
+      <path d="M22 14 Q26 6 30 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      <ellipse cx="26" cy="13" rx="3" ry="2" stroke="currentColor" strokeWidth="2.5"/>
+      {/* Ribbing */}
+      <line x1="11" y1="27" x2="41" y2="27" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
+      <line x1="11" y1="54" x2="41" y2="54" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
+      {/* Drips */}
+      <path d="M22 63 Q21 67 22 70 Q23 67 22 63Z" fill="currentColor"/>
+      <path d="M33 63 Q32 68 33 71 Q34 68 33 63Z" fill="currentColor"/>
     </svg>
   );
 }
 
-function CbdBottle({ className = "" }: { className?: string }) {
+function HempLeaf({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 50 75" fill="none" className={className} aria-hidden>
-      {/* Bottle body */}
-      <path d="M16 30 L12 68 L38 68 L34 30 Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Neck */}
-      <rect x="19" y="16" width="12" height="16" rx="2" stroke="currentColor" strokeWidth="3"/>
-      {/* Dropper bulb */}
-      <ellipse cx="25" cy="10" rx="6" ry="8" stroke="currentColor" strokeWidth="3"/>
-      {/* Dropper tip */}
-      <line x1="25" y1="18" x2="25" y2="16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-      {/* Drop */}
-      <path d="M25 72 Q22 76 25 78 Q28 76 25 72" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Label lines */}
-      <line x1="16" y1="45" x2="34" y2="45" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-      <line x1="17" y1="52" x2="33" y2="52" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-      {/* Leaf */}
-      <path d="M22 39 Q25 32 28 39 Q25 38 22 39Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+    <svg viewBox="0 0 64 72" fill="none" className={className} aria-hidden>
+      <Splatter x={2} y={8} r={1.5} /><Splatter x={62} y={12} r={1} /><Splatter x={4} y={60} r={1.2} /><Splatter x={60} y={58} r={1} /><Splatter x={5} y={35} /><Splatter x={59} y={40} />
+      {/* Shadow */}
+      <path d="M32 6 L36 20 L50 14 L40 26 L58 28 L44 34 L56 44 L40 40 L38 58 L32 48 L26 58 L24 40 L8 44 L20 34 L6 28 L24 26 L14 14 L28 20 Z" fill="currentColor" opacity="0.15" transform="translate(2,2)"/>
+      {/* Leaf fill */}
+      <path d="M32 6 L36 20 L50 14 L40 26 L58 28 L44 34 L56 44 L40 40 L38 58 L32 48 L26 58 L24 40 L8 44 L20 34 L6 28 L24 26 L14 14 L28 20 Z" fill="currentColor" opacity="0.25"/>
+      {/* Bold outline */}
+      <path d="M32 6 L36 20 L50 14 L40 26 L58 28 L44 34 L56 44 L40 40 L38 58 L32 48 L26 58 L24 40 L8 44 L20 34 L6 28 L24 26 L14 14 L28 20 Z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/>
+      {/* Stem */}
+      <line x1="32" y1="48" x2="32" y2="68" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
+      {/* Center vein */}
+      <line x1="32" y1="16" x2="32" y2="48" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
     </svg>
   );
 }
 
 function WineGlass({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 50 75" fill="none" className={className} aria-hidden>
-      {/* Bowl */}
-      <path d="M10 8 Q8 32 25 44 Q42 32 40 8 Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg viewBox="0 0 52 74" fill="none" className={className} aria-hidden>
+      <Splatter x={2} y={10} r={1.5} /><Splatter x={50} y={16} r={1} /><Splatter x={4} y={55} r={1.2} /><Splatter x={50} y={62} /><Splatter x={2} y={35} r={1} />
+      {/* Bowl shadow */}
+      <path d="M10 6 Q8 32 26 44 Q44 32 42 6 Z" fill="currentColor" opacity="0.15" transform="translate(2,2)"/>
+      {/* Bowl fill */}
+      <path d="M10 6 Q8 32 26 44 Q44 32 42 6 Z" fill="currentColor" opacity="0.22"/>
+      {/* Bowl outline */}
+      <path d="M10 6 Q8 32 26 44 Q44 32 42 6 Z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/>
+      {/* Wine fill */}
+      <path d="M14 28 Q26 36 38 28 L42 6 L10 6 Z" fill="currentColor" opacity="0.3"/>
+      <path d="M14 28 Q26 36 38 28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
       {/* Stem */}
-      <line x1="25" y1="44" x2="25" y2="64" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+      <line x1="26" y1="44" x2="26" y2="64" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
       {/* Base */}
-      <path d="M13 64 Q25 68 37 64" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-      {/* Wine fill line */}
-      <path d="M13 28 Q25 34 37 28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+      <path d="M13 64 Q26 70 39 64" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
+      {/* Drip */}
+      <path d="M26 70 Q25 74 26 76 Q27 74 26 70Z" fill="currentColor"/>
       {/* Shine */}
-      <path d="M14 16 Q16 22 14 28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
+      <path d="M14 14 Q16 22 14 30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.35"/>
     </svg>
   );
 }
 
-function UpsideDownGlass({ className = "" }: { className?: string }) {
+function EmptyBeerGlass({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 50 70" fill="none" className={className} aria-hidden>
-      {/* Upside-down glass — trapezoid flipped, wider at top */}
-      <path d="M8 12 L14 58 L36 58 L42 12 Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-      {/* Rim (now at bottom) */}
-      <path d="M14 58 Q25 64 36 58" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-      {/* Opening at top */}
-      <line x1="8" y1="12" x2="42" y2="12" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-      {/* Drips from top opening */}
-      <path d="M18 12 Q17 6 19 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M25 12 Q24 4 26 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M32 12 Q31 6 33 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      {/* Drop dots */}
-      <circle cx="19" cy="3" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
-      <circle cx="26" cy="1" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
-      <circle cx="33" cy="3" r="1.5" stroke="currentColor" strokeWidth="1.5"/>
+    <svg viewBox="0 0 64 72" fill="none" className={className} aria-hidden>
+      <Splatter x={4} y={10} r={1.5} /><Splatter x={60} y={18} r={1} /><Splatter x={6} y={60} r={1.2} /><Splatter x={58} y={58} /><Splatter x={3} y={38} r={1} />
+      {/* Glass body — EMPTY, just outline + handle */}
+      <path d="M15 14 L11 63 L53 63 L49 14 Z" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Rim top */}
+      <line x1="15" y1="14" x2="49" y2="14" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
       {/* Handle */}
-      <path d="M42 22 Q54 22 54 34 Q54 46 42 46" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+      <path d="M49 22 Q62 22 62 36 Q62 50 49 50" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
+      {/* Residue ring at bottom — classic empty beer */}
+      <path d="M18 56 Q32 60 46 56" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.5"/>
+      {/* Lone bubble */}
+      <circle cx="32" cy="45" r="2.5" stroke="currentColor" strokeWidth="2" opacity="0.5"/>
+      <circle cx="24" cy="34" r="1.5" stroke="currentColor" strokeWidth="2" opacity="0.4"/>
+      {/* Shine */}
+      <path d="M18 24 Q20 32 18 40" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.35"/>
+      {/* "EMPTY" vibe — drip on outside */}
+      <path d="M11 63 Q10 67 11 70 Q12 67 11 63Z" fill="currentColor" opacity="0.6"/>
     </svg>
   );
 }
 
-function BabyBeerBottle({ className = "" }: { className?: string }) {
+function BabyBottle({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 50 80" fill="none" className={className} aria-hidden>
-      {/* Bottle body */}
-      <path d="M16 36 Q12 42 12 56 Q12 70 25 70 Q38 70 38 56 Q38 42 34 36 Z" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg viewBox="0 0 52 78" fill="none" className={className} aria-hidden>
+      <Splatter x={2} y={12} r={1.5} /><Splatter x={50} y={18} r={1} /><Splatter x={3} y={62} r={1.2} /><Splatter x={50} y={58} />
+      {/* Body shadow */}
+      <path d="M14 34 Q10 42 10 54 Q10 70 26 70 Q42 70 42 54 Q42 42 38 34 Z" fill="currentColor" opacity="0.15" transform="translate(2,2)"/>
+      {/* Body fill */}
+      <path d="M14 34 Q10 42 10 54 Q10 70 26 70 Q42 70 42 54 Q42 42 38 34 Z" fill="currentColor" opacity="0.22"/>
+      {/* Body outline */}
+      <path d="M14 34 Q10 42 10 54 Q10 70 26 70 Q42 70 42 54 Q42 42 38 34 Z" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Measurement marks */}
+      <line x1="11" y1="48" x2="16" y2="48" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
+      <line x1="11" y1="56" x2="16" y2="56" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
+      <line x1="11" y1="64" x2="16" y2="64" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5"/>
       {/* Neck */}
-      <rect x="19" y="18" width="12" height="20" rx="3" stroke="currentColor" strokeWidth="3"/>
-      {/* Baby nipple top */}
-      <path d="M19 18 Q19 10 25 8 Q31 10 31 18" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-      <path d="M22 12 Q25 6 28 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-      {/* Label */}
-      <rect x="15" y="46" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
-      {/* Star / label decoration */}
-      <path d="M25 50 L26 53 L29 53 L27 55 L28 58 L25 56 L22 58 L23 55 L21 53 L24 53 Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" opacity="0.8"/>
+      <rect x="19" y="18" width="14" height="18" rx="3" stroke="currentColor" strokeWidth="3.5"/>
+      <rect x="19" y="18" width="14" height="18" rx="3" fill="currentColor" opacity="0.15"/>
+      {/* Nipple collar */}
+      <ellipse cx="26" cy="18" rx="8" ry="3" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.2"/>
+      {/* Nipple tip */}
+      <path d="M22 18 Q22 10 26 7 Q30 10 30 18" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="currentColor" opacity="0.2"/>
+      <path d="M24 12 Q26 7 28 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      {/* Drip from bottom */}
+      <path d="M26 70 Q25 74 26 77 Q27 74 26 70Z" fill="currentColor"/>
     </svg>
   );
 }
@@ -149,7 +180,7 @@ const TILES = [
     accent: "bg-[var(--color-oasis-orange)]/85",
     textColor: "text-black",
     rotation: "-rotate-2",
-    icon: CbdBottle,
+    icon: HempLeaf,
   },
   {
     label: "Wine",
@@ -165,7 +196,7 @@ const TILES = [
     accent: "bg-[var(--color-oasis-orange)]",
     textColor: "text-black",
     rotation: "-rotate-1",
-    icon: UpsideDownGlass,
+    icon: EmptyBeerGlass,
   },
   {
     label: "Kids Menu",
@@ -173,7 +204,7 @@ const TILES = [
     accent: "bg-white",
     textColor: "text-black",
     rotation: "rotate-1",
-    icon: BabyBeerBottle,
+    icon: BabyBottle,
   },
 ];
 
