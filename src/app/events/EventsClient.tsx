@@ -26,19 +26,25 @@ type Tab = (typeof TABS)[number];
 
 export default function EventsClient({ events }: { events: Event[] }) {
   const [activeTab, setActiveTab] = useState<Tab>("Upcoming");
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+
+  // Build category list dynamically from events that exist
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(events.map((e) => e.genre).filter(Boolean)));
+    return ["All", ...cats.sort()];
+  }, [events]);
 
   const filtered = useMemo(() => {
     const now = new Date();
     now.setHours(0, 0, 0, 0);
-    const sorted = [...events].sort(
+    let sorted = [...events].sort(
       (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
     );
 
     if (activeTab === "Upcoming") {
-      return sorted.filter((e) => new Date(e.date) >= now);
-    }
-    if (activeTab === "This Month") {
-      return sorted.filter((e) => {
+      sorted = sorted.filter((e) => new Date(e.date) >= now);
+    } else if (activeTab === "This Month") {
+      sorted = sorted.filter((e) => {
         const d = new Date(e.date);
         return (
           d.getMonth() === now.getMonth() &&
@@ -47,8 +53,13 @@ export default function EventsClient({ events }: { events: Event[] }) {
         );
       });
     }
+
+    if (activeCategory !== "All") {
+      sorted = sorted.filter((e) => e.genre === activeCategory);
+    }
+
     return sorted;
-  }, [activeTab, events]);
+  }, [activeTab, activeCategory, events]);
 
   return (
     <>
@@ -68,14 +79,15 @@ export default function EventsClient({ events }: { events: Event[] }) {
         speed={40}
       />
 
-      {/* Tabs */}
+      {/* Tabs + category pills */}
       <section className="bg-[var(--color-oasis-ink)] sticky top-16 md:top-20 z-30 border-b-2 border-[var(--color-oasis-orange)]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Time tabs */}
           <div className="flex gap-1 overflow-x-auto scrollbar-hide">
             {TABS.map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => { setActiveTab(tab); setActiveCategory("All"); }}
                 className={`px-5 py-4 text-sm font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
                   activeTab === tab
                     ? "border-[var(--color-oasis-orange)] text-[var(--color-oasis-orange)]"
@@ -86,6 +98,24 @@ export default function EventsClient({ events }: { events: Event[] }) {
               </button>
             ))}
           </div>
+          {/* Category pills */}
+          {categories.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide py-3 border-t border-white/10">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
+                    activeCategory === cat
+                      ? "bg-[var(--color-oasis-orange)] text-black"
+                      : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
