@@ -53,8 +53,8 @@ export default function TheVibe() {
               transition={{ duration: 0.7 }}
               className="poster-title text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9] mb-8"
             >
-              Real pub.<br />
-              <span className="text-[var(--color-oasis-orange)]">Real sound.</span>
+              Tiny haunt.<br />
+              <span className="text-[var(--color-oasis-orange)]">Huge sound.</span>
             </motion.h2>
             <motion.div
               initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ export default function TheVibe() {
               className="space-y-4 text-white/70 text-base md:text-lg leading-relaxed max-w-xl mb-8"
             >
               <p>
-                Emerging bands. Rotating craft drafts. The stage where you catch someone before everyone else does.
+                The room where the good bands play before they get too big for the room.
               </p>
             </motion.div>
             <motion.div

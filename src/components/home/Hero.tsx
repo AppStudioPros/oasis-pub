@@ -98,7 +98,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 1.3 }}
           className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-snug font-light"
         >
-          The epicenter of New London&apos;s music scene.<br />
+          The most REAL bar you&apos;ve never heard of.<br />
           <span className="text-white/60">Loud nights. Cold drafts. Open 365.</span>
         </motion.p>
 

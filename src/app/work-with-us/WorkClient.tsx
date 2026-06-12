@@ -45,7 +45,7 @@ export default function WorkClient() {
         eyebrow="Now Hiring"
         title="Join"
         accent="The Crew."
-        subtitle="Bartenders. Door staff. Sound engineers. Booking help."
+        subtitle="Think you've got something worth hearing? Prove it."
       />
 
       <SectionDivider
@@ -106,13 +106,13 @@ export default function WorkClient() {
               ✦ The Right People ✦
             </p>
             <h2 className="poster-title text-3xl md:text-5xl text-white leading-[0.9] mb-6">
-              We&apos;re always looking<br />
-              <span className="text-[var(--color-oasis-orange)]">for our people.</span>
+              We&apos;re not hard<br />
+              <span className="text-[var(--color-oasis-orange)]">to work for.</span>
             </h2>
             <p className="text-white/70 text-base leading-relaxed">
-              Bartenders, door staff, sound engineers, booking help. If you love live music,
-              keep a cool head behind a bar at 1am on a Friday, and don&apos;t mind the smell of
-              stale beer on your jacket — drop us a line.
+              Bartenders, door people, sound engineers, booking help. We need humans who love live music,
+              can keep a cool head at 1am on a Friday, and don&apos;t mind the smell of
+              stale beer on their jacket. If that&apos;s you — you already fit in.
             </p>
           </motion.div>
         </div>
@@ -142,8 +142,8 @@ export default function WorkClient() {
               ✦ Apply Now ✦
             </p>
             <h2 className="poster-title text-4xl md:text-5xl text-white leading-[0.9]">
-              Tell us<br />
-              <span className="text-[var(--color-oasis-orange)]">about yourself.</span>
+              Alright.<br />
+              <span className="text-[var(--color-oasis-orange)]">Prove it.</span>
             </h2>
           </motion.div>
 
@@ -195,7 +195,7 @@ export default function WorkClient() {
                 <textarea
                   name="message"
                   rows={5}
-                  placeholder="Why the Oasis? Any music scene experience? Availability?"
+                  placeholder="Why the Oasis? Music scene experience? When can you work?"
                   className="w-full bg-black border-2 border-white/20 px-4 py-3 text-white focus:border-[var(--color-oasis-orange)] focus:outline-none transition-colors"
                 />
               </div>

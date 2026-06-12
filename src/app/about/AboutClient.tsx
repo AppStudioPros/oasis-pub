@@ -11,25 +11,25 @@ const PILLARS = [
   {
     icon: <Music size={28} />,
     title: "Music First",
-    body: "Indie rock, metal, bass nights, DJ sets, sea shanty crews. If it's loud and honest, we'll book it. The lineup never sits still.",
+    body: "Indie rock, metal, bass nights, DJ sets, sea shanty crews. If it's loud and honest, we'll book it. The room where the good bands play before they get too big for the room.",
     rotation: "-rotate-1",
   },
   {
     icon: <Beer size={28} />,
     title: "20+ Drafts",
-    body: "A curated rotation of craft beer — heavy on microbrews and CT-local. Always something new on tap. Plus seltzers, cocktails, CBD drinks, wine, and zero-proof options.",
+    body: "Rotating craft beer, heavy on CT-local microbrews. Always something new on tap. Plus seltzers, canned cocktails, CBD drinks, wine, and zero-proof. We take the list seriously so you don't have to.",
     rotation: "rotate-1",
   },
   {
     icon: <Users size={28} />,
     title: "The Crowd",
-    body: "Young, weird, friendly. 21+. You'll meet musicians, artists, students, lifers, and the occasional touring band member crashing at the bar after their set.",
+    body: "Young, weird, and completely unpretentious. 21+. You'll meet musicians, artists, students, lifers, and the occasional touring band member crashing at the bar after soundcheck.",
     rotation: "rotate-2",
   },
   {
     icon: <Heart size={28} />,
     title: "Open 365",
-    body: "Every single day of the year. Holidays, blizzards, slow Tuesdays, weird Wednesdays. The door's open.",
+    body: "Every single day of the year. Holidays, blizzards, slow Tuesdays, weird Wednesdays. Other bars close. We don't.",
     rotation: "-rotate-2",
   },
 ];
@@ -45,7 +45,7 @@ export default function AboutClient() {
         eyebrow="Our Story"
         title="About"
         accent="The Oasis"
-        subtitle="Emerging bands. Cold drafts. No pretense."
+        subtitle="We've been called a lot of things. We'll take all of it."
       />
 
       <SectionDivider
@@ -74,8 +74,8 @@ export default function AboutClient() {
               ✦ The Real Deal ✦
             </p>
             <h2 className="poster-title text-4xl md:text-6xl text-white leading-[0.9]">
-              What a real bar<br />
-              <span className="text-[var(--color-oasis-orange)]">is supposed to feel like.</span>
+              Tiny haunt.<br />
+              <span className="text-[var(--color-oasis-orange)]">Huge sound.</span>
             </h2>
           </motion.div>
 
@@ -87,11 +87,11 @@ export default function AboutClient() {
             className="space-y-5 text-white/75 text-base md:text-lg leading-relaxed"
           >
             <p>
-              We&apos;re the room at 16 Bank Street where emerging bands play before they blow up,
-              the beer list rotates weekly, and the crowd actually knows every word.
+              We&apos;ve been called a hipster haunt, a dive bar, a rock club, and &ldquo;that place
+              that smells like spilled Guinness and ambition.&rdquo; We&apos;ll take all of it.
             </p>
             <p>
-              No bottle service. No bouncer attitude. No cover charge. Just twenty-plus
+              No bottle service. No bouncer attitude. No cover charge bullshit. Just twenty-plus
               craft beers on draught — mostly microbrews, a lot of local — a wall covered in show
               posters, and a stage where you might catch the band that&apos;s about to be your favorite
               before anybody else has heard of them.
@@ -119,8 +119,8 @@ export default function AboutClient() {
               ✦ What We&apos;re About ✦
             </p>
             <h2 className="poster-title text-5xl md:text-7xl text-white leading-none">
-              The Four<br />
-              <span className="text-[var(--color-oasis-orange)]">Pillars.</span>
+              Four reasons<br />
+              <span className="text-[var(--color-oasis-orange)]">you&apos;ll be back.</span>
             </h2>
           </motion.div>
 
@@ -175,7 +175,7 @@ export default function AboutClient() {
             transition={{ duration: 0.6 }}
             className="poster-title text-4xl md:text-6xl text-black mb-8 leading-[0.9]"
           >
-            Come see<br />what&apos;s on tonight.
+            Don&apos;t just take<br />our word for it.
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
