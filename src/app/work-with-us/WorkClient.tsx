@@ -82,21 +82,16 @@ export default function WorkClient() {
 
         {/* Staff photo */}
         <div className="relative max-w-5xl mx-auto px-6 mt-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]"
-          >
+          <div className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]">
             <Image
               src="/images/staff-photo.jpg"
               alt="The Oasis crew"
               fill
               className="object-cover object-top"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          </motion.div>
+          </div>
         </div>
       </section>
 
