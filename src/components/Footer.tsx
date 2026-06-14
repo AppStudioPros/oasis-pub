@@ -61,22 +61,10 @@ export default function Footer() {
             </h4>
             <p className="text-white/70 text-sm mb-3">Open 365 days a year</p>
             <ul className="text-white/80 text-sm space-y-1">
-              <li className="flex justify-between max-w-xs">
-                <span>Mon – Thu</span>
-                <span>5pm – 1am</span>
-              </li>
-              <li className="flex justify-between max-w-xs">
-                <span>Fri</span>
-                <span>5pm – 2am</span>
-              </li>
-              <li className="flex justify-between max-w-xs">
-                <span>Sat</span>
-                <span>7pm – 2am</span>
-              </li>
-              <li className="flex justify-between max-w-xs">
-                <span>Sun</span>
-                <span>7pm – 1am</span>
-              </li>
+              <li>Mon – Thu: 5pm – 1am</li>
+              <li>Fri: 5pm – 2am</li>
+              <li>Sat: 7pm – 2am</li>
+              <li>Sun: 7pm – 1am</li>
             </ul>
           </div>
 
