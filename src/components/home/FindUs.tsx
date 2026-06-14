@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
+import { MapPin, Mail, ArrowRight } from "lucide-react";
 
 export default function FindUs() {
   return (
@@ -37,24 +37,26 @@ export default function FindUs() {
               </div>
               <div className="grid grid-cols-2 gap-4 text-white">
                 <div className="text-center">
-                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Sun – Thu</div>
-                  <div className="poster-title text-2xl">7pm – 1am</div>
+                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Mon – Thu</div>
+                  <div className="poster-title text-2xl">5pm – 1am</div>
                 </div>
                 <div className="text-center border-l border-white/10 pl-4">
-                  <div className="text-[var(--color-oasis-orange)]/80 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Fri – Sat</div>
-                  <div className="poster-title text-2xl text-[var(--color-oasis-orange)]">7pm – 2am</div>
+                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Fri</div>
+                  <div className="poster-title text-2xl">5pm – 2am</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Sat</div>
+                  <div className="poster-title text-2xl">7pm – 2am</div>
+                </div>
+                <div className="text-center border-l border-white/10 pl-4">
+                  <div className="text-[var(--color-oasis-orange)]/80 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Sun</div>
+                  <div className="poster-title text-2xl text-[var(--color-oasis-orange)]">7pm – 1am</div>
                 </div>
               </div>
             </div>
 
             {/* Contact bits */}
             <div className="space-y-3 mb-8">
-              <a href="tel:+18604473929" className="flex items-center gap-3 text-white/80 hover:text-[var(--color-oasis-orange)] transition-colors group">
-                <div className="w-10 h-10 border border-white/20 group-hover:border-[var(--color-oasis-orange)] flex items-center justify-center transition-colors">
-                  <Phone size={16} />
-                </div>
-                <span className="text-base">(860) 447-3929</span>
-              </a>
               <a href="mailto:oasisnewlondon@gmail.com" className="flex items-center gap-3 text-white/80 hover:text-[var(--color-oasis-orange)] transition-colors group">
                 <div className="w-10 h-10 border border-white/20 group-hover:border-[var(--color-oasis-orange)] flex items-center justify-center transition-colors">
                   <Mail size={16} />
@@ -67,7 +69,7 @@ export default function FindUs() {
               href="/contact"
               className="group inline-flex items-center gap-2 bg-[var(--color-oasis-orange)] text-white font-bold uppercase tracking-wider text-sm px-8 py-4 transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#000] w-fit"
             >
-              Book the Venue
+              More Info
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone, Clock } from "lucide-react";
+import { MapPin, Mail, Clock } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import SectionDivider from "@/components/SectionDivider";
@@ -42,14 +42,12 @@ export default function ContactClient() {
         { name: "Contact", url: "https://oasisnewlondon.com/contact" },
       ]} />
       <PageHero
-        eyebrow="Get In Touch"
-        title="Find"
-        accent="Us."
-        subtitle="16 Bank Street, New London CT. Open 365 days a year."
+        title="Connect With Us"
+        subtitle="We don't bite."
       />
 
       <SectionDivider
-        items={["✦ BOOK THE VENUE ✦", "PRIVATE EVENTS", "BAND SUBMISSIONS", "BOOKING INQUIRIES"]}
+        items={["✦ BAND SUBMISSIONS ✦", "EVENT INQUIRIES", "GET DIRECTIONS"]}
         speed={40}
       />
 
@@ -63,7 +61,7 @@ export default function ContactClient() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-4">
-              ✦ The Pub ✦
+              ✦ Find Us ✦
             </p>
             <h2 className="poster-title text-4xl md:text-5xl text-white mb-8 leading-[0.9]">
               The Oasis<br />
@@ -75,11 +73,6 @@ export default function ContactClient() {
                 icon={<MapPin size={20} />}
                 label="Address"
                 value={<>16 Bank Street<br />New London, CT 06320</>}
-              />
-              <InfoRow
-                icon={<Phone size={20} />}
-                label="Phone"
-                value={<a href="tel:+18604473929" className="hover:text-[var(--color-oasis-orange)]">(860) 447-3929</a>}
               />
               <InfoRow
                 icon={<Mail size={20} />}
@@ -97,8 +90,10 @@ export default function ContactClient() {
                 value={
                   <>
                     Open 365 days a year<br />
-                    Sun–Thu: 7pm – 1am<br />
-                    Fri–Sat: 7pm – 2am
+                    Mon–Thu: 5pm – 1am<br />
+                    Fri: 5pm – 2am<br />
+                    Sat: 7pm – 2am<br />
+                    Sun: 7pm – 1am
                   </>
                 }
               />
@@ -142,7 +137,7 @@ export default function ContactClient() {
               <span className="text-[var(--color-oasis-orange)]">a message.</span>
             </h2>
             <p className="text-white/60 text-sm mb-8">
-              Private event? Booking inquiry? Just curious? Hit us up.
+              General inquiries only. For band booking, please use the email provided.
             </p>
 
             {status === "sent" ? (
@@ -185,12 +180,6 @@ export default function ContactClient() {
           </motion.div>
         </div>
       </section>
-
-      <SectionDivider
-        items={["✦ 16 BANK ST ✦", "OPEN 365", "21+", "NEW LONDON CT", "(860) 447-3929"]}
-        reverse
-        speed={45}
-      />
     </>
   );
 }

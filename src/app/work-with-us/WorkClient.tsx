@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -42,18 +43,16 @@ export default function WorkClient() {
         { name: "Work With Us", url: "https://oasisnewlondon.com/work-with-us" },
       ]} />
       <PageHero
-        eyebrow="Now Hiring"
-        title="Join"
-        accent="The Crew."
-        subtitle="Think you've got something worth hearing? Prove it."
+        title="Join The Fam"
+        subtitle="We're pretty cool to work with. We swear."
       />
 
       <SectionDivider
-        items={["✦ NOW HIRING ✦", "BARTENDERS", "DOOR STAFF", "SOUND ENGINEERS", "JOIN THE CREW"]}
+        items={["✦ BARTENDER ✦", "DOOR PERSON", "SOUND ENGINEER", "BOOKING ASSISTANT"]}
         speed={40}
       />
 
-      {/* Intro w/ rotating stamp */}
+      {/* Intro w/ image */}
       <section className="relative bg-black py-16 md:py-24 overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.07] pointer-events-none"
@@ -81,14 +80,14 @@ export default function WorkClient() {
                 </defs>
                 <text className="fill-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.4em] text-[13px]">
                   <textPath href="#work-circle">
-                    NOW HIRING · NOW HIRING · NOW HIRING ·
+                    JOIN THE FAM · JOIN THE FAM · JOIN THE FAM ·
                   </textPath>
                 </text>
               </svg>
               <div className="absolute inset-6 border-4 border-[var(--color-oasis-orange)] rounded-full flex items-center justify-center bg-black">
                 <div className="text-center">
                   <div className="text-[var(--color-oasis-orange)] text-[10px] font-bold uppercase tracking-[0.3em]">Join</div>
-                  <div className="poster-title text-2xl md:text-3xl text-white leading-none mt-1">The<br />Crew</div>
+                  <div className="poster-title text-2xl md:text-3xl text-white leading-none mt-1">The<br />Fam</div>
                 </div>
               </div>
             </div>
@@ -102,18 +101,32 @@ export default function WorkClient() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:col-span-2"
           >
-            <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-4">
-              ✦ The Right People ✦
-            </p>
             <h2 className="poster-title text-3xl md:text-5xl text-white leading-[0.9] mb-6">
-              We&apos;re not hard<br />
-              <span className="text-[var(--color-oasis-orange)]">to work for.</span>
+              Be A Part Of<br />
+              <span className="text-[var(--color-oasis-orange)]">The Oasis Fam</span>
             </h2>
             <p className="text-white/70 text-base leading-relaxed">
-              Bartenders, door people, sound engineers, booking help. We need humans who love live music,
-              can keep a cool head at 1am on a Friday, and don&apos;t mind the smell of
-              stale beer on their jacket. If that&apos;s you — you already fit in.
+              We&apos;re looking for good people that keep a cool head and can stay upbeat while getting the work done. If this is you, you may be a good fit for the Oasis. Please note: We are not always hiring, but we will take your application under consideration when the time comes.
             </p>
+          </motion.div>
+        </div>
+
+        {/* Staff photo */}
+        <div className="relative max-w-5xl mx-auto px-6 mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]"
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&q=80"
+              alt="Bar staff"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           </motion.div>
         </div>
 
@@ -138,12 +151,9 @@ export default function WorkClient() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-3">
-              ✦ Apply Now ✦
-            </p>
             <h2 className="poster-title text-4xl md:text-5xl text-white leading-[0.9]">
-              Alright.<br />
-              <span className="text-[var(--color-oasis-orange)]">Prove it.</span>
+              Let&apos;s Hear<br />
+              <span className="text-[var(--color-oasis-orange)]">About You</span>
             </h2>
           </motion.div>
 
@@ -180,11 +190,9 @@ export default function WorkClient() {
                 >
                   <option value="" disabled>Choose a role...</option>
                   <option value="Bartender">Bartender</option>
-                  <option value="Door Staff / Security">Door Staff / Security</option>
+                  <option value="Door Person">Door Person</option>
                   <option value="Sound Engineer">Sound Engineer</option>
-                  <option value="Barback">Barback</option>
                   <option value="Booking Assistant">Booking Assistant</option>
-                  <option value="Other">Other</option>
                 </select>
               </div>
               <Field label="Years of Experience" name="experience" placeholder="e.g. 2 years bartending" />
@@ -218,7 +226,7 @@ export default function WorkClient() {
       </section>
 
       <SectionDivider
-        items={["✦ JOIN US ✦", "BARTENDERS", "DOOR STAFF", "SOUND ENGINEERS", "BARBACKS"]}
+        items={["✦ LIVE MUSIC ✦", "HAPPY HOUR", "CRAFT BEER", "BAD MOVIE NIGHT"]}
         reverse
         speed={45}
       />

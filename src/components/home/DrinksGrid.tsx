@@ -8,37 +8,37 @@ import { ArrowRight } from "lucide-react";
 const TILES = [
   {
     label: "Craft Beer",
-    sample: "Tox · Fat Orange Cat · Beer'd",
+    sample: "Local Beer · Ciders · Unique Styles",
     rotation: "-rotate-1",
     icon: "/images/icons/craft-beer.png",
   },
   {
-    label: "Seltzers & Cans",
-    sample: "Truly · Alc-A-Chino · Dogfish",
+    label: "Canned Drinks",
+    sample: "Seltzers · Cocktails · Coffee",
     rotation: "rotate-1",
     icon: "/images/icons/seltzers.png",
   },
   {
-    label: "CBD Drinks",
-    sample: "Goodwell · Hooker",
+    label: "CBD & Social Tonics",
+    sample: "CBD · Adaptogens",
     rotation: "-rotate-2",
     icon: "/images/icons/cbd.png",
   },
   {
     label: "Wine",
-    sample: "Archer Roose · Canned & honest",
+    sample: "Malbec · Rose · Sauv Blanc",
     rotation: "rotate-2",
     icon: "/images/icons/wine.png",
   },
   {
     label: "Alcohol-Free",
-    sample: "Recess · Blind Tiger · Athletic",
+    sample: "Beer · Cider · Cocktails",
     rotation: "-rotate-1",
     icon: "/images/icons/alcohol-free.png",
   },
   {
     label: "Kids Menu",
-    sample: "Bud · Yuengling · Miller High Life",
+    sample: "The basics.",
     rotation: "rotate-1",
     icon: "/images/icons/kids-menu.png",
   },
@@ -70,7 +70,7 @@ export default function DrinksGrid() {
             The Drinks
           </h2>
           <p className="text-black/70 text-sm md:text-base mt-4 max-w-xl mx-auto">
-            Twenty-plus drafts. Canned cocktails. CBD chill. Mocktails. Whatever your night needs.
+            20 drafts. 60+ cans. Canned cocktails. CBD & mushroom drinks. Social tonics. Whatever your night needs.
           </p>
         </motion.div>
 
@@ -136,16 +136,6 @@ export default function DrinksGrid() {
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center text-black/60 text-xs italic mt-8"
-        >
-          ✦ Tap list rotates often — ask your bartender for tonight&apos;s pour list ✦
-        </motion.p>
       </div>
     </section>
   );

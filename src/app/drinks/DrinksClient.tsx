@@ -50,19 +50,18 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
       ]} />
       <PageHero
         eyebrow="Pick Your Poison"
-        title="The"
-        accent="Drinks."
-        subtitle="20+ drafts. Canned cocktails. CBD chill. Mocktails. Whatever your night needs."
+        title="The Drinks"
+        subtitle="20 drafts. 60+ cans. Canned cocktails. CBD & mushroom drinks. Social tonics. Whatever your night needs."
       />
 
       <SectionDivider
         items={[
-          "✦ 20+ DRAFTS ✦",
-          "CRAFT BEER",
-          "CANNED COCKTAILS",
-          "CBD CHILL",
-          "ZERO PROOF",
-          "ALWAYS COLD",
+          "✦ CRAFT BEER ✦",
+          "ALCOHOL-FREE",
+          "COCKTAILS",
+          "CIDERS",
+          "SELTZERS",
+          "SOCIAL TONICS",
         ]}
         speed={40}
       />
@@ -100,9 +99,6 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
               transition={{ duration: 0.4 }}
             >
               <div className="text-center mb-12">
-                <p className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.3em] text-xs mb-3">
-                  ✦ {activeTab} ✦
-                </p>
                 <h2 className="poster-title text-4xl md:text-6xl text-white mb-3 leading-[0.9]">
                   {active.title}
                 </h2>
@@ -126,7 +122,7 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: ci * 0.05 }}
                   >
-                    <h3 className="display text-2xl md:text-3xl uppercase tracking-wider text-[var(--color-oasis-orange)] mb-3 pb-2 border-b-2 border-[var(--color-oasis-orange)]/40">
+                    <h3 className="display text-2xl md:text-3xl uppercase tracking-wider text-white mb-3 pb-2 border-b-2 border-[var(--color-oasis-orange)]/40">
                       {cat.name}
                     </h3>
                     {cat.note && (
@@ -152,28 +148,10 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
                   </motion.div>
                 ))}
               </div>
-
-              {activeTab === "Craft Beer" && (
-                <p className="text-center text-white/40 text-xs italic mt-12">
-                  ✦ Tap list rotates often — ask your bartender for tonight&apos;s pour list ✦
-                </p>
-              )}
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
-
-      <SectionDivider
-        items={[
-          "✦ COLD CRAFT BEER ✦",
-          "CT LOCAL",
-          "ROTATING TAPS",
-          "21+",
-          "OPEN 365",
-        ]}
-        reverse
-        speed={45}
-      />
     </>
   );
 }

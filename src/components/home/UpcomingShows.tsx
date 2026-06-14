@@ -32,7 +32,7 @@ export default function UpcomingShows({ events }: { events: Event[] }) {
             </p>
             <h2 className="poster-title text-5xl md:text-7xl text-white leading-[0.9]">
               Upcoming<br />
-              <span className="text-[var(--color-oasis-orange)]">Shows.</span>
+              <span className="text-[var(--color-oasis-orange)]">Events.</span>
             </h2>
           </motion.div>
 

@@ -9,13 +9,13 @@ import kidsMenu from "@/data/drinks/kids-menu.json";
 export const metadata = {
   title: "Drinks — Craft Beer, Cocktails, Wine, CBD & More",
   description:
-    "Craft beer drafts at The Oasis Pub. Plus hard seltzers, canned cocktails, CBD drinks, wine, and zero-proof options. Tap list rotates weekly.",
+    "20 drafts, 60+ cans, canned cocktails, CBD & mushroom drinks, social tonics and alcohol-free options at The Oasis Pub in New London, CT.",
 };
 
 const menus = {
   "Craft Beer": craftBeer,
-  "Seltzers & Canned Cocktails": seltzers,
-  "CBD Drinks": chill,
+  "Canned Drinks": seltzers,
+  "CBD & Social Tonics": chill,
   "Wine": wine,
   "Alcohol-Free": alcoholFree,
   "Kids Menu": kidsMenu,

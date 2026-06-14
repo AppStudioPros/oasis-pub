@@ -65,47 +65,31 @@ export default function Hero() {
           ✦ 16 Bank Street · New London, CT ✦
         </motion.p>
 
-        {/* Staggered title */}
-        <h1 className="poster-title text-white mb-8 leading-[0.85]">
-          {"OASIS".split("").map((letter, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 80, rotate: -8 }}
-              animate={{ opacity: 1, y: 0, rotate: 0 }}
-              transition={{
-                duration: 0.7,
-                delay: 0.4 + i * 0.08,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-              className="inline-block text-7xl sm:text-8xl md:text-[10rem] lg:text-[14rem]"
-            >
-              {letter}
-            </motion.span>
-          ))}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.1 }}
-            className="text-3xl md:text-5xl text-[var(--color-oasis-orange)] mt-2"
-          >
-            THE PUB
-          </motion.div>
-        </h1>
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
+          className="poster-title text-white mb-8 leading-[0.9] text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
+        >
+          A Sanctuary<br />
+          <span className="text-[var(--color-oasis-orange)]">From Sameness</span>
+        </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
           className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-snug font-light"
         >
-          The most REAL bar you&apos;ve never heard of.<br />
-          <span className="text-white/60">Loud nights. Cold drafts. Open 365.</span>
+          Craft Beer. Unique Drinks. Live Music.<br />
+          <span className="text-white/60">Open every weekday at 5pm, every weekend at 7pm</span>
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link
@@ -113,7 +97,7 @@ export default function Hero() {
             className="group relative inline-flex items-center justify-center gap-2 bg-[var(--color-oasis-orange)] text-white font-bold uppercase tracking-wider text-sm px-8 py-4 overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#000]"
           >
             <Calendar size={18} />
-            See Upcoming Shows
+            See Upcoming Events
           </Link>
           <Link
             href="/drinks"

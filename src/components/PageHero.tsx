@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 interface PageHeroProps {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   accent?: string; // accent line below title (orange)
   subtitle?: string;
@@ -59,14 +59,16 @@ export default function PageHero({ eyebrow, title, accent, subtitle }: PageHeroP
         style={{ opacity }}
         className="relative z-10 text-center px-6 max-w-4xl"
       >
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.4em] text-xs mb-5"
-        >
-          ✦ {eyebrow} ✦
-        </motion.p>
+        {eyebrow && (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.4em] text-xs mb-5"
+          >
+            ✦ {eyebrow} ✦
+          </motion.p>
+        )}
         <h1 className="poster-title text-white leading-[0.9]">
           {title.split(" ").map((word, i) => (
             <motion.span

@@ -68,14 +68,14 @@ export default function EventsClient({ events }: { events: Event[] }) {
         { name: "Events", url: "https://oasisnewlondon.com/events" },
       ]} />
       <PageHero
-        eyebrow="Live Music · DJ Sets · Bass Nights"
-        title="The"
-        accent="Lineup."
-        subtitle="Emerging bands. Loud nights. Always 21+."
+        eyebrow="The Lineup"
+        title="Upcoming Events"
+        accent=""
+        subtitle="Emerging bands, eclectic DJs, bad movie nights and much more."
       />
 
       <SectionDivider
-        items={["✦ INDIE ROCK ✦", "METAL", "BASS NIGHTS", "DJ SETS", "SEA SHANTIES", "NO COVER"]}
+        items={["✦ LIVE MUSIC ✦", "DANCE PARTIES", "BAD MOVIE NIGHTS", "ART OPENINGS"]}
         speed={40}
       />
 
@@ -142,7 +142,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
       </section>
 
       <SectionDivider
-        items={["✦ WANT TO PLAY ✦", "BOOK A NIGHT", "EMAIL BOOKING", "EMERGING BANDS WELCOME"]}
+        items={["✦ INDIE ROCK ✦", "POST-PUNK", "EDM", "HIP HOP", "FOLK", "COUNTRY ROCK", "DANCE"]}
         reverse
         speed={45}
       />
@@ -173,7 +173,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-black/80 mb-8 max-w-xl mx-auto"
           >
-            We book emerging bands, DJs, and weird-in-a-good-way one-off nights. Send us a link to your music.
+            We get tons of requests to perform. Please be patient and give us time to respond.
           </motion.p>
           <motion.a
             initial={{ opacity: 0, y: 20 }}

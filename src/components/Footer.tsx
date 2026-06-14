@@ -30,7 +30,7 @@ export default function Footer() {
               The Oasis Pub
             </h3>
             <p className="text-white/70 text-sm leading-relaxed">
-              New London&apos;s loud side. Live music, rotating taps, 365 nights a year.
+              A New London staple. Craft beer. Live music. 21+ only.
             </p>
             <div className="flex gap-3 mt-5">
               <a
@@ -62,12 +62,20 @@ export default function Footer() {
             <p className="text-white/70 text-sm mb-3">Open 365 days a year</p>
             <ul className="text-white/80 text-sm space-y-1">
               <li className="flex justify-between max-w-xs">
-                <span>Sun – Thu</span>
-                <span>7pm – 1am</span>
+                <span>Mon – Thu</span>
+                <span>5pm – 1am</span>
               </li>
               <li className="flex justify-between max-w-xs">
-                <span>Fri – Sat</span>
+                <span>Fri</span>
+                <span>5pm – 2am</span>
+              </li>
+              <li className="flex justify-between max-w-xs">
+                <span>Sat</span>
                 <span>7pm – 2am</span>
+              </li>
+              <li className="flex justify-between max-w-xs">
+                <span>Sun</span>
+                <span>7pm – 1am</span>
               </li>
             </ul>
           </div>
@@ -105,13 +113,13 @@ export default function Footer() {
               href="/contact"
               className="inline-block mt-4 text-sm font-bold uppercase tracking-wider text-[var(--color-oasis-orange)] hover:underline"
             >
-              Book the Venue →
+              More Info →
             </Link>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-white/40">
-          <p>© {new Date().getFullYear()} The Oasis Pub. 21+. New London, CT.</p>
+          <p>© {new Date().getFullYear()} The Oasis Pub. New London, CT.</p>
           <p>Site by <a href="https://webdesignpros365.com" className="hover:text-[var(--color-oasis-orange)]">WebDesignPros365</a></p>
         </div>
       </div>

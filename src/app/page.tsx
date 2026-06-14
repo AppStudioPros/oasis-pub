@@ -1,11 +1,11 @@
 import Hero from "@/components/home/Hero";
 import Marquee from "@/components/home/Marquee";
 import FeaturedShow from "@/components/home/FeaturedShow";
-import TheVibe from "@/components/home/TheVibe";
 import DrinksGrid from "@/components/home/DrinksGrid";
 import UpcomingShows from "@/components/home/UpcomingShows";
-import HiringBanner from "@/components/home/HiringBanner";
+import HappyHourBanner from "@/components/home/HappyHourBanner";
 import FindUs from "@/components/home/FindUs";
+import SectionDivider from "@/components/SectionDivider";
 import { getUpcomingEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
 import staticEvents from "@/data/events.json";
 
@@ -26,17 +26,27 @@ function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
   };
 }
 
+// Filter to only live music events for the homepage
+function isLiveMusic(event: { genre: string }) {
+  const g = (event.genre ?? "").toLowerCase();
+  return g.includes("live music") || g.includes("live") || g.includes("music");
+}
+
 export default async function HomePage() {
   // Try live DB first, fall back to static JSON
   const liveEvents = await getUpcomingEvents();
-  const events =
+  const allEvents =
     liveEvents.length > 0
       ? liveEvents.map(mapEvent)
       : staticEvents.filter(
           (e) => new Date(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))
         );
 
-  const featured = events[0] ?? null;
+  // Filter to live music for Next Up section
+  const liveMusicEvents = allEvents.filter(isLiveMusic);
+  // Use live music events for featured if available, else fall back to all
+  const featured = (liveMusicEvents.length > 0 ? liveMusicEvents : allEvents)[0] ?? null;
+  const upcomingEvents = liveMusicEvents.length > 0 ? liveMusicEvents : allEvents;
 
   return (
     <>
@@ -44,42 +54,37 @@ export default async function HomePage() {
 
       <Marquee
         items={[
-          "LIVE MUSIC",
-          "20+ DRAFTS",
           "OPEN 365",
-          "NO COVER",
-          "16 BANK ST",
-          "ROCK CLUB",
-          "CRAFT BEER",
-          "NEW LONDON CT",
+          "21+ ONLY",
+          "20 DRAFTS",
+          "60+ CANS",
+          "HAPPY HOUR",
+          "LIVE MUSIC",
         ]}
         speed={40}
       />
 
       {featured && <FeaturedShow event={featured} />}
 
-      <TheVibe />
-
       <DrinksGrid />
 
-      <UpcomingShows events={events} />
+      <UpcomingShows events={upcomingEvents} />
 
-      <Marquee
+      <SectionDivider
         items={[
-          "✦ EST. 1990s ✦",
-          "21+",
-          "INDIE ROCK",
-          "BASS NIGHTS",
-          "SEA SHANTIES",
-          "DJ SETS",
-          "METAL",
-          "CRAFT BEER",
+          "✦ INDIE ROCK ✦",
+          "POST-PUNK",
+          "EDM",
+          "HIP HOP",
+          "FOLK",
+          "COUNTRY ROCK",
+          "DANCE",
         ]}
         reverse
         speed={45}
       />
 
-      <HiringBanner />
+      <HappyHourBanner />
 
       <FindUs />
 
@@ -96,7 +101,7 @@ export default async function HomePage() {
                 name: "What is The Oasis Pub?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Oasis Pub is a rock club and music venue at 16 Bank Street in downtown New London, CT. Known as the epicenter of New London's music scene, it features emerging bands, 20+ rotating craft beers on draft, and is open 365 days a year.",
+                  text: "The Oasis Pub is a neighborhood bar and music venue at 16 Bank Street in downtown New London, CT. Known as a sanctuary from sameness, it features craft beer, live music, and is open every weekday at 5pm and every weekend at 7pm.",
                 },
               },
               {
@@ -104,7 +109,7 @@ export default async function HomePage() {
                 name: "What are the hours at The Oasis Pub?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Oasis Pub is open 365 days a year. Sunday through Thursday: 7pm to 1am. Friday and Saturday: 7pm to 2am.",
+                  text: "The Oasis Pub is open 365 days a year. Monday–Thursday: 5pm to 1am. Friday: 5pm to 2am. Saturday: 7pm to 2am. Sunday: 7pm to 1am.",
                 },
               },
               {
@@ -120,15 +125,15 @@ export default async function HomePage() {
                 name: "Does The Oasis Pub have live music?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes. The Oasis Pub is New London's primary live music venue, featuring emerging bands, DJ sets, metal nights, indie rock, sea shanty nights, and bass music events regularly throughout the year.",
+                  text: "Yes. The Oasis Pub features live music on weekends, plus DJ sets, Bad Movie Nights every Wednesday, and more.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Is there a cover charge at The Oasis Pub?",
+                name: "Does The Oasis Pub have happy hour?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. The Oasis Pub does not charge a cover charge.",
+                  text: "Yes. Happy hour is every weekday from 5–7pm with cheap beers and shot specials.",
                 },
               },
               {
@@ -136,7 +141,7 @@ export default async function HomePage() {
                 name: "What beer does The Oasis Pub serve?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Oasis Pub has 20+ rotating craft beers on draft, heavily featuring Connecticut local microbreweries. They also serve hard seltzers, canned cocktails, CBD drinks, wine, alcohol-free options, and domestic beers.",
+                  text: "The Oasis Pub has 20 rotating craft beers on draft, 60+ cans, canned cocktails, CBD and mushroom drinks, social tonics, and alcohol-free options.",
                 },
               },
               {
