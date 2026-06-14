@@ -79,13 +79,16 @@ export default function WorkClient() {
           </motion.div>
         </div>
 
-        {/* Staff photo — hidden until client provides image */}
-        {/* TODO: replace null with "/images/staff-photo.jpg" when client sends photo */}
-        {null && (
-          <div className="relative max-w-5xl mx-auto px-6 mt-12">
-            <div className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]" />
-          </div>
-        )}
+        {/* Staff photo — set STAFF_PHOTO_URL to show, leave empty to hide */}
+        {/* TODO: replace empty string with "/images/staff-photo.jpg" when client sends photo */}
+        {(() => {
+          const STAFF_PHOTO_URL = ""; // <- drop the path here when ready
+          return STAFF_PHOTO_URL ? (
+            <div className="relative max-w-5xl mx-auto px-6 mt-12">
+              <div className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]" />
+            </div>
+          ) : null;
+        })()}
       </section>
 
       {/* Application form */}
