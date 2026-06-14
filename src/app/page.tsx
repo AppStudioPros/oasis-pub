@@ -26,14 +26,26 @@ function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
   };
 }
 
-// Filter to only live music events for the homepage
+// Live Music categories — includes genre sub-categories saved from the Oasis event form
+const LIVE_MUSIC_CATEGORIES = new Set([
+  "live music",
+  "indie rock",
+  "metal / hardcore",
+  "folk / shanty",
+  "dj / dance",
+  "hip hop",
+  "country rock",
+  "post-punk",
+  "edm",
+  "other genre",
+]);
+
 function isLiveMusic(event: { genre: string }) {
-  const g = (event.genre ?? "").toLowerCase();
-  return g.includes("live music") || g.includes("live") || g.includes("music");
+  return LIVE_MUSIC_CATEGORIES.has((event.genre ?? "").toLowerCase());
 }
 
 export default async function HomePage() {
-  // Try live DB first, fall back to static JSON
+  // Fetch all upcoming events from DB, fall back to static JSON
   const liveEvents = await getUpcomingEvents();
   const allEvents =
     liveEvents.length > 0
@@ -42,11 +54,10 @@ export default async function HomePage() {
           (e) => new Date(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))
         );
 
-  // Filter to live music for Next Up section
+  // Strictly filter to Live Music only — no fallback to non-music events
   const liveMusicEvents = allEvents.filter(isLiveMusic);
-  // Use live music events for featured if available, else fall back to all
-  const featured = (liveMusicEvents.length > 0 ? liveMusicEvents : allEvents)[0] ?? null;
-  const upcomingEvents = liveMusicEvents.length > 0 ? liveMusicEvents : allEvents;
+  const featured = liveMusicEvents[0] ?? null;
+  const upcomingEvents = liveMusicEvents;
 
   return (
     <>
