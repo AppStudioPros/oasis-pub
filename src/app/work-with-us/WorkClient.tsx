@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -61,45 +60,14 @@ export default function WorkClient() {
               "repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(242,99,33,0.4) 40px, rgba(242,99,33,0.4) 42px)",
           }}
         />
-        <div className="relative max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-10 items-center">
-          {/* Rotating stamp */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: -8 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="relative mx-auto md:mx-0"
-          >
-            <div className="relative w-40 h-40 md:w-48 md:h-48">
-              <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full animate-spin-slow-work">
-                <defs>
-                  <path
-                    id="work-circle"
-                    d="M 100,100 m -85,0 a 85,85 0 1,1 170,0 a 85,85 0 1,1 -170,0"
-                  />
-                </defs>
-                <text className="fill-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.4em] text-[13px]">
-                  <textPath href="#work-circle">
-                    JOIN THE FAM · JOIN THE FAM · JOIN THE FAM ·
-                  </textPath>
-                </text>
-              </svg>
-              <div className="absolute inset-6 border-4 border-[var(--color-oasis-orange)] rounded-full flex items-center justify-center bg-black">
-                <div className="text-center">
-                  <div className="text-[var(--color-oasis-orange)] text-[10px] font-bold uppercase tracking-[0.3em]">Join</div>
-                  <div className="poster-title text-2xl md:text-3xl text-white leading-none mt-1">The<br />Fam</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Copy */}
+        <div className="relative max-w-5xl mx-auto px-6">
+          {/* Copy — full width, no stamp */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-2"
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
           >
             <h2 className="poster-title text-3xl md:text-5xl text-white leading-[0.9] mb-6">
               Be A Part Of<br />
@@ -111,34 +79,13 @@ export default function WorkClient() {
           </motion.div>
         </div>
 
-        {/* Staff photo */}
-        <div className="relative max-w-5xl mx-auto px-6 mt-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=800&q=80"
-              alt="Bar staff"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          </motion.div>
-        </div>
-
-        <style jsx>{`
-          @keyframes spin-slow-work {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-          :global(.animate-spin-slow-work) {
-            animation: spin-slow-work 20s linear infinite;
-          }
-        `}</style>
+        {/* Staff photo — hidden until client provides image */}
+        {/* TODO: replace null with "/images/staff-photo.jpg" when client sends photo */}
+        {null && (
+          <div className="relative max-w-5xl mx-auto px-6 mt-12">
+            <div className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]" />
+          </div>
+        )}
       </section>
 
       {/* Application form */}
