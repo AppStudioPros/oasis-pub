@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -79,16 +80,24 @@ export default function WorkClient() {
           </motion.div>
         </div>
 
-        {/* Staff photo — set STAFF_PHOTO_URL to show, leave empty to hide */}
-        {/* TODO: replace empty string with "/images/staff-photo.jpg" when client sends photo */}
-        {(() => {
-          const STAFF_PHOTO_URL = ""; // <- drop the path here when ready
-          return STAFF_PHOTO_URL ? (
-            <div className="relative max-w-5xl mx-auto px-6 mt-12">
-              <div className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]" />
-            </div>
-          ) : null;
-        })()}
+        {/* Staff photo */}
+        <div className="relative max-w-5xl mx-auto px-6 mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]"
+          >
+            <Image
+              src="/images/staff-photo.jpg"
+              alt="The Oasis crew"
+              fill
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          </motion.div>
+        </div>
       </section>
 
       {/* Application form */}

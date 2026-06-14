@@ -11,7 +11,7 @@ export default function HappyHourBanner() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80"
+          src="/images/happy-hour.jpg"
           alt="Happy Hour cocktails"
           fill
           className="object-cover opacity-40"
