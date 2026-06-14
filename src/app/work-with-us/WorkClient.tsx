@@ -62,35 +62,42 @@ export default function WorkClient() {
           }}
         />
         <div className="relative max-w-5xl mx-auto px-6">
-          {/* Copy — full width, no stamp */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <h2 className="poster-title text-3xl md:text-5xl text-white leading-[0.9] mb-6">
-              Be A Part Of<br />
-              <span className="text-[var(--color-oasis-orange)]">The Oasis Fam</span>
-            </h2>
-            <p className="text-white/70 text-base leading-relaxed">
-              We&apos;re looking for good people that keep a cool head and can stay upbeat while getting the work done. If this is you, you may be a good fit for the Oasis. Please note: We are not always hiring, but we will take your application under consideration when the time comes.
-            </p>
-          </motion.div>
-        </div>
+          <div className="grid md:grid-cols-2 gap-10 items-center">
 
-        {/* Staff photo */}
-        <div className="relative max-w-5xl mx-auto px-6 mt-12">
-          <div className="relative aspect-[16/7] overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]">
-            <Image
-              src="/images/staff-photo.jpg"
-              alt="The Oasis crew"
-              fill
-              className="object-cover object-top"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            {/* Staff photo — replaces the old spinning circle */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative aspect-square overflow-hidden border-2 border-[var(--color-oasis-orange)]/40 shadow-[8px_8px_0_0_var(--color-oasis-orange)]"
+            >
+              <Image
+                src="/images/staff-photo.jpg"
+                alt="The Oasis crew"
+                fill
+                className="object-cover object-top"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            </motion.div>
+
+            {/* Copy */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <h2 className="poster-title text-3xl md:text-5xl text-white leading-[0.9] mb-6">
+                Be A Part Of<br />
+                <span className="text-[var(--color-oasis-orange)]">The Oasis Fam</span>
+              </h2>
+              <p className="text-white/70 text-base leading-relaxed">
+                We&apos;re looking for good people that keep a cool head and can stay upbeat while getting the work done. If this is you, you may be a good fit for the Oasis. Please note: We are not always hiring, but we will take your application under consideration when the time comes.
+              </p>
+            </motion.div>
+
           </div>
         </div>
       </section>
