@@ -5,9 +5,17 @@ import { createClient } from "@supabase/supabase-js";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, position, experience, message } = body;
+    const {
+      first_name, last_name, email, phone, birthday, position,
+      address1, address2, city, state, zip,
+      instagram, facebook,
+      company1, job1, company2, job2,
+      availability, shifts_per_week, priorities, good_fit,
+    } = body;
 
-    if (!name || !email || !phone || !position) {
+    const name = [first_name, last_name].filter(Boolean).join(" ");
+
+    if (!first_name || !last_name || !email || !phone || !position) {
       return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
     }
 
@@ -21,13 +29,25 @@ export async function POST(req: Request) {
       name,
       email,
       phone,
-      message: message || null,
+      message: good_fit || null,
       source: "jobs-oasis",
       venue: "oasis",
       is_read: false,
       is_archived: false,
       starred: false,
-      metadata: { position, experience: experience || null },
+      metadata: {
+        position,
+        birthday: birthday || null,
+        address: [address1, address2, city, state, zip].filter(Boolean).join(", ") || null,
+        instagram: instagram || null,
+        facebook: facebook || null,
+        company1: company1 || null, job1: job1 || null,
+        company2: company2 || null, job2: job2 || null,
+        availability: availability || null,
+        shifts_per_week: shifts_per_week || null,
+        priorities: priorities || null,
+        good_fit: good_fit || null,
+      },
     });
 
     // Send email via Resend
@@ -50,11 +70,26 @@ export async function POST(req: Request) {
         `Name: ${name}`,
         `Email: ${email}`,
         `Phone: ${phone}`,
+        `Birthday: ${birthday || "(not provided)"}`,
         `Position: ${position}`,
-        `Experience: ${experience || "(not specified)"}`,
         ``,
-        `Message:`,
-        message || "(none)",
+        `Address: ${[address1, address2, city, state, zip].filter(Boolean).join(", ") || "(not provided)"}`,
+        ``,
+        `Instagram: ${instagram || "(none)"}`,
+        `Facebook: ${facebook || "(none)"}`,
+        ``,
+        `Company #1: ${company1 || "(none)"}`,
+        `Job Description: ${job1 || "(none)"}`,
+        ``,
+        `Company #2: ${company2 || "(none)"}`,
+        `Job Description: ${job2 || "(none)"}`,
+        ``,
+        `Availability: ${Array.isArray(availability) ? availability.join(", ") : availability || "(not specified)"}`,
+        `Shifts per week: ${shifts_per_week || "(not specified)"}`,
+        ``,
+        `Work/School Priorities: ${priorities || "(none)"}`,
+        ``,
+        `Why a good fit: ${good_fit || "(none)"}`,
       ].join("\n"),
     });
 
