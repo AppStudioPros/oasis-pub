@@ -15,10 +15,10 @@ export function toEasternDate(iso: string): string {
 /** Format a time from ISO string in Eastern time, e.g. "9:00 PM" */
 export function toEasternTime(iso: string): string {
   return new Date(iso).toLocaleTimeString("en-US", {
+    timeZone: "America/New_York",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-    timeZone: "America/New_York",
   });
 }
 

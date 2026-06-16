@@ -194,9 +194,9 @@ export default function EventsClient({ events }: { events: Event[] }) {
 
 function EventCard({ event, index }: { event: Event; index: number }) {
   const d = new Date(event.date);
-  const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
-  const day = d.getDate();
-  const weekday = d.toLocaleString("en-US", { weekday: "long" });
+  const month = d.toLocaleString("en-US", { month: "short", timeZone: "America/New_York" }).toUpperCase();
+  const day = parseInt(d.toLocaleDateString("en-US", { day: "numeric", timeZone: "America/New_York" }), 10);
+  const weekday = d.toLocaleString("en-US", { weekday: "long", timeZone: "America/New_York" });
   const rotation = index % 2 === 0 ? "-rotate-1" : "rotate-1";
 
   return (

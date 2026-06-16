@@ -47,9 +47,9 @@ export default function FeaturedShow({ event }: { event: Event }) {
   }, [event.date]);
 
   const d = new Date(event.date);
-  const weekday = d.toLocaleString("en-US", { weekday: "long" }).toUpperCase();
-  const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
-  const day = d.getDate();
+  const weekday = d.toLocaleString("en-US", { weekday: "long", timeZone: "America/New_York" }).toUpperCase();
+  const month = d.toLocaleString("en-US", { month: "short", timeZone: "America/New_York" }).toUpperCase();
+  const day = parseInt(d.toLocaleDateString("en-US", { day: "numeric", timeZone: "America/New_York" }), 10);
 
   return (
     <section ref={ref} className="relative bg-[var(--color-oasis-ink)] py-20 md:py-32 overflow-hidden">
@@ -128,7 +128,7 @@ export default function FeaturedShow({ event }: { event: Event }) {
             <div className="space-y-2 text-white/75 mb-8 text-sm">
               <div className="flex items-center gap-3">
                 <Calendar size={16} className="text-[var(--color-oasis-orange)]" />
-                <span>{weekday}, {d.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+                <span>{weekday}, {d.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" })}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Clock size={16} className="text-[var(--color-oasis-orange)]" />
