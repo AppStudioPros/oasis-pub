@@ -55,7 +55,7 @@ export default function EventDetailClient({ event }: { event: Event }) {
   const fullDate = d.toLocaleString("en-US", {
     month: "long",
     day: "numeric",
-    year: "numeric",, timeZone: "America/New_York" });
+    year: "numeric", timeZone: "America/New_York" });
   const isPast = new Date(event.date) < new Date(new Date().setHours(0, 0, 0, 0));
 
   return (
