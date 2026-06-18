@@ -62,11 +62,13 @@ export default async function EventDetailPage({ params }: { params: Params }) {
     "@context": "https://schema.org",
     "@type": "MusicEvent",
     name: event.title,
-    description: event.description || `Live music at The Oasis Pub — ${event.title}`,
+    description: event.description || `Live music at The Oasis Pub — ${event.title}. Join us at 16 Bank Street, New London CT.`,
     startDate: live ? live.start_date : `${event.date}T${event.startTime}`,
-    endDate: live?.end_date ?? undefined,
+    ...(live?.end_date ? { endDate: live.end_date } : {}),
     image: event.image || "https://oasisnewlondon.com/images/heroes/poster-collage.jpg",
     url: `https://oasisnewlondon.com/events/${slug}`,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
       "@type": "MusicVenue",
       name: "The Oasis Pub",
@@ -84,9 +86,28 @@ export default async function EventDetailPage({ params }: { params: Params }) {
       name: "The Oasis Pub",
       url: "https://oasisnewlondon.com",
     },
-    ...(event.ticketLink ? { offers: { "@type": "Offer", url: event.ticketLink, availability: "https://schema.org/InStock" } } : {}),
-    eventStatus: "https://schema.org/EventScheduled",
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    performer: {
+      "@type": "MusicGroup",
+      name: event.title,
+    },
+    offers: event.ticketLink
+      ? {
+          "@type": "Offer",
+          url: event.ticketLink,
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          validFrom: new Date().toISOString().split("T")[0],
+        }
+      : {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: "https://oasisnewlondon.com/events",
+          name: "Free Admission",
+          validFrom: new Date().toISOString().split("T")[0],
+        },
   };
 
   return (
