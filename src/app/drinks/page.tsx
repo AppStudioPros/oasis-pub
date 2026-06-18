@@ -10,6 +10,7 @@ export const metadata = {
   title: "Drinks — Craft Beer, Cocktails, Wine, CBD & More",
   description:
     "20 drafts, 60+ cans, canned cocktails, CBD & mushroom drinks, social tonics and alcohol-free options at The Oasis Pub in New London, CT.",
+  alternates: { canonical: "https://oasisnewlondon.com/drinks" },
 };
 
 const menus = {

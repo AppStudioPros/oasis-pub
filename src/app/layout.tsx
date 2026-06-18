@@ -21,7 +21,20 @@ export const metadata: Metadata = {
     "16 Bank Street",
     "emerging bands New London",
     "bar New London CT",
+    "New London bar",
+    "Connecticut music venue",
+    "live music tonight New London",
+    "21+ bar New London",
+    "bar near me New London CT",
+    "New London nightlife",
+    "live bands Connecticut",
+    "New London CT rock bar",
+    "oasis pub CT",
+    "bank street bar New London",
   ],
+  alternates: {
+    canonical: "https://oasisnewlondon.com",
+  },
   openGraph: {
     title: "The Oasis Pub — New London CT",
     description:

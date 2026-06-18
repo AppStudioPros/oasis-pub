@@ -8,6 +8,7 @@ export const metadata = {
   title: "Events & Live Music",
   description:
     "Upcoming shows at The Oasis Pub — indie rock, metal, sea shanty nights, DJ sets, and more. 16 Bank Street, New London CT. 21+.",
+  alternates: { canonical: "https://oasisnewlondon.com/events" },
 };
 
 function mapEvent(e: Awaited<ReturnType<typeof getAllEvents>>[number]) {
