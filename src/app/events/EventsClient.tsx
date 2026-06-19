@@ -41,15 +41,18 @@ export default function EventsClient({ events }: { events: Event[] }) {
       new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }) + "T00:00:00"
     );
     const now = etMidnight;
+    // Parse YYYY-MM-DD as noon to avoid UTC-midnight day rollback
+    const parseDate = (dateStr: string) => new Date(dateStr + "T12:00:00");
+
     let sorted = [...events].sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      (a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()
     );
 
     if (activeTab === "Upcoming") {
-      sorted = sorted.filter((e) => new Date(e.date) >= now);
+      sorted = sorted.filter((e) => parseDate(e.date) >= now);
     } else if (activeTab === "This Month") {
       sorted = sorted.filter((e) => {
-        const d = new Date(e.date);
+        const d = parseDate(e.date);
         return (
           d.getMonth() === now.getMonth() &&
           d.getFullYear() === now.getFullYear() &&
@@ -197,7 +200,8 @@ export default function EventsClient({ events }: { events: Event[] }) {
 }
 
 function EventCard({ event, index }: { event: Event; index: number }) {
-  const d = new Date(event.date);
+  // Parse YYYY-MM-DD as noon ET to avoid UTC-midnight day rollback
+  const d = new Date(event.date + "T12:00:00");
   const month = d.toLocaleString("en-US", { month: "short", timeZone: "America/New_York" }).toUpperCase();
   const day = parseInt(d.toLocaleDateString("en-US", { day: "numeric", timeZone: "America/New_York" }), 10);
   const weekday = d.toLocaleString("en-US", { weekday: "long", timeZone: "America/New_York" });

@@ -46,7 +46,7 @@ export default function FeaturedShow({ event }: { event: Event }) {
     return () => clearInterval(id);
   }, [event.date]);
 
-  const d = new Date(event.date);
+  const d = new Date(event.date + "T12:00:00");
   const weekday = d.toLocaleString("en-US", { weekday: "long", timeZone: "America/New_York" }).toUpperCase();
   const month = d.toLocaleString("en-US", { month: "short", timeZone: "America/New_York" }).toUpperCase();
   const day = parseInt(d.toLocaleDateString("en-US", { day: "numeric", timeZone: "America/New_York" }), 10);

@@ -50,13 +50,13 @@ export default function EventDetailClient({ event }: { event: Event }) {
     return () => clearInterval(id);
   }, [event.date]);
 
-  const d = new Date(event.date);
+  const d = new Date(event.date + "T12:00:00");
   const weekday = d.toLocaleString("en-US", { weekday: "long", timeZone: "America/New_York" }).toUpperCase();
   const fullDate = d.toLocaleString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric", timeZone: "America/New_York" });
-  const isPast = new Date(event.date) < new Date(new Date().setHours(0, 0, 0, 0));
+  const isPast = new Date(event.date + "T12:00:00") < new Date(new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }) + "T00:00:00");
 
   return (
     <>
