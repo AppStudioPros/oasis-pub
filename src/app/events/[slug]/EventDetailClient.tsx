@@ -187,7 +187,7 @@ export default function EventDetailClient({ event }: { event: Event }) {
 
       <SectionDivider
         items={["✦ LIVE MUSIC ✦", "16 BANK ST", "21+", "NEW LONDON CT", "OPEN 365"]}
-        pixelsPerSecond={107}
+        pixelsPerSecond={214}
       />
 
       {/* JSON-LD */}

@@ -184,7 +184,7 @@ export default function AboutClient({ staff }: { staff: StaffMember[] }) {
           "CRAFT BEER",
           "BAD MOVIE NIGHT",
         ]}
-        pixelsPerSecond={107}
+        pixelsPerSecond={214}
       />
 
       {/* The pitch */}
