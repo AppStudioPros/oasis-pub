@@ -40,7 +40,8 @@ export default function Marquee({ items, reverse = false, pixelsPerSecond = 80 }
   }, [pixelsPerSecond, reverse]);
 
   // Triple items so there's always content visible during the loop reset
-  const reel = [...items, ...items, ...items];
+  // Double only so scrollWidth / 2 accurately represents one set
+  const reel = [...items, ...items];
 
   return (
     <div className="relative overflow-hidden bg-[var(--color-oasis-orange)] border-y-4 border-black py-3 md:py-4">

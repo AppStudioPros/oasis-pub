@@ -43,7 +43,8 @@ export default function SectionDivider({
     return () => cancelAnimationFrame(rafRef.current);
   }, [pixelsPerSecond, reverse]);
 
-  const reel = [...items, ...items, ...items];
+  // Double only — so setWidth = scrollWidth / 2 is accurate
+  const reel = [...items, ...items];
 
   const bg = variant === "orange" ? "bg-[var(--color-oasis-orange)]" : "bg-black";
   const text = variant === "orange" ? "text-black" : "text-[var(--color-oasis-orange)]";
