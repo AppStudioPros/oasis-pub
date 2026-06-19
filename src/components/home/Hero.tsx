@@ -70,10 +70,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
-          className="poster-title text-white mb-8 leading-[0.9] text-4xl sm:text-5xl md:text-7xl lg:text-8xl"
+          className="poster-title text-white mb-8 leading-[0.9] text-6xl sm:text-6xl md:text-7xl lg:text-8xl"
         >
-          A Sanctuary<br />
-          <span className="text-[var(--color-oasis-orange)]">From Sameness</span>
+          Open Every Day<br />
+          <span className="text-[var(--color-oasis-orange)]">365 Days A Year</span>
         </motion.h1>
 
         <motion.p
