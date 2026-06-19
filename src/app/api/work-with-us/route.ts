@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
-    await supabase.from("messages").insert({
+    const { data: insertedRows } = await supabase.from("messages").insert({
       name,
       email,
       phone,
@@ -48,12 +48,14 @@ export async function POST(req: Request) {
         priorities: priorities || null,
         good_fit: good_fit || null,
       },
-    });
+    }).select("id");
+    const insertedId = insertedRows?.[0]?.id ?? null;
 
     // Send email via Resend
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("[work-with-us] RESEND_API_KEY not set");
+      if (insertedId) await supabase.from("messages").update({ email_sent: false }).eq("id", insertedId);
       return NextResponse.json({ error: "Email service not configured." }, { status: 500 });
     }
 
@@ -61,7 +63,7 @@ export async function POST(req: Request) {
     const fromAddress = process.env.RESEND_FROM || "Oasis Website <onboarding@resend.dev>";
     const toAddress = process.env.HIRING_TO || process.env.CONTACT_TO || "oasisnewlondon@gmail.com";
 
-    await resend.emails.send({
+    const { error: sendError } = await resend.emails.send({
       from: fromAddress,
       to: [toAddress],
       replyTo: email,
@@ -93,6 +95,13 @@ export async function POST(req: Request) {
       ].join("\n"),
     });
 
+    if (sendError) {
+      console.error("[work-with-us] Resend error", sendError);
+      if (insertedId) await supabase.from("messages").update({ email_sent: false }).eq("id", insertedId);
+      return NextResponse.json({ ok: true, emailFailed: true });
+    }
+
+    if (insertedId) await supabase.from("messages").update({ email_sent: true }).eq("id", insertedId);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[work-with-us] error", err);

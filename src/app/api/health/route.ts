@@ -61,6 +61,27 @@ export async function GET(request: Request) {
     errors.push(`Homepage unreachable: ${e instanceof Error ? e.message : String(e)}`);
   }
 
+
+  // 4. Check for failed email sends in the last 5 hours
+  try {
+    const fiveHoursAgo = new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString();
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      { auth: { persistSession: false } }
+    );
+    const { data: failedEmails } = await supabase
+      .from("messages")
+      .select("id, name, source, created_at")
+      .eq("email_sent", false)
+      .gte("created_at", fiveHoursAgo);
+    if (failedEmails && failedEmails.length > 0) {
+      errors.push(`${failedEmails.length} form submission(s) failed to send email in the last 5 hours: ${failedEmails.map(m => `${m.source} from ${m.name}`).join(", ")}`);
+    }
+  } catch (e: unknown) {
+    errors.push(`Could not check failed emails: ${e instanceof Error ? e.message : String(e)}`);
+  }
+
   if (errors.length > 0) {
     await sendSlackAlert(errors.map((e) => `• ${e}`).join("\n"));
     return NextResponse.json({ ok: false, errors });
