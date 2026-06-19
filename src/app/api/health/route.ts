@@ -37,9 +37,20 @@ export async function GET(request: Request) {
     errors.push(`Supabase unreachable: ${e instanceof Error ? e.message : String(e)}`);
   }
 
-  // 2. Check Resend API key is set
+  // 2. Check Resend API key is valid and can reach Resend
   if (!process.env.RESEND_API_KEY) {
     errors.push("RESEND_API_KEY is not set — contact forms will not send emails");
+  } else {
+    try {
+      const resendCheck = await fetch("https://api.resend.com/domains", {
+        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+      });
+      if (!resendCheck.ok) {
+        errors.push(`Resend API key invalid or Resend is down (HTTP ${resendCheck.status}) — contact forms will not send emails`);
+      }
+    } catch (e: unknown) {
+      errors.push(`Resend unreachable: ${e instanceof Error ? e.message : String(e)}`);
+    }
   }
 
   // 3. Check site homepage responds
