@@ -72,7 +72,7 @@ export default async function HomePage() {
           "HAPPY HOUR",
           "LIVE MUSIC",
         ]}
-        pixelsPerSecond={80}
+        pixelsPerSecond={107}
       />
 
       {featured && <FeaturedShow event={featured} />}
@@ -92,7 +92,7 @@ export default async function HomePage() {
           "DANCE",
         ]}
         reverse
-        pixelsPerSecond={80}
+        pixelsPerSecond={107}
       />
 
       <HappyHourBanner />

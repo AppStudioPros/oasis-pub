@@ -63,7 +63,7 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
           "SELTZERS",
           "SOCIAL TONICS",
         ]}
-        pixelsPerSecond={80}
+        pixelsPerSecond={107}
       />
 
       {/* Tab nav */}

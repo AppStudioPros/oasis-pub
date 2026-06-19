@@ -6,7 +6,7 @@ interface MarqueeProps {
   pixelsPerSecond?: number;
 }
 
-export default function Marquee({ items, reverse = false, pixelsPerSecond = 80 }: MarqueeProps) {
+export default function Marquee({ items, reverse = false, pixelsPerSecond = 107 }: MarqueeProps) {
   const reel = [...items, ...items, ...items, ...items, ...items, ...items];
   const duration = Math.round(2000 / pixelsPerSecond);
 

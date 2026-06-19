@@ -10,7 +10,7 @@ interface SectionDividerProps {
 export default function SectionDivider({
   items,
   reverse = false,
-  pixelsPerSecond = 80,
+  pixelsPerSecond = 107,
   variant = "orange",
 }: SectionDividerProps) {
   // Repeat enough times to guarantee fill on any screen width
