@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef } from "react";
 
 interface SectionDividerProps {
   items: string[];
@@ -14,49 +13,25 @@ export default function SectionDivider({
   pixelsPerSecond = 80,
   variant = "orange",
 }: SectionDividerProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef(0);
-  const rafRef = useRef<number>(0);
-  const lastRef = useRef<number>(0);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const setWidth = track.scrollWidth / 2;
-
-    const step = (ts: number) => {
-      if (lastRef.current === 0) lastRef.current = ts;
-      const delta = (ts - lastRef.current) / 1000;
-      lastRef.current = ts;
-
-      posRef.current += pixelsPerSecond * delta * (reverse ? -1 : 1);
-
-      if (!reverse && posRef.current >= setWidth) posRef.current -= setWidth;
-      if (reverse && posRef.current <= -setWidth) posRef.current += setWidth;
-
-      track.style.transform = `translateX(${-posRef.current}px)`;
-      rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [pixelsPerSecond, reverse]);
-
-  // Double only — so setWidth = scrollWidth / 2 is accurate
-  const reel = [...items, ...items];
+  // Repeat enough times to guarantee fill on any screen width
+  const reel = [...items, ...items, ...items, ...items, ...items, ...items];
 
   const bg = variant === "orange" ? "bg-[var(--color-oasis-orange)]" : "bg-black";
   const text = variant === "orange" ? "text-black" : "text-[var(--color-oasis-orange)]";
   const border = variant === "orange" ? "border-black" : "border-[var(--color-oasis-orange)]";
   const sparkle = variant === "orange" ? "text-black/40" : "text-[var(--color-oasis-orange)]/40";
 
+  // Duration: lower = faster. We derive from pixelsPerSecond vs a ~2000px wide reel estimate
+  const duration = Math.round(2000 / pixelsPerSecond);
+
   return (
     <div className={`relative overflow-hidden ${bg} border-y-4 ${border} py-3 md:py-4`}>
       <div
-        ref={trackRef}
         className="flex gap-12 whitespace-nowrap"
-        style={{ willChange: "transform" }}
+        style={{
+          animation: `sd-scroll-${reverse ? "rev" : "fwd"} ${duration}s linear infinite`,
+          willChange: "transform",
+        }}
       >
         {reel.map((item, i) => (
           <div key={i} className="flex items-center gap-12 flex-shrink-0">
@@ -67,6 +42,17 @@ export default function SectionDivider({
           </div>
         ))}
       </div>
+
+      <style>{`
+        @keyframes sd-scroll-fwd {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes sd-scroll-rev {
+          0%   { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </div>
   );
 }

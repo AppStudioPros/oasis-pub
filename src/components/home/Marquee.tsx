@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef } from "react";
 
 interface MarqueeProps {
   items: string[];
@@ -8,47 +7,17 @@ interface MarqueeProps {
 }
 
 export default function Marquee({ items, reverse = false, pixelsPerSecond = 80 }: MarqueeProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef(0);
-  const rafRef = useRef<number>(0);
-  const lastRef = useRef<number>(0);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    // Measure one "set" width (half the track since we duplicate)
-    const setWidth = track.scrollWidth / 2;
-
-    const step = (ts: number) => {
-      if (lastRef.current === 0) lastRef.current = ts;
-      const delta = (ts - lastRef.current) / 1000; // seconds
-      lastRef.current = ts;
-
-      posRef.current += pixelsPerSecond * delta * (reverse ? -1 : 1);
-
-      // Seamless loop: when we've scrolled one full set, reset without jump
-      if (!reverse && posRef.current >= setWidth) posRef.current -= setWidth;
-      if (reverse && posRef.current <= -setWidth) posRef.current += setWidth;
-
-      track.style.transform = `translateX(${-posRef.current}px)`;
-      rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [pixelsPerSecond, reverse]);
-
-  // Triple items so there's always content visible during the loop reset
-  // Double only so scrollWidth / 2 accurately represents one set
-  const reel = [...items, ...items];
+  const reel = [...items, ...items, ...items, ...items, ...items, ...items];
+  const duration = Math.round(2000 / pixelsPerSecond);
 
   return (
     <div className="relative overflow-hidden bg-[var(--color-oasis-orange)] border-y-4 border-black py-3 md:py-4">
       <div
-        ref={trackRef}
         className="flex gap-12 whitespace-nowrap"
-        style={{ willChange: "transform" }}
+        style={{
+          animation: `mq-scroll-${reverse ? "rev" : "fwd"} ${duration}s linear infinite`,
+          willChange: "transform",
+        }}
       >
         {reel.map((item, i) => (
           <div key={i} className="flex items-center gap-12 flex-shrink-0">
@@ -59,6 +28,17 @@ export default function Marquee({ items, reverse = false, pixelsPerSecond = 80 }
           </div>
         ))}
       </div>
+
+      <style>{`
+        @keyframes mq-scroll-fwd {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes mq-scroll-rev {
+          0%   { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </div>
   );
 }
