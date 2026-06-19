@@ -6,7 +6,7 @@ interface MarqueeProps {
   speed?: number;
 }
 
-export default function Marquee({ items, reverse = false, speed = 17 }: MarqueeProps) {
+export default function Marquee({ items, reverse = false, speed = 8 }: MarqueeProps) {
   // Double the items for seamless loop — only need 2x with -50% translate
   const reel = [...items, ...items];
 
