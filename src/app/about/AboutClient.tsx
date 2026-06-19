@@ -173,8 +173,7 @@ export default function AboutClient({ staff }: { staff: StaffMember[] }) {
         { name: "About", url: "https://oasisnewlondon.com/about" },
       ]} />
       <PageHero
-        title="Welcome To"
-        accent={'"The O"'}
+        title="About Us"
         subtitle="Open weekdays at 5pm, weekends at 7pm"
       />
 
