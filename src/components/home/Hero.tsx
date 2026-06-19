@@ -56,15 +56,6 @@ export default function Hero() {
         style={{ y: contentY, opacity }}
         className="relative z-10 text-center px-6 max-w-5xl"
       >
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[var(--color-oasis-orange)] font-bold uppercase tracking-[0.4em] text-xs md:text-sm mb-6"
-        >
-          ✦ 16 Bank Street · New London, CT ✦
-        </motion.p>
-
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
