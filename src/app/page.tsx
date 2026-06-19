@@ -72,7 +72,7 @@ export default async function HomePage() {
           "HAPPY HOUR",
           "LIVE MUSIC",
         ]}
-        speed={40}
+        pixelsPerSecond={80}
       />
 
       {featured && <FeaturedShow event={featured} />}
