@@ -74,7 +74,7 @@ export default function Hero() {
           className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-snug font-light"
         >
           Craft Beer. Unique Drinks. Live Music.<br />
-          <span className="text-white/60">Open every weekday at 5pm, every weekend at 7pm</span>
+          <span className="text-gray-300">Open every weekday at 5pm, every weekend at 7pm</span>
         </motion.p>
 
         <motion.div
