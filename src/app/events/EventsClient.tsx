@@ -35,8 +35,12 @@ export default function EventsClient({ events }: { events: Event[] }) {
   }, [events]);
 
   const filtered = useMemo(() => {
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
+    // Use midnight Eastern time as "today" cutoff so events on the current ET
+    // date are not incorrectly classified as past (server runs UTC)
+    const etMidnight = new Date(
+      new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }) + "T00:00:00"
+    );
+    const now = etMidnight;
     let sorted = [...events].sort(
       (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
     );
