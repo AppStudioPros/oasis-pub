@@ -92,7 +92,7 @@ export default async function HomePage() {
           "DANCE",
         ]}
         reverse
-        speed={45}
+        pixelsPerSecond={80}
       />
 
       <HappyHourBanner />

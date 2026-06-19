@@ -83,7 +83,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
 
       <SectionDivider
         items={["✦ LIVE MUSIC ✦", "DANCE PARTIES", "BAD MOVIE NIGHTS", "ART OPENINGS"]}
-        speed={40}
+        pixelsPerSecond={80}
       />
 
       {/* Tabs + category pills */}
@@ -151,7 +151,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
       <SectionDivider
         items={["✦ INDIE ROCK ✦", "POST-PUNK", "EDM", "HIP HOP", "FOLK", "COUNTRY ROCK", "DANCE"]}
         reverse
-        speed={45}
+        pixelsPerSecond={80}
       />
 
       {/* Booking CTA */}

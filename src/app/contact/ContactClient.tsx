@@ -48,7 +48,7 @@ export default function ContactClient() {
 
       <SectionDivider
         items={["✦ BAND SUBMISSIONS ✦", "EVENT INQUIRIES", "GET DIRECTIONS"]}
-        speed={40}
+        pixelsPerSecond={80}
       />
 
       <section className="relative bg-[var(--color-oasis-ink)] py-16 md:py-24 overflow-hidden">

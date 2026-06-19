@@ -49,7 +49,7 @@ export default function WorkClient() {
 
       <SectionDivider
         items={["✦ BARTENDER ✦", "DOOR PERSON", "SOUND ENGINEER", "BOOKING ASSISTANT"]}
-        speed={40}
+        pixelsPerSecond={80}
       />
 
       {/* Intro w/ image */}
@@ -257,7 +257,7 @@ export default function WorkClient() {
       <SectionDivider
         items={["✦ LIVE MUSIC ✦", "HAPPY HOUR", "CRAFT BEER", "BAD MOVIE NIGHT"]}
         reverse
-        speed={45}
+        pixelsPerSecond={80}
       />
     </>
   );
