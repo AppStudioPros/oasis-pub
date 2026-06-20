@@ -164,7 +164,7 @@ function ItemList({ items }: { items: DrinkItem[] }) {
         if (item.is_subhead) {
           return (
             <li key={`${item.name}-${idx}`} className="pt-6 pb-1 first:pt-0 list-none">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/40 border-b border-white/10 pb-1">{item.name}</p>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/55 border-b border-white/10 pb-1">{item.name}</p>
             </li>
           );
         }
