@@ -80,6 +80,7 @@ export interface OasisMenuItem {
   description?: string | null;
   note?: string | null;
   subcategory?: string | null;
+  is_subhead?: boolean;
   position: number;
 }
 

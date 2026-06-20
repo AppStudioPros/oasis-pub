@@ -37,9 +37,6 @@ export default async function DrinksPage() {
     for (const tab of tabs) {
       // Group sections by subcategory within each section
       const categories = tab.sections.map((sec) => {
-        // Check if any items have subcategory set — if so, group them
-        const hasSubcategories = sec.items.some((i) => i.subcategory);
-
         const mapItem = (item: typeof sec.items[0]) => ({
           name: item.name,
           style: item.description ?? undefined,
@@ -47,30 +44,9 @@ export default async function DrinksPage() {
           origin: item.note ?? undefined,
           size: undefined,
           price: item.price ?? undefined,
+          // Pass is_subhead flag through so DrinksClient can render inline subheadings
+          is_subhead: item.is_subhead ?? false,
         });
-
-        if (hasSubcategories) {
-          // Group items by subcategory
-          const subMap: Record<string, typeof sec.items> = {};
-          const noSub: typeof sec.items = [];
-          for (const item of sec.items) {
-            if (item.subcategory) {
-              if (!subMap[item.subcategory]) subMap[item.subcategory] = [];
-              subMap[item.subcategory].push(item);
-            } else {
-              noSub.push(item);
-            }
-          }
-          return {
-            name: sec.name,
-            note: sec.note ?? undefined,
-            items: noSub.map(mapItem),
-            subcategories: Object.entries(subMap).map(([subName, subItems]) => ({
-              name: subName,
-              items: subItems.map(mapItem),
-            })),
-          };
-        }
 
         return {
           name: sec.name,

@@ -14,6 +14,7 @@ interface DrinkItem {
   thc?: string;
   size?: string;
   price?: string;
+  is_subhead?: boolean;
 }
 
 interface SubCategory {
@@ -159,27 +160,36 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
 function ItemList({ items }: { items: DrinkItem[] }) {
   return (
     <ul className="divide-y divide-white/5">
-      {items.map((item, idx) => (
-        <li key={`${item.name}-${idx}`} className="py-3.5">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-white leading-snug">{item.name}</p>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/55 mt-1">
-                {item.style && <span>{item.style}</span>}
-                {item.abv && <span className="text-[var(--color-oasis-orange)]/80">{item.abv} ABV</span>}
-                {item.thc && <span className="text-[var(--color-oasis-orange)]/80">{item.thc}</span>}
-                {item.origin && <span className="italic">{item.origin}</span>}
-                {item.size && <span>{item.size}</span>}
+      {items.map((item, idx) => {
+        if (item.is_subhead) {
+          return (
+            <li key={`${item.name}-${idx}`} className="pt-6 pb-1 first:pt-0 list-none">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/40 border-b border-white/10 pb-1">{item.name}</p>
+            </li>
+          );
+        }
+        return (
+          <li key={`${item.name}-${idx}`} className="py-3.5">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-white leading-snug">{item.name}</p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/55 mt-1">
+                  {item.style && <span>{item.style}</span>}
+                  {item.abv && <span className="text-[var(--color-oasis-orange)]/80">{item.abv} ABV</span>}
+                  {item.thc && <span className="text-[var(--color-oasis-orange)]/80">{item.thc}</span>}
+                  {item.origin && <span className="italic">{item.origin}</span>}
+                  {item.size && <span>{item.size}</span>}
+                </div>
               </div>
+              {item.price && (
+                <span className="text-[var(--color-oasis-orange)] font-bold whitespace-nowrap text-base">
+                  {item.price}
+                </span>
+              )}
             </div>
-            {item.price && (
-              <span className="text-[var(--color-oasis-orange)] font-bold whitespace-nowrap text-base">
-                {item.price}
-              </span>
-            )}
-          </div>
-        </li>
-      ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }
