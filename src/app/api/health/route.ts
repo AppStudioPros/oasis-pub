@@ -37,20 +37,11 @@ export async function GET(request: Request) {
     errors.push(`Supabase unreachable: ${e instanceof Error ? e.message : String(e)}`);
   }
 
-  // 2. Check Resend API key is valid and can reach Resend
-  if (!process.env.RESEND_API_KEY) {
-    errors.push("RESEND_API_KEY is not set — contact forms will not send emails");
-  } else {
-    try {
-      const resendCheck = await fetch("https://api.resend.com/domains", {
-        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
-      });
-      if (!resendCheck.ok) {
-        errors.push(`Resend API key invalid or Resend is down (HTTP ${resendCheck.status}) — contact forms will not send emails`);
-      }
-    } catch (e: unknown) {
-      errors.push(`Resend unreachable: ${e instanceof Error ? e.message : String(e)}`);
-    }
+  // 2. Check Resend API key is set and non-empty
+  // Note: we use send-only scoped keys which cannot call /domains — key presence + email_sent
+  // tracking (check #4 below) is the correct way to monitor email health with scoped keys
+  if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY.trim().length < 10) {
+    errors.push("RESEND_API_KEY is not set or appears invalid — contact forms will not send emails");
   }
 
   // 3. Check site homepage responds
