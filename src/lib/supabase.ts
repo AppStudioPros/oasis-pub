@@ -70,6 +70,73 @@ export async function getAllEvents(): Promise<OasisEvent[]> {
   return data ?? [];
 }
 
+// ── Menu types ───────────────────────────────────────────────────────────────
+
+export interface OasisMenuItem {
+  id: string;
+  name: string;
+  price?: string | null;
+  price_alt?: string | null;
+  description?: string | null;
+  note?: string | null;
+  subcategory?: string | null;
+  position: number;
+}
+
+export interface OasisMenuSection {
+  id: string;
+  name: string;
+  note?: string | null;
+  detail?: string | null;
+  position: number;
+  items: OasisMenuItem[];
+}
+
+export interface OasisMenuTab {
+  id: string;
+  name: string;
+  slug: string;
+  subtitle?: string | null;
+  position: number;
+  sections: OasisMenuSection[];
+}
+
+/** Fetch all drinks menu tabs for Oasis from Supabase */
+export async function getOasisMenuTabs(): Promise<OasisMenuTab[]> {
+  const { data, error } = await supabase
+    .from("menu_tabs")
+    .select(`
+      id, name, slug, subtitle, position,
+      menu_sections (
+        id, name, note, detail, position,
+        menu_items ( id, name, price, price_alt, description, note, subcategory, position )
+      )
+    `)
+    .eq("venue", "oasis")
+    .eq("type", "drinks")
+    .order("position");
+
+  if (error || !data) {
+    console.error("[oasis] getOasisMenuTabs error:", error?.message);
+    return [];
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (data as any[]).map((tab) => ({
+    id: tab.id,
+    name: tab.name,
+    slug: tab.slug,
+    subtitle: tab.subtitle ?? null,
+    position: tab.position,
+    sections: ((tab.menu_sections ?? []) as OasisMenuSection[])
+      .sort((a, b) => a.position - b.position)
+      .map((sec) => ({
+        ...sec,
+        items: ((sec as unknown as { menu_items?: OasisMenuItem[] }).menu_items ?? []).sort((a, b) => a.position - b.position),
+      })),
+  })) as OasisMenuTab[];
+}
+
 /** Fetch a single event by slug */
 export async function getEventBySlug(slug: string): Promise<OasisEvent | null> {
   const { data, error } = await supabase
