@@ -32,7 +32,7 @@ export default async function DrinksPage() {
 
   // If Supabase returned data, convert to DrinksClient format
   if (tabs && tabs.length > 0) {
-    const supabaseMenus: Record<string, { title: string; subtitle?: string; note?: string; categories: { name: string; note?: string; items?: { name: string; style?: string; abv?: string; origin?: string; size?: string; price?: string }[]; subcategories?: { name: string; items: { name: string; style?: string; abv?: string; origin?: string; size?: string; price?: string }[] }[] }[] }> = {};
+    const supabaseMenus: Record<string, { title: string; subtitle?: string; note?: string; categories: { name: string; note?: string; items?: { name: string; style?: string; abv?: string; origin?: string; size?: string; price?: string; addons?: string; is_subhead?: boolean }[]; subcategories?: { name: string; items: { name: string; style?: string; abv?: string; origin?: string; size?: string; price?: string; addons?: string }[] }[] }[] }> = {};
 
     for (const tab of tabs) {
       // Group sections by subcategory within each section
@@ -44,7 +44,7 @@ export default async function DrinksPage() {
           origin: item.note ?? undefined,
           size: undefined,
           price: item.price ?? undefined,
-          // Pass is_subhead flag through so DrinksClient can render inline subheadings
+          addons: item.addons ?? undefined,
           is_subhead: item.is_subhead ?? false,
         });
 

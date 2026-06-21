@@ -14,6 +14,7 @@ interface DrinkItem {
   thc?: string;
   size?: string;
   price?: string;
+  addons?: string;
   is_subhead?: boolean;
 }
 
@@ -179,6 +180,7 @@ function ItemList({ items }: { items: DrinkItem[] }) {
                   {item.thc && <span className="text-[var(--color-oasis-orange)]/80">{item.thc}</span>}
                   {item.origin && <span className="italic">{item.origin}</span>}
                   {item.size && <span>{item.size}</span>}
+                  {item.addons && <span className="italic">{item.addons}</span>}
                 </div>
               </div>
               {item.price && (
