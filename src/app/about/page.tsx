@@ -13,7 +13,7 @@ export const metadata = {
 export default async function AboutPage() {
   const { data: staff } = await supabase
     .from("oasis_staff")
-    .select("id, name, role, bio, photo_url, display_order")
+    .select("id, name, role, bio, photo_url, photo_focal_x, photo_focal_y, display_order")
     .eq("active", true)
     .order("display_order", { ascending: true });
 

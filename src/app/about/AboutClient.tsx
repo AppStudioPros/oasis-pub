@@ -15,6 +15,8 @@ interface StaffMember {
   role: string;
   bio?: string | null;
   photo_url?: string | null;
+  photo_focal_x?: number | null;
+  photo_focal_y?: number | null;
   display_order?: number;
   active?: boolean;
 }
@@ -75,6 +77,7 @@ function StaffCard({
             width={112}
             height={112}
             className="w-full h-full object-cover"
+            style={{ objectPosition: `${member.photo_focal_x ?? 50}% ${member.photo_focal_y ?? 50}%` }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-white/20 text-xs font-bold uppercase tracking-wider text-center px-2">
