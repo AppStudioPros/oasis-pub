@@ -79,6 +79,7 @@ export interface OasisMenuItem {
   price_alt?: string | null;
   description?: string | null;
   note?: string | null;
+  addons?: string | null;
   subcategory?: string | null;
   is_subhead?: boolean;
   position: number;
@@ -110,7 +111,7 @@ export async function getOasisMenuTabs(): Promise<OasisMenuTab[]> {
       id, name, slug, subtitle, position,
       menu_sections (
         id, name, note, detail, position,
-        menu_items ( id, name, price, price_alt, description, note, subcategory, position )
+        menu_items ( id, name, price, price_alt, description, note, addons, subcategory, is_subhead, position )
       )
     `)
     .eq("venue", "oasis")
