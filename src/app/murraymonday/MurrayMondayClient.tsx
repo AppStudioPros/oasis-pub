@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import type { MurraySection } from "./page";
 
 export default function MurrayMondayClient({ sections }: { sections: MurraySection[] }) {
@@ -8,28 +7,18 @@ export default function MurrayMondayClient({ sections }: { sections: MurraySecti
   const toggle = (key: string) => setOpen((prev) => (prev === key ? null : key));
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--color-oasis-black)", position: "relative", overflow: "hidden" }}>
-
-      {/* Single large Sean head — faded, right side */}
-      <div style={{
-        position: "absolute",
-        right: "-8%",
-        top: "50%",
-        transform: "translateY(-50%)",
-        width: "min(560px, 75vw)",
-        height: "auto",
-        opacity: 0.1,
-        pointerEvents: "none",
-        zIndex: 0,
+    <div style={{
+        minHeight: "100vh",
+        position: "relative",
+        overflow: "hidden",
+        backgroundImage: "url('/images/sean-graphic.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}>
-        <Image
-          src="/images/sean-head-single.png"
-          alt=""
-          width={500}
-          height={520}
-          style={{ objectFit: "contain", width: "100%", height: "auto" }}
-        />
-      </div>
+
+      {/* Dark overlay so text stays readable */}
+      <div style={{ position: "absolute", inset: 0, background: "rgba(10,10,10,0.82)", zIndex: 0 }} />
 
       {/* Content */}
       <div style={{ position: "relative", zIndex: 1, maxWidth: "680px", margin: "0 auto", padding: "5rem 1.5rem 4rem" }}>
