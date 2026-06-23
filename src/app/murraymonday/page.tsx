@@ -1,4 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import MurrayMondayClient from "./MurrayMondayClient";
 
 const supabase = createClient(
@@ -16,7 +18,7 @@ export interface MurraySection {
 export const dynamic = "force-dynamic";
 
 export default async function MurrayMondayPage() {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("murray_monday_specials")
     .select("section_key, title, note, items")
     .order("section_key");
@@ -28,10 +30,15 @@ export default async function MurrayMondayPage() {
     items: Array.isArray(r.items) ? r.items : [],
   }));
 
-  // Ensure correct order: can, draft_5_7, draft_7_9
   const ordered = ["can", "draft_5_7", "draft_7_9"]
     .map((k) => sections.find((s) => s.section_key === k))
     .filter(Boolean) as MurraySection[];
 
-  return <MurrayMondayClient sections={ordered} />;
+  return (
+    <>
+      <Header />
+      <MurrayMondayClient sections={ordered} />
+      <Footer />
+    </>
+  );
 }
