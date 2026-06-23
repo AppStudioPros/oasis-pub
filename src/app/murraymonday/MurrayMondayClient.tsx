@@ -13,20 +13,20 @@ export default function MurrayMondayClient({ sections }: { sections: MurraySecti
       {/* Single large Sean head — faded, right side */}
       <div style={{
         position: "absolute",
-        right: "-5%",
+        right: "-8%",
         top: "50%",
         transform: "translateY(-50%)",
-        width: "min(650px, 80vw)",
+        width: "min(560px, 75vw)",
         height: "auto",
-        opacity: 0.08,
+        opacity: 0.1,
         pointerEvents: "none",
         zIndex: 0,
       }}>
         <Image
-          src="/images/sean-graphic.png"
+          src="/images/sean-head-single.png"
           alt=""
-          width={650}
-          height={812}
+          width={500}
+          height={520}
           style={{ objectFit: "contain", width: "100%", height: "auto" }}
         />
       </div>
