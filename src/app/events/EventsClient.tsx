@@ -15,6 +15,7 @@ interface Event {
   date: string;
   startTime: string;
   endTime: string;
+  endDate: string | null;
   image: string;
   description: string;
   ticketLink: string | null;
@@ -50,14 +51,8 @@ export default function EventsClient({ events }: { events: Event[] }) {
 
     if (activeTab === "Upcoming") {
       sorted = sorted.filter((e) => {
-        // If event has an end time, keep it until the end time has passed
-        if (e.endTime) {
-          const [h, m] = e.endTime.replace(/[^0-9:]/g, "").split(":").map(Number);
-          const endDt = new Date(parseDate(e.date));
-          endDt.setHours(h || 0, m || 0, 0, 0);
-          return endDt >= now;
-        }
-        return parseDate(e.date) >= now;
+        const cutoff = e.endDate ? new Date(e.endDate) : parseDate(e.date);
+        return cutoff >= now;
       });
     } else if (activeTab === "This Month") {
       sorted = sorted.filter((e) => {

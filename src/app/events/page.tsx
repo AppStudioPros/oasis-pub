@@ -18,6 +18,7 @@ function mapEvent(e: Awaited<ReturnType<typeof getAllEvents>>[number]) {
     date: toEasternDate(e.start_date),
     startTime: toEasternTime(e.start_date),
     endTime: e.end_date ? toEasternTime(e.end_date) : "",
+    endDate: e.end_date ?? null,
     image: e.image_url ?? "/images/heroes/poster-collage.jpg",
     description: e.description ?? "",
     ticketLink: e.ticket_url ?? null,
@@ -27,7 +28,8 @@ function mapEvent(e: Awaited<ReturnType<typeof getAllEvents>>[number]) {
 
 export default async function EventsPage() {
   const liveEvents = await getAllEvents();
-  const events = liveEvents.length > 0 ? liveEvents.map(mapEvent) : staticEvents;
+  const rawStatic = (staticEvents as typeof staticEvents).map((e) => ({ ...e, endDate: null as string | null }));
+  const events = liveEvents.length > 0 ? liveEvents.map(mapEvent) : rawStatic;
 
   return <EventsClient events={events} />;
 }
