@@ -44,7 +44,7 @@ export async function getUpcomingEvents(): Promise<OasisEvent[]> {
     .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location")
     .eq("venue", "oasis")
     .eq("status", "published")
-    .gte("start_date", new Date().toISOString())
+    .or(`end_date.gte.${new Date().toISOString()},and(end_date.is.null,start_date.gte.${new Date().toISOString()})`)
     .order("start_date", { ascending: true });
 
   if (error) {

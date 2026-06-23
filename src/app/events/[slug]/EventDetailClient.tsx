@@ -56,7 +56,10 @@ export default function EventDetailClient({ event }: { event: Event }) {
     month: "long",
     day: "numeric",
     year: "numeric", timeZone: "America/New_York" });
-  const isPast = new Date(event.date + "T12:00:00") < new Date(new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }) + "T00:00:00");
+  const nowET = new Date(new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }) + "T00:00:00");
+  const isPast = event.endTime
+    ? (() => { const [h,m] = event.endTime!.replace(/[^0-9:]/g,"").split(":").map(Number); const d = new Date(event.date + "T12:00:00"); d.setHours(h||0,m||0,0,0); return d < new Date(); })()
+    : new Date(event.date + "T12:00:00") < nowET;
 
   return (
     <>
