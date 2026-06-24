@@ -171,11 +171,7 @@ export default function EventDetailClient({ event }: { event: Event }) {
                     Get Tickets
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </a>
-                ) : (
-                  <div className="inline-flex items-center justify-center bg-[var(--color-oasis-orange)] text-white font-bold uppercase tracking-wider text-sm px-7 py-4 shadow-[6px_6px_0_0_#000]">
-                    {isPast ? "Past Show" : "Free Show · 21+"}
-                  </div>
-                )}
+                ) : null}
                 <Link
                   href="/contact"
                   className="group inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:border-[var(--color-oasis-orange)] hover:text-[var(--color-oasis-orange)] text-white font-bold uppercase tracking-wider text-sm px-7 py-4 transition-all hover:-translate-y-1"
