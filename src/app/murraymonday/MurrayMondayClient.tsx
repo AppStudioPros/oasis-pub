@@ -23,7 +23,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
 
       {/* Single Sean head — right side, vertically centered, breathing animation */}
       <motion.div
-        animate={{ opacity: [0.10, 0.16, 0.10], scale: [1, 1.04, 1] }}
+        animate={{ opacity: [0.18, 0.26, 0.18], scale: [1, 1.04, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
@@ -40,7 +40,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
           alt=""
           width={580}
           height={607}
-          style={{ objectFit: "contain", width: "100%", height: "auto", filter: "invert(1)" }}
+          style={{ objectFit: "contain", width: "100%", height: "auto" }}
         />
       </motion.div>
 
