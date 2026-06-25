@@ -24,26 +24,26 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
       {/* Single Sean head — right side, vertically centered, breathing animation */}
       {/* Orange glow — separate layer behind the head */}
       <motion.div
-        animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.15, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ opacity: [0.12, 0.28, 0.12], scale: [1, 1.12, 1] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
-          right: "10%",
+          right: "5%",
           top: "50%",
           translateY: "-50%",
-          width: "min(580px, 70vw)",
+          width: "min(700px, 85vw)",
           aspectRatio: "1 / 1",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(242,99,33,0.55) 0%, rgba(242,99,33,0.0) 70%)",
+          background: "radial-gradient(circle, rgba(242,99,33,0.5) 0%, rgba(242,99,33,0.0) 70%)",
           pointerEvents: "none",
-          zIndex: 0,
+          zIndex: -1,
         }}
       />
 
       {/* Sean head */}
       <motion.div
-        animate={{ opacity: [0.18, 0.26, 0.18], scale: [1, 1.04, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ opacity: [0.15, 0.22, 0.15], scale: [1, 1.04, 1] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
           right: "10%",
