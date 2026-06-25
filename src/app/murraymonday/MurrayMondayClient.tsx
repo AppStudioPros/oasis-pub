@@ -22,16 +22,27 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
     <div style={{ minHeight: "100vh", position: "relative", overflow: "hidden", background: "var(--color-oasis-black)" }}>
 
       {/* Single Sean head — right side, vertically centered, breathing animation */}
+      {/* Orange glow — separate layer behind the head */}
       <motion.div
-        animate={{
-          opacity: [0.18, 0.26, 0.18],
-          scale: [1, 1.04, 1],
-          filter: [
-            "drop-shadow(0 0 30px rgba(242,99,33,0.15))",
-            "drop-shadow(0 0 70px rgba(242,99,33,0.40))",
-            "drop-shadow(0 0 30px rgba(242,99,33,0.15))",
-          ],
+        animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.15, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute",
+          right: "10%",
+          top: "50%",
+          translateY: "-50%",
+          width: "min(580px, 70vw)",
+          aspectRatio: "1 / 1",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(242,99,33,0.55) 0%, rgba(242,99,33,0.0) 70%)",
+          pointerEvents: "none",
+          zIndex: 0,
         }}
+      />
+
+      {/* Sean head */}
+      <motion.div
+        animate={{ opacity: [0.18, 0.26, 0.18], scale: [1, 1.04, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
@@ -40,7 +51,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
           translateY: "-50%",
           width: "min(580px, 70vw)",
           pointerEvents: "none",
-          zIndex: 0,
+          zIndex: 1,
         }}
       >
         <Image
