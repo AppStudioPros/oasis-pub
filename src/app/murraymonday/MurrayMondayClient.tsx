@@ -1,10 +1,21 @@
 "use client";
 import { useState } from "react";
-import type { MurraySection } from "./page";
+import type { MurrayTab } from "./page";
 
-export default function MurrayMondayClient({ sections }: { sections: MurraySection[] }) {
+function parseItemName(name: string): { brewery: string; beerName: string } | null {
+  // Items are stored as "Brewery · Beer Name"
+  const sep = " \u00b7 ";
+  const idx = name.indexOf(sep);
+  if (idx === -1) return null;
+  return {
+    brewery: name.slice(0, idx),
+    beerName: name.slice(idx + sep.length),
+  };
+}
+
+export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
   const [open, setOpen] = useState<string | null>(null);
-  const toggle = (key: string) => setOpen((prev) => (prev === key ? null : key));
+  const toggle = (id: string) => setOpen((prev) => (prev === id ? null : id));
 
   return (
     <div style={{
@@ -34,12 +45,12 @@ export default function MurrayMondayClient({ sections }: { sections: MurraySecti
           <div style={{ width: "60px", height: "3px", background: "var(--color-oasis-orange)", borderRadius: "2px" }} />
         </div>
 
-        {/* Accordion sections */}
+        {/* Accordion sections — each tab is a section */}
         <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-          {sections.map((section, idx) => (
-            <div key={section.section_key} style={{ borderTop: `1px solid rgba(242,99,33,${idx === 0 ? "0.4" : "0.2"})` }}>
+          {tabs.map((tab, idx) => (
+            <div key={tab.id} style={{ borderTop: `1px solid rgba(242,99,33,${idx === 0 ? "0.4" : "0.2"})` }}>
               <button
-                onClick={() => toggle(section.section_key)}
+                onClick={() => toggle(tab.id)}
                 style={{
                   width: "100%",
                   display: "flex",
@@ -52,37 +63,49 @@ export default function MurrayMondayClient({ sections }: { sections: MurraySecti
                   textAlign: "left",
                 }}
               >
-                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", color: open === section.section_key ? "var(--color-oasis-orange)" : "var(--color-oasis-cream)", transition: "color 0.2s" }}>
-                  {section.title}
+                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", color: open === tab.id ? "var(--color-oasis-orange)" : "var(--color-oasis-cream)", transition: "color 0.2s" }}>
+                  {tab.name}
                 </span>
                 <span style={{ fontSize: "1.5rem", color: "var(--color-oasis-orange)", lineHeight: 1, fontWeight: 300 }}>
-                  {open === section.section_key ? "−" : "+"}
+                  {open === tab.id ? "\u2212" : "+"}
                 </span>
               </button>
 
-              {open === section.section_key && (
+              {open === tab.id && (
                 <div style={{ paddingBottom: "1.5rem" }}>
-                  {section.note && (
+                  {tab.subtitle && (
                     <p style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.85rem", color: "var(--color-oasis-cream)", marginBottom: "1.25rem", opacity: 0.7 }}>
-                      {section.note}
+                      {tab.subtitle}
                     </p>
                   )}
                   <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                    {section.items.map((item, i) => (
-                      <div key={i} style={{ borderLeft: "2px solid var(--color-oasis-orange)", paddingLeft: "1rem" }}>
-                        <p style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", color: "var(--color-oasis-cream)", margin: 0 }}>
-                          {item.brewery} <em style={{ fontWeight: 400 }}>{item.name}</em>
-                        </p>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.8rem", color: "rgba(245,241,234,0.5)", margin: "0.2rem 0 0" }}>
-                          {item.desc}
-                        </p>
-                        {item.price && (
-                          <p style={{ fontFamily: "var(--font-display)", fontSize: "0.85rem", color: "var(--color-oasis-orange)", margin: "0.15rem 0 0", fontWeight: 700 }}>
-                            {item.price}
+                    {tab.items.map((item) => {
+                      const parsed = parseItemName(item.name);
+                      return (
+                        <div key={item.id} style={{ borderLeft: "2px solid var(--color-oasis-orange)", paddingLeft: "1rem" }}>
+                          <p style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", color: "var(--color-oasis-cream)", margin: 0 }}>
+                            {parsed ? (
+                              <>
+                                <strong>{parsed.brewery}</strong>{" "}
+                                <em style={{ fontWeight: 400 }}>{parsed.beerName}</em>
+                              </>
+                            ) : (
+                              item.name
+                            )}
                           </p>
-                        )}
-                      </div>
-                    ))}
+                          {item.description && (
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.8rem", color: "rgba(245,241,234,0.5)", margin: "0.2rem 0 0" }}>
+                              {item.description}
+                            </p>
+                          )}
+                          {item.price && (
+                            <p style={{ fontFamily: "var(--font-display)", fontSize: "0.85rem", color: "var(--color-oasis-orange)", margin: "0.15rem 0 0", fontWeight: 700 }}>
+                              {item.price}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}

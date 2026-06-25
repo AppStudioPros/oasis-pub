@@ -6,31 +6,66 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-export interface MurraySection {
-  section_key: string;
-  title: string;
-  note: string | null;
-  items: { brewery: string; name: string; desc: string; price?: string }[];
+export interface MurrayItem {
+  id: string;
+  name: string;
+  description: string | null;
+  price: string | null;
+  position: number;
+}
+
+export interface MurrayTab {
+  id: string;
+  name: string;
+  subtitle: string | null;
+  position: number;
+  items: MurrayItem[];
 }
 
 export const dynamic = "force-dynamic";
 
 export default async function MurrayMondayPage() {
-  const { data } = await supabase
-    .from("murray_monday_specials")
-    .select("section_key, title, note, items")
-    .order("section_key");
+  // Fetch all murray tabs ordered by position
+  const { data: tabs } = await supabase
+    .from("menu_tabs")
+    .select("id, name, subtitle, position")
+    .eq("venue", "murray")
+    .order("position");
 
-  const sections: MurraySection[] = (data ?? []).map((r) => ({
-    section_key: r.section_key,
-    title: r.title,
-    note: r.note,
-    items: Array.isArray(r.items) ? r.items : [],
-  }));
+  if (!tabs || tabs.length === 0) {
+    return <MurrayMondayClient tabs={[]} />;
+  }
 
-  const ordered = ["can", "draft_5_7", "draft_7_9"]
-    .map((k) => sections.find((s) => s.section_key === k))
-    .filter(Boolean) as MurraySection[];
+  // For each tab, fetch sections and their items
+  const tabsWithItems: MurrayTab[] = await Promise.all(
+    tabs.map(async (tab) => {
+      const { data: sections } = await supabase
+        .from("menu_sections")
+        .select("id")
+        .eq("tab_id", tab.id)
+        .order("position");
 
-  return <MurrayMondayClient sections={ordered} />;
+      if (!sections || sections.length === 0) {
+        return { ...tab, items: [] };
+      }
+
+      const sectionIds = sections.map((s) => s.id);
+
+      const { data: items } = await supabase
+        .from("menu_items")
+        .select("id, name, description, price, position")
+        .in("section_id", sectionIds)
+        .order("position");
+
+      return {
+        id: tab.id,
+        name: tab.name,
+        subtitle: tab.subtitle,
+        position: tab.position,
+        items: (items ?? []) as MurrayItem[],
+      };
+    })
+  );
+
+  return <MurrayMondayClient tabs={tabsWithItems} />;
 }
