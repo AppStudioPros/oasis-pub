@@ -27,7 +27,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
-          right: "-5%",
+          right: "10%",
           top: "50%",
           translateY: "-50%",
           width: "min(580px, 70vw)",
