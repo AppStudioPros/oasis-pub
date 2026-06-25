@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import type { MurrayTab } from "./page";
 
 // Items now use name = brewery (bold) + note = nickname (italic)
@@ -17,18 +19,30 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
   const toggle = (id: string) => setOpen((prev) => (prev === id ? null : id));
 
   return (
-    <div style={{
-        minHeight: "100vh",
-        position: "relative",
-        overflow: "hidden",
-        backgroundImage: "url('/images/sean-graphic.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}>
+    <div style={{ minHeight: "100vh", position: "relative", overflow: "hidden", background: "var(--color-oasis-black)" }}>
 
-      {/* Dark overlay so text stays readable */}
-      <div style={{ position: "absolute", inset: 0, background: "rgba(10,10,10,0.82)", zIndex: 0 }} />
+      {/* Single Sean head — right side, vertically centered, breathing animation */}
+      <motion.div
+        animate={{ opacity: [0.10, 0.16, 0.10], scale: [1, 1.04, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          position: "absolute",
+          right: "-5%",
+          top: "50%",
+          translateY: "-50%",
+          width: "min(580px, 70vw)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        <Image
+          src="/images/sean-head-solo.png"
+          alt=""
+          width={580}
+          height={607}
+          style={{ objectFit: "contain", width: "100%", height: "auto", filter: "invert(1)" }}
+        />
+      </motion.div>
 
       {/* Content */}
       <div style={{ position: "relative", zIndex: 1, maxWidth: "680px", margin: "0 auto", padding: "5rem 1.5rem 4rem" }}>
