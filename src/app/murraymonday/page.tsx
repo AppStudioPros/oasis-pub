@@ -9,6 +9,7 @@ const supabase = createClient(
 export interface MurrayItem {
   id: string;
   name: string;
+  note: string | null;
   description: string | null;
   price: string | null;
   position: number;
@@ -53,7 +54,7 @@ export default async function MurrayMondayPage() {
 
       const { data: items } = await supabase
         .from("menu_items")
-        .select("id, name, description, price, position")
+        .select("id, name, note, description, price, position")
         .in("section_id", sectionIds)
         .order("position");
 

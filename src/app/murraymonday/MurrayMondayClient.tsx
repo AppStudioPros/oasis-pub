@@ -2,15 +2,14 @@
 import { useState } from "react";
 import type { MurrayTab } from "./page";
 
-function parseItemName(name: string): { brewery: string; beerName: string } | null {
-  // Items are stored as "Brewery · Beer Name"
+// Items now use name = brewery (bold) + note = nickname (italic)
+// Fallback: split on " · " for legacy items
+function parseItem(name: string, note: string | null): { brewery: string; nickname: string } {
+  if (note) return { brewery: name, nickname: note };
   const sep = " \u00b7 ";
   const idx = name.indexOf(sep);
-  if (idx === -1) return null;
-  return {
-    brewery: name.slice(0, idx),
-    beerName: name.slice(idx + sep.length),
-  };
+  if (idx !== -1) return { brewery: name.slice(0, idx), nickname: name.slice(idx + sep.length) };
+  return { brewery: name, nickname: "" };
 }
 
 export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
@@ -80,18 +79,12 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
                   )}
                   <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                     {tab.items.map((item) => {
-                      const parsed = parseItemName(item.name);
+                      const { brewery, nickname } = parseItem(item.name, item.note ?? null);
                       return (
                         <div key={item.id} style={{ borderLeft: "2px solid var(--color-oasis-orange)", paddingLeft: "1rem" }}>
                           <p style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", color: "var(--color-oasis-cream)", margin: 0 }}>
-                            {parsed ? (
-                              <>
-                                <strong>{parsed.brewery}</strong>{" "}
-                                <em style={{ fontWeight: 400 }}>{parsed.beerName}</em>
-                              </>
-                            ) : (
-                              item.name
-                            )}
+                            <strong>{brewery}</strong>
+                            {nickname && <>{" "}<em style={{ fontWeight: 400 }}>{nickname}</em></>}
                           </p>
                           {item.description && (
                             <p style={{ fontFamily: "var(--font-body)", fontSize: "0.8rem", color: "rgba(245,241,234,0.5)", margin: "0.2rem 0 0" }}>
