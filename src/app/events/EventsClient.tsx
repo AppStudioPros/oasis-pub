@@ -22,55 +22,37 @@ interface Event {
   genre: string;
 }
 
-const TABS = ["Upcoming", "This Month", "All Shows"] as const;
-type Tab = (typeof TABS)[number];
-
 export default function EventsClient({ events }: { events: Event[] }) {
-  const [activeTab, setActiveTab] = useState<Tab>("Upcoming");
   const [activeCategory, setActiveCategory] = useState<string>("All");
 
-  // Build category list dynamically from events that exist
+  // Build category list dynamically from events that exist in the admin
   const categories = useMemo(() => {
     const cats = Array.from(new Set(events.map((e) => e.genre).filter(Boolean)));
     return ["All", ...cats.sort()];
   }, [events]);
 
   const filtered = useMemo(() => {
-    // Use midnight Eastern time as "today" cutoff so events on the current ET
-    // date are not incorrectly classified as past (server runs UTC)
+    // Use midnight Eastern time as "today" cutoff
     const etMidnight = new Date(
       new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" }) + "T00:00:00"
     );
     const now = etMidnight;
-    // Parse YYYY-MM-DD as noon to avoid UTC-midnight day rollback
     const parseDate = (dateStr: string) => new Date(dateStr + "T12:00:00");
 
-    let sorted = [...events].sort(
-      (a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime()
-    );
-
-    if (activeTab === "Upcoming") {
-      sorted = sorted.filter((e) => {
+    // Always show only upcoming events, sorted ascending
+    let sorted = [...events]
+      .filter((e) => {
         const cutoff = e.endDate ? new Date(e.endDate) : parseDate(e.date);
         return cutoff >= now;
-      });
-    } else if (activeTab === "This Month") {
-      sorted = sorted.filter((e) => {
-        const d = parseDate(e.date);
-        return (
-          d.getMonth() === now.getMonth() &&
-          d.getFullYear() === now.getFullYear() &&
-          d >= now
-        );
-      });
-    }
+      })
+      .sort((a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime());
 
     if (activeCategory !== "All") {
       sorted = sorted.filter((e) => e.genre === activeCategory);
     }
 
     return sorted;
-  }, [activeTab, activeCategory, events]);
+  }, [activeCategory, events]);
 
   return (
     <>
@@ -90,28 +72,11 @@ export default function EventsClient({ events }: { events: Event[] }) {
         pixelsPerSecond={214}
       />
 
-      {/* Tabs + category pills */}
-      <section className="bg-[var(--color-oasis-ink)] sticky top-16 md:top-20 z-30 border-b-2 border-[var(--color-oasis-orange)]/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Time tabs */}
-          <div className="flex gap-1 overflow-x-auto scrollbar-hide">
-            {TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => { setActiveTab(tab); setActiveCategory("All"); }}
-                className={`px-5 py-4 text-sm font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
-                  activeTab === tab
-                    ? "border-[var(--color-oasis-orange)] text-[var(--color-oasis-orange)]"
-                    : "border-transparent text-white/60 hover:text-white"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-          {/* Category pills */}
-          {categories.length > 1 && (
-            <div className="flex gap-2 overflow-x-auto scrollbar-hide py-3 border-t border-white/10">
+      {/* Genre filter pills */}
+      {categories.length > 1 && (
+        <section className="bg-[var(--color-oasis-ink)] sticky top-16 md:top-20 z-30 border-b-2 border-[var(--color-oasis-orange)]/40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide py-3">
               {categories.map((cat) => (
                 <button
                   key={cat}
@@ -126,9 +91,9 @@ export default function EventsClient({ events }: { events: Event[] }) {
                 </button>
               ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* Events grid */}
       <section className="relative bg-[var(--color-oasis-ink)] py-16 md:py-20 min-h-[50vh] overflow-hidden">
