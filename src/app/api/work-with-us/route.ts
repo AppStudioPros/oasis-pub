@@ -2,6 +2,20 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
+
+async function verifyTurnstile(token: string): Promise<boolean> {
+  if (!token) return false;
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true; // skip in dev if not set
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret, response: token }).toString(),
+  });
+  const data = await res.json();
+  return data.success === true;
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();

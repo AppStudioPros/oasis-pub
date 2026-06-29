@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import Turnstile from "@/components/Turnstile";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Clock } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -10,6 +11,8 @@ import SectionDivider from "@/components/SectionDivider";
 export default function ContactClient() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const handleTurnstile = useCallback((token: string) => setTurnstileToken(token), []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -170,7 +173,7 @@ export default function ContactClient() {
                 )}
                 <button
                   type="submit"
-                  disabled={status === "sending"}
+                  disabled={status === "sending" || !turnstileToken}
                   className="group w-full bg-[var(--color-oasis-orange)] hover:bg-[var(--color-oasis-orange-dark)] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold uppercase tracking-wider text-sm px-7 py-4 transition-all hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#000]"
                 >
                   {status === "sending" ? "Sending..." : "Send Message"}

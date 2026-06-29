@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import Turnstile from "@/components/Turnstile";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -10,6 +11,8 @@ import SectionDivider from "@/components/SectionDivider";
 
 export default function WorkClient() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const handleTurnstile = useCallback((token: string) => setTurnstileToken(token), []);
   const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -244,7 +247,7 @@ export default function WorkClient() {
 
               <button
                 type="submit"
-                disabled={status === "sending"}
+                disabled={status === "sending" || !turnstileToken}
                 className="group bg-[var(--color-oasis-orange)] hover:bg-[var(--color-oasis-orange-dark)] disabled:opacity-60 text-white font-bold uppercase tracking-wider text-sm px-10 py-4 transition-all hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#000] inline-flex items-center gap-2"
               >
                 {status === "sending" ? "Submitting..." : <>Send <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>}
