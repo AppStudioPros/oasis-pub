@@ -13,11 +13,12 @@ export async function POST(req: Request) {
 
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
 
     // Save to DB first, capture row ID to update email_sent after
-    const { data: insertedRows } = await supabase.from("messages").insert({
+    const { data: insertedRows, error: insertError } = await supabase.from("messages").insert({
+
       name,
       email,
       message,
@@ -28,6 +29,7 @@ export async function POST(req: Request) {
       starred: false,
       metadata: { subject: subject || null },
     }).select("id");
+    if (insertError) console.error("[contact] DB insert error:", insertError);
     const insertedId = insertedRows?.[0]?.id ?? null;
 
     // Send email via Resend
