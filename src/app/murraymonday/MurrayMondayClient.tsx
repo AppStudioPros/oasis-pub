@@ -95,7 +95,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
                   textAlign: "left",
                 }}
               >
-                <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", color: open === tab.id ? "var(--color-oasis-orange)" : "var(--color-oasis-cream)", transition: "color 0.2s" }}>
+                <span style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "1rem", letterSpacing: "0.02em", color: open === tab.id ? "var(--color-oasis-orange)" : "var(--color-oasis-cream)", transition: "color 0.2s" }}>
                   {tab.name}
                 </span>
                 <span style={{ fontSize: "1.5rem", color: "var(--color-oasis-orange)", lineHeight: 1, fontWeight: 300 }}>
@@ -115,7 +115,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
                       const { brewery, nickname } = parseItem(item.name, item.note ?? null);
                       return (
                         <div key={item.id} style={{ borderLeft: "2px solid var(--color-oasis-orange)", paddingLeft: "1rem" }}>
-                          <p style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.95rem", color: "var(--color-oasis-cream)", margin: 0 }}>
+                          <p style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "0.95rem", color: "var(--color-oasis-cream)", margin: 0, letterSpacing: "0.01em" }}>
                             <strong>{brewery}</strong>
                             {nickname && <>{" "}<em style={{ fontWeight: 400 }}>{nickname}</em></>}
                           </p>
@@ -125,7 +125,7 @@ export default function MurrayMondayClient({ tabs }: { tabs: MurrayTab[] }) {
                             </p>
                           )}
                           {item.price && (
-                            <p style={{ fontFamily: "var(--font-display)", fontSize: "0.85rem", color: "var(--color-oasis-orange)", margin: "0.15rem 0 0", fontWeight: 700 }}>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "var(--color-oasis-orange)", margin: "0.15rem 0 0", fontWeight: 700 }}>
                               {item.price}
                             </p>
                           )}
