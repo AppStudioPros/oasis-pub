@@ -19,7 +19,7 @@ export default function ContactClient() {
     setStatus("sending");
     setErrorMsg("");
     const formData = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(formData.entries());
+    const payload = { ...Object.fromEntries(formData.entries()), turnstileToken };
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
