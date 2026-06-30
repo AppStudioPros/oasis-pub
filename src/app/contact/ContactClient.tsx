@@ -171,6 +171,11 @@ export default function ContactClient() {
                 {status === "error" && (
                   <p className="text-red-400 text-sm">{errorMsg}</p>
                 )}
+                <Turnstile
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                  onVerify={handleTurnstile}
+                  theme="dark"
+                />
                 <button
                   type="submit"
                   disabled={status === "sending" || !turnstileToken}
