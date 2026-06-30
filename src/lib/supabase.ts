@@ -35,13 +35,15 @@ export interface OasisEvent {
   category: string | null;
   status: "draft" | "published" | "archived";
   location: string | null;
+  is_recurring: boolean;
+  recurrence_rule: { freq?: string; days?: string[]; monthly_type?: string; nth?: number; nth_day?: string; until?: string } | null;
 }
 
 /** Fetch all upcoming published Oasis events */
 export async function getUpcomingEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location")
+    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
     .eq("venue", "oasis")
     .eq("status", "published")
     .or(`end_date.gte.${new Date().toISOString()},start_date.gte.${new Date().toISOString()}`)
@@ -58,7 +60,7 @@ export async function getUpcomingEvents(): Promise<OasisEvent[]> {
 export async function getAllEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location")
+    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
     .eq("venue", "oasis")
     .eq("status", "published")
     .order("start_date", { ascending: false });
@@ -143,7 +145,7 @@ export async function getOasisMenuTabs(): Promise<OasisMenuTab[]> {
 export async function getEventBySlug(slug: string): Promise<OasisEvent | null> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location")
+    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
     .eq("venue", "oasis")
     .eq("slug", slug)
     .single();

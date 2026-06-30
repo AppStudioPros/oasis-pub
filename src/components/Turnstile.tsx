@@ -30,6 +30,7 @@ export default function Turnstile({ siteKey, onVerify, onExpire, theme = "auto" 
         callback: onVerify,
         "expired-callback": onExpire,
         theme,
+        appearance: "always",
       });
     }
 
