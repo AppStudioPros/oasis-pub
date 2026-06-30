@@ -23,6 +23,9 @@ function mapEvent(e: Awaited<ReturnType<typeof getAllEvents>>[number]) {
     description: e.description ?? "",
     ticketLink: e.ticket_url ?? null,
     genre: e.category ?? "Live Music",
+    isRecurring: e.is_recurring ?? false,
+    recurrenceRule: e.recurrence_rule ?? null,
+    originalDate: e.start_date,
   };
 }
 

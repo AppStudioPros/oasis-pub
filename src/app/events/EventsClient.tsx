@@ -9,6 +9,31 @@ import PageHero from "@/components/PageHero";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import SectionDivider from "@/components/SectionDivider";
 
+const DAY_CODE_O: Record<string, number> = { SU:0, MO:1, TU:2, WE:3, TH:4, FR:5, SA:6 };
+
+function getNextOasisDate(event: Event, now: Date): Date {
+  const parseDate = (s: string) => new Date(s + "T12:00:00");
+  const base = parseDate(event.date);
+  if (!event.isRecurring || !event.recurrenceRule) return base;
+  const rule = event.recurrenceRule as { freq?: string; days?: string[]; monthly_type?: string; nth?: number; nth_day?: string };
+  if (rule.freq === "weekly" && rule.days?.length) {
+    const etNow = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+    for (let i = 0; i <= 13; i++) {
+      const cand = new Date(etNow);
+      cand.setDate(etNow.getDate() + i);
+      cand.setHours(base.getHours(), base.getMinutes(), 0, 0);
+      if (rule.days.some((d: string) => DAY_CODE_O[d] === cand.getDay()) && cand >= now) return cand;
+    }
+  }
+  if (rule.freq === "monthly") {
+    const cand = new Date(base);
+    if (cand < now) { cand.setMonth(now.getMonth()); cand.setFullYear(now.getFullYear()); }
+    if (cand < now) cand.setMonth(cand.getMonth() + 1);
+    return cand;
+  }
+  return base;
+}
+
 interface Event {
   slug: string;
   title: string;
@@ -20,6 +45,9 @@ interface Event {
   description: string;
   ticketLink: string | null;
   genre: string;
+  isRecurring?: boolean;
+  recurrenceRule?: Record<string, unknown> | null;
+  originalDate?: string;
 }
 
 export default function EventsClient({ events }: { events: Event[] }) {
@@ -45,7 +73,7 @@ export default function EventsClient({ events }: { events: Event[] }) {
         const cutoff = e.endDate ? new Date(e.endDate) : parseDate(e.date);
         return cutoff >= now;
       })
-      .sort((a, b) => parseDate(a.date).getTime() - parseDate(b.date).getTime());
+      .sort((a, b) => getNextOasisDate(a, etMidnight).getTime() - getNextOasisDate(b, etMidnight).getTime());
 
     if (activeCategory !== "All") {
       sorted = sorted.filter((e) => e.genre === activeCategory);
