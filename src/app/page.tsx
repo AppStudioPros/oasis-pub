@@ -54,10 +54,9 @@ export default async function HomePage() {
           (e) => new Date(e.date) >= new Date(new Date().setHours(0, 0, 0, 0))
         );
 
-  // Strictly filter to Live Music only — no fallback to non-music events
-  const liveMusicEvents = allEvents.filter(isLiveMusic);
-  const featured = liveMusicEvents[0] ?? null;
-  const upcomingEvents = liveMusicEvents;
+  // Homepage shows whatever is checked "Feature on Homepage" in the admin
+  const featured = allEvents[0] ?? null;
+  const upcomingEvents = allEvents;
 
   return (
     <>
