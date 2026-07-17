@@ -1,5 +1,5 @@
 import EventsClient from "./EventsClient";
-import { getAllEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
+import { getUpcomingEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
 import staticEvents from "@/data/events.json";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ export const metadata = {
   alternates: { canonical: "https://oasisnewlondon.com/events" },
 };
 
-function mapEvent(e: Awaited<ReturnType<typeof getAllEvents>>[number]) {
+function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
   return {
     slug: e.slug,
     title: e.title,
@@ -30,7 +30,7 @@ function mapEvent(e: Awaited<ReturnType<typeof getAllEvents>>[number]) {
 }
 
 export default async function EventsPage() {
-  const liveEvents = await getAllEvents();
+  const liveEvents = await getUpcomingEvents();
   const rawStatic = (staticEvents as typeof staticEvents).map((e) => ({ ...e, endDate: null as string | null }));
   const events = liveEvents.length > 0 ? liveEvents.map(mapEvent) : rawStatic;
 

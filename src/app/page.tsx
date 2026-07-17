@@ -6,7 +6,7 @@ import UpcomingShows from "@/components/home/UpcomingShows";
 import HappyHourBanner from "@/components/home/HappyHourBanner";
 import FindUs from "@/components/home/FindUs";
 import SectionDivider from "@/components/SectionDivider";
-import { getUpcomingEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
+import { getHomepageEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
 import staticEvents from "@/data/events.json";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +46,7 @@ function isLiveMusic(event: { genre: string }) {
 
 export default async function HomePage() {
   // Fetch all upcoming events from DB, fall back to static JSON
-  const liveEvents = await getUpcomingEvents();
+  const liveEvents = await getHomepageEvents();
   const allEvents =
     liveEvents.length > 0
       ? liveEvents.map(mapEvent)

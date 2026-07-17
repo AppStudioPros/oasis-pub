@@ -43,7 +43,7 @@ export interface OasisEvent {
 export async function getUpcomingEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
+    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
     .eq("venue", "oasis")
     .eq("status", "published")
     .or(`end_date.gte.${new Date().toISOString()},start_date.gte.${new Date().toISOString()}`)
@@ -56,11 +56,30 @@ export async function getUpcomingEvents(): Promise<OasisEvent[]> {
   return data ?? [];
 }
 
+
+/** Fetch upcoming Oasis events featured on homepage */
+export async function getHomepageEvents(): Promise<OasisEvent[]> {
+  const { data, error } = await supabase
+    .from("events")
+    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
+    .eq("venue", "oasis")
+    .eq("status", "published")
+    .eq("featured_on_homepage", true)
+    .or(`end_date.gte.${new Date().toISOString()},start_date.gte.${new Date().toISOString()}`)
+    .order("start_date", { ascending: true });
+
+  if (error) {
+    console.error("[oasis] getHomepageEvents error:", error.message);
+    return [];
+  }
+  return data ?? [];
+}
+
 /** Fetch all published Oasis events (upcoming + past) */
 export async function getAllEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
+    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
     .eq("venue", "oasis")
     .eq("status", "published")
     .order("start_date", { ascending: false });
