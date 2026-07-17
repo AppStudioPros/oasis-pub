@@ -12,7 +12,7 @@ import staticEvents from "@/data/events.json";
 export const dynamic = "force-dynamic";
 
 // Map Supabase event → shape expected by home components
-function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
+function mapEvent(e: Awaited<ReturnType<typeof getHomepageEvents>>[number]) {
   return {
     slug: e.slug,
     title: e.title,
