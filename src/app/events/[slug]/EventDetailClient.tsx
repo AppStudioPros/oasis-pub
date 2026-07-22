@@ -158,7 +158,10 @@ export default function EventDetailClient({ event }: { event: Event }) {
                 </div>
               </div>
 
-              <p className="text-white/75 leading-relaxed mb-8">{event.description}</p>
+              <div
+                className="text-white/75 leading-relaxed mb-8 prose prose-invert prose-sm max-w-none [&_p]:mb-3 [&_strong]:text-white [&_em]:text-white/90"
+                dangerouslySetInnerHTML={{ __html: event.description || "" }}
+              />
 
               <div className="flex flex-col sm:flex-row gap-3">
                 {event.ticketLink ? (
