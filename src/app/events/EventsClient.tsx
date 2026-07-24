@@ -11,27 +11,31 @@ import SectionDivider from "@/components/SectionDivider";
 
 const DAY_CODE_O: Record<string, number> = { SU:0, MO:1, TU:2, WE:3, TH:4, FR:5, SA:6 };
 
+function etDayOfWeekO(d: Date): number {
+  const name = new Intl.DateTimeFormat("en-US", { weekday: "long", timeZone: "America/New_York" }).format(d);
+  return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].indexOf(name);
+}
+
 function getNextOasisDate(event: Event, now: Date): Date {
-  const parseDate = (s: string) => new Date(s + "T12:00:00");
-  const base = parseDate(event.date);
-  if (!event.isRecurring || !event.recurrenceRule) return base;
+  const origDate = event.originalDate ? new Date(event.originalDate) : new Date(event.date + "T12:00:00");
+  if (!event.isRecurring || !event.recurrenceRule) return origDate;
   const rule = event.recurrenceRule as { freq?: string; days?: string[]; monthly_type?: string; nth?: number; nth_day?: string };
+  const MS = 24 * 60 * 60 * 1000;
   if (rule.freq === "weekly" && rule.days?.length) {
-    const etNow = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+    const daysElapsed = Math.max(0, Math.floor((now.getTime() - origDate.getTime()) / MS));
+    const searchFrom = new Date(origDate.getTime() + daysElapsed * MS);
     for (let i = 0; i <= 13; i++) {
-      const cand = new Date(etNow);
-      cand.setDate(etNow.getDate() + i);
-      cand.setHours(base.getHours(), base.getMinutes(), 0, 0);
-      if (rule.days.some((d: string) => DAY_CODE_O[d] === cand.getDay()) && cand >= now) return cand;
+      const cand = new Date(searchFrom.getTime() + i * MS);
+      if (rule.days.some((d: string) => DAY_CODE_O[d] === etDayOfWeekO(cand)) && cand >= now) return cand;
     }
   }
   if (rule.freq === "monthly") {
-    const cand = new Date(base);
-    if (cand < now) { cand.setMonth(now.getMonth()); cand.setFullYear(now.getFullYear()); }
-    if (cand < now) cand.setMonth(cand.getMonth() + 1);
+    const cand = new Date(origDate);
+    if (cand < now) { cand.setUTCMonth(now.getUTCMonth()); cand.setUTCFullYear(now.getUTCFullYear()); }
+    if (cand < now) cand.setUTCMonth(cand.getUTCMonth() + 1);
     return cand;
   }
-  return base;
+  return origDate;
 }
 
 interface Event {
