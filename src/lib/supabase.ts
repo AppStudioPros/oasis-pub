@@ -195,3 +195,30 @@ export async function getOasisSettings(): Promise<OasisSettings> {
     social: data?.social || {},
   };
 }
+
+export interface OasisStaffMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string | null;
+  photo_url: string | null;
+  photo_focal_x: number | null;
+  photo_focal_y: number | null;
+  display_order: number;
+  active: boolean;
+}
+
+/** Fetch all active Oasis staff ordered by display_order */
+export async function getOasisStaff(): Promise<OasisStaffMember[]> {
+  const { data, error } = await supabase
+    .from("oasis_staff")
+    .select("id, name, role, bio, photo_url, photo_focal_x, photo_focal_y, display_order, active")
+    .eq("active", true)
+    .order("display_order", { ascending: true });
+
+  if (error) {
+    console.error("[oasis] getOasisStaff error:", error.message);
+    return [];
+  }
+  return data ?? [];
+}

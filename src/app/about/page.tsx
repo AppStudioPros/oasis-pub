@@ -1,7 +1,8 @@
 import AboutClient from "./AboutClient";
-import { supabase } from "@/lib/supabase";
+import { getOasisStaff } from "@/lib/supabase";
 
-export const dynamic = "force-dynamic";
+// Staff changes rarely — revalidate every 5 minutes instead of hitting DB on every request
+export const revalidate = 300;
 
 export const metadata = {
   title: "About",
@@ -11,11 +12,6 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  const { data: staff } = await supabase
-    .from("oasis_staff")
-    .select("id, name, role, bio, photo_url, photo_focal_x, photo_focal_y, display_order")
-    .eq("active", true)
-    .order("display_order", { ascending: true });
-
-  return <AboutClient staff={staff ?? []} />;
+  const staff = await getOasisStaff();
+  return <AboutClient staff={staff} />;
 }

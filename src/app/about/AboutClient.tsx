@@ -1,4 +1,5 @@
 "use client";
+import type { OasisStaffMember } from "@/lib/supabase";
 
 import { useState } from "react";
 import Link from "next/link";
