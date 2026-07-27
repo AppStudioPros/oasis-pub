@@ -16,8 +16,12 @@ interface Event {
   endTime: string;
   endDate?: string | null;
   image: string;
+  focalX?: number;
+  focalY?: number;
   description: string;
   ticketLink: string | null;
+  rsvpUrl?: string | null;
+  location?: string | null;
   genre: string;
 }
 
@@ -116,6 +120,7 @@ export default function EventDetailClient({ event }: { event: Event }) {
                   fill
                   priority
                   className="object-cover"
+                  style={{ objectPosition: `${event.focalX ?? 50}% ${event.focalY ?? 50}%` }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
@@ -154,7 +159,7 @@ export default function EventDetailClient({ event }: { event: Event }) {
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin size={18} className="text-[var(--color-oasis-orange)]" />
-                  <span>16 Bank Street, New London CT</span>
+                  <span>{event.location || "16 Bank Street, New London CT"}</span>
                 </div>
               </div>
 
@@ -172,6 +177,17 @@ export default function EventDetailClient({ event }: { event: Event }) {
                     className="group inline-flex items-center justify-center gap-2 bg-[var(--color-oasis-orange)] text-white font-bold uppercase tracking-wider text-sm px-7 py-4 transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#000]"
                   >
                     Get Tickets
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
+                ) : null}
+                {event.rsvpUrl ? (
+                  <a
+                    href={event.rsvpUrl}
+                    target={/^https?:/i.test(event.rsvpUrl) ? "_blank" : undefined}
+                    rel={/^https?:/i.test(event.rsvpUrl) ? "noopener noreferrer" : undefined}
+                    className="group inline-flex items-center justify-center gap-2 border-2 border-[var(--color-oasis-orange)] text-[var(--color-oasis-orange)] font-bold uppercase tracking-wider text-sm px-7 py-4 transition-all hover:-translate-y-1 hover:bg-[var(--color-oasis-orange)] hover:text-white"
+                  >
+                    RSVP
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                   </a>
                 ) : null}

@@ -30,6 +30,8 @@ export interface OasisEvent {
   start_date: string;
   end_date: string | null;
   image_url: string | null;
+  image_focal_x: number | null;
+  image_focal_y: number | null;
   ticket_url: string | null;
   rsvp_url: string | null;
   category: string | null;
@@ -43,7 +45,7 @@ export interface OasisEvent {
 export async function getUpcomingEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
+    .select("id, slug, title, description, start_date, end_date, image_url, image_focal_x, image_focal_y, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
     .eq("venue", "oasis")
     .eq("status", "published")
     .or(`end_date.gte.${new Date().toISOString()},start_date.gte.${new Date().toISOString()}`)
@@ -61,7 +63,7 @@ export async function getUpcomingEvents(): Promise<OasisEvent[]> {
 export async function getHomepageEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
+    .select("id, slug, title, description, start_date, end_date, image_url, image_focal_x, image_focal_y, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
     .eq("venue", "oasis")
     .eq("status", "published")
     .eq("featured_on_homepage", true)
@@ -79,7 +81,7 @@ export async function getHomepageEvents(): Promise<OasisEvent[]> {
 export async function getAllEvents(): Promise<OasisEvent[]> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
+    .select("id, slug, title, description, start_date, end_date, image_url, image_focal_x, image_focal_y, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule, featured_on_homepage")
     .eq("venue", "oasis")
     .eq("status", "published")
     .order("start_date", { ascending: false });
@@ -164,7 +166,7 @@ export async function getOasisMenuTabs(): Promise<OasisMenuTab[]> {
 export async function getEventBySlug(slug: string): Promise<OasisEvent | null> {
   const { data, error } = await supabase
     .from("events")
-    .select("id, slug, title, description, start_date, end_date, image_url, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
+    .select("id, slug, title, description, start_date, end_date, image_url, image_focal_x, image_focal_y, ticket_url, rsvp_url, category, status, location, is_recurring, recurrence_rule")
     .eq("venue", "oasis")
     .eq("slug", slug)
     .single();

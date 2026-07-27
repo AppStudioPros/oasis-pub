@@ -116,6 +116,15 @@ export default function EventsClient({ events }: { events: Event[] }) {
     // Always show only upcoming events, sorted ascending
     let sorted = [...events]
       .filter((e) => {
+        // Recurring events: use next occurrence date as cutoff (respects until date)
+        if (e.isRecurring && e.recurrenceRule) {
+          const next = getNextOasisDate(e, now);
+          if (e.recurrenceRule.until) {
+            const until = new Date(e.recurrenceRule.until + "T23:59:59");
+            return next >= now && next <= until;
+          }
+          return next >= now;
+        }
         const cutoff = e.endDate ? new Date(e.endDate) : parseDate(e.date);
         return cutoff >= now;
       })

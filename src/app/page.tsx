@@ -7,17 +7,23 @@ import HappyHourBanner from "@/components/home/HappyHourBanner";
 import FindUs from "@/components/home/FindUs";
 import SectionDivider from "@/components/SectionDivider";
 import { getHomepageEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
+import { getNextOccurrence } from "@/lib/server-recurrence";
 import staticEvents from "@/data/events.json";
 
 export const dynamic = "force-dynamic";
 
 // Map Supabase event → shape expected by home components
 function mapEvent(e: Awaited<ReturnType<typeof getHomepageEvents>>[number]) {
+  // For recurring events, show the next upcoming occurrence date
+  const nextDate = (e.is_recurring && e.recurrence_rule)
+    ? getNextOccurrence(e.start_date, true, e.recurrence_rule)
+    : new Date(e.start_date);
+  const nextISO = nextDate.toISOString();
   return {
     slug: e.slug,
     title: e.title,
-    date: toEasternDate(e.start_date),
-    startTime: toEasternTime(e.start_date),
+    date: toEasternDate(nextISO),
+    startTime: toEasternTime(nextISO),
     endTime: e.end_date ? toEasternTime(e.end_date) : "",
     image: e.image_url ?? "/images/heroes/poster-collage.jpg",
     description: e.description ?? "",
