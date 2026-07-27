@@ -16,11 +16,24 @@ function etDayOfWeekO(d: Date): number {
   return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].indexOf(name);
 }
 
+function etComponentsO(d: Date): { y: number; mo: number; day: number } {
+  const s = d.toLocaleString("sv-SE", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" });
+  const [y, mo, day] = s.split("-").map(Number);
+  return { y, mo, day };
+}
+
+function candidateAtO(base: Date, tY: number, tM: number, tD: number): Date {
+  const orig = etComponentsO(base);
+  const dayDiff = Math.round((Date.UTC(tY, tM-1, tD) - Date.UTC(orig.y, orig.mo-1, orig.day)) / (24*60*60*1000));
+  return new Date(base.getTime() + dayDiff * 24 * 60 * 60 * 1000);
+}
+
 function getNextOasisDate(event: Event, now: Date): Date {
   const origDate = event.originalDate ? new Date(event.originalDate) : new Date(event.date + "T12:00:00");
   if (!event.isRecurring || !event.recurrenceRule) return origDate;
   const rule = event.recurrenceRule as { freq?: string; days?: string[]; monthly_type?: string; nth?: number; nth_day?: string };
   const MS = 24 * 60 * 60 * 1000;
+
   if (rule.freq === "weekly" && rule.days?.length) {
     const daysElapsed = Math.max(0, Math.floor((now.getTime() - origDate.getTime()) / MS));
     const searchFrom = new Date(origDate.getTime() + daysElapsed * MS);
@@ -29,12 +42,41 @@ function getNextOasisDate(event: Event, now: Date): Date {
       if (rule.days.some((d: string) => DAY_CODE_O[d] === etDayOfWeekO(cand)) && cand >= now) return cand;
     }
   }
+
   if (rule.freq === "monthly") {
-    const cand = new Date(origDate);
-    if (cand < now) { cand.setUTCMonth(now.getUTCMonth()); cand.setUTCFullYear(now.getUTCFullYear()); }
-    if (cand < now) cand.setUTCMonth(cand.getUTCMonth() + 1);
-    return cand;
+    const { y: nowY, mo: nowMo } = etComponentsO(now);
+
+    if (rule.monthly_type === "nth_weekday" && rule.nth && rule.nth_day) {
+      const targetDay = DAY_CODE_O[rule.nth_day];
+      for (let offset = 0; offset <= 12; offset++) {
+        const mo2 = ((nowMo - 1 + offset) % 12) + 1;
+        const y2 = nowY + Math.floor((nowMo - 1 + offset) / 12);
+        let count = 0;
+        for (let d = 1; d <= 31; d++) {
+          const t = new Date(Date.UTC(y2, mo2 - 1, d, 12, 0, 0)); // noon UTC avoids midnight crossing
+          if (t.getUTCMonth() !== mo2 - 1) break;
+          if (etDayOfWeekO(t) === targetDay) {
+            count++;
+            if (count === rule.nth) {
+              const found = candidateAtO(origDate, y2, mo2, d);
+              if (found >= now) return found;
+              break;
+            }
+          }
+        }
+      }
+      return origDate;
+    }
+
+    // day_of_month
+    const startET = etComponentsO(origDate);
+    const thisMonth = candidateAtO(origDate, nowY, nowMo, startET.day);
+    if (thisMonth >= now) return thisMonth;
+    const nextMo = nowMo === 12 ? 1 : nowMo + 1;
+    const nextY = nowMo === 12 ? nowY + 1 : nowY;
+    return candidateAtO(origDate, nextY, nextMo, startET.day);
   }
+
   return origDate;
 }
 

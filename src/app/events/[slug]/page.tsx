@@ -13,6 +13,22 @@ function etDayOfWeek(d: Date): number {
   return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"].indexOf(name);
 }
 
+/** Get ET year/month/day for any Date */
+function etComponents(d: Date): { y: number; mo: number; day: number } {
+  const s = d.toLocaleString("sv-SE", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" });
+  const [y, mo, day] = s.split("-").map(Number);
+  return { y, mo, day };
+}
+
+/** Build a candidate Date on a target ET date, preserving the original event's UTC time-of-day */
+function candidateAt(base: Date, targetY: number, targetM: number, targetD: number): Date {
+  const origET = etComponents(base);
+  const origETMs = Date.UTC(origET.y, origET.mo - 1, origET.day);
+  const targetETMs = Date.UTC(targetY, targetM - 1, targetD);
+  const dayDiff = Math.round((targetETMs - origETMs) / (24 * 60 * 60 * 1000));
+  return new Date(base.getTime() + dayDiff * 24 * 60 * 60 * 1000);
+}
+
 /** Returns the next upcoming occurrence date for a recurring event, or the original start date.
  *  Advances the original UTC timestamp by whole days — preserving exact UTC time-of-day so
  *  ET time is always correct. Day-of-week comparison uses Intl (ET), not getDay() (UTC). */
@@ -24,7 +40,6 @@ function getNextOccurrence(startDateISO: string, isRecurring: boolean, rule: Rec
   const MS = 24 * 60 * 60 * 1000;
 
   if (rule.freq === "weekly" && rule.days?.length) {
-    // Start search from around today (preserving exact UTC time from original)
     const daysElapsed = Math.max(0, Math.floor((now.getTime() - base.getTime()) / MS));
     const searchFrom = new Date(base.getTime() + daysElapsed * MS);
     for (let i = 0; i <= 13; i++) {
@@ -34,10 +49,38 @@ function getNextOccurrence(startDateISO: string, isRecurring: boolean, rule: Rec
   }
 
   if (rule.freq === "monthly") {
-    const cand = new Date(base);
-    if (cand < now) { cand.setUTCMonth(now.getUTCMonth()); cand.setUTCFullYear(now.getUTCFullYear()); }
-    if (cand < now) cand.setUTCMonth(cand.getUTCMonth() + 1);
-    return cand;
+    const { y: nowY, mo: nowMo } = etComponents(now);
+
+    if (rule.monthly_type === "nth_weekday" && rule.nth && rule.nth_day) {
+      const targetJsDay = DAY_CODE[rule.nth_day];
+      for (let monthOffset = 0; monthOffset <= 12; monthOffset++) {
+        const mo2 = ((nowMo - 1 + monthOffset) % 12) + 1;
+        const y2 = nowY + Math.floor((nowMo - 1 + monthOffset) / 12);
+        let count = 0;
+        for (let d = 1; d <= 31; d++) {
+          // Use noon UTC so the ET calendar day always matches (avoids midnight-crossing bug)
+          const testDate = new Date(Date.UTC(y2, mo2 - 1, d, 12, 0, 0));
+          if (testDate.getUTCMonth() !== mo2 - 1) break;
+          if (etDayOfWeek(testDate) === targetJsDay) {
+            count++;
+            if (count === rule.nth) {
+              const found = candidateAt(base, y2, mo2, d);
+              if (found >= now) return found;
+              break;
+            }
+          }
+        }
+      }
+      return base;
+    }
+
+    // day_of_month — same ET calendar day each month
+    const startET = etComponents(base);
+    const thisMonth = candidateAt(base, nowY, nowMo, startET.day);
+    if (thisMonth >= now) return thisMonth;
+    const nextMo = nowMo === 12 ? 1 : nowMo + 1;
+    const nextY = nowMo === 12 ? nowY + 1 : nowY;
+    return candidateAt(base, nextY, nextMo, startET.day);
   }
 
   return base;
