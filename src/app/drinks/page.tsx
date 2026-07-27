@@ -44,7 +44,9 @@ export default async function DrinksPage() {
           origin: item.note ?? undefined,
           size: undefined,
           price: item.price ?? undefined,
+          price_alt: item.price_alt ?? undefined,
           addons: item.addons ?? undefined,
+          subcategory: item.subcategory ?? undefined,
           is_subhead: item.is_subhead ?? false,
         });
 

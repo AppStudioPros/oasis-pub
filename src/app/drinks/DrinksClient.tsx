@@ -14,7 +14,9 @@ interface DrinkItem {
   thc?: string;
   size?: string;
   price?: string;
+  price_alt?: string;
   addons?: string;
+  subcategory?: string;
   is_subhead?: boolean;
 }
 
@@ -173,7 +175,12 @@ function ItemList({ items }: { items: DrinkItem[] }) {
           <li key={`${item.name}-${idx}`} className="py-3.5">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-white leading-snug">{item.name}</p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="font-semibold text-white leading-snug">{item.name}</p>
+                  {item.subcategory && (
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/40 border border-white/20 rounded px-1.5 py-0.5 leading-none">{item.subcategory}</span>
+                  )}
+                </div>
                 <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-white/55 mt-1">
                   {item.style && <span>{item.style}</span>}
                   {item.abv && <span className="text-[var(--color-oasis-orange)]/80">{item.abv} ABV</span>}
@@ -183,11 +190,18 @@ function ItemList({ items }: { items: DrinkItem[] }) {
                   {item.addons && <span className="italic">{item.addons}</span>}
                 </div>
               </div>
-              {item.price && (
-                <span className="text-[var(--color-oasis-orange)] font-bold whitespace-nowrap text-base">
-                  {item.price}
-                </span>
-              )}
+              <div className="flex flex-col items-end gap-1 whitespace-nowrap">
+                {item.price && (
+                  <span className="text-[var(--color-oasis-orange)] font-bold text-base">
+                    {item.price}
+                  </span>
+                )}
+                {item.price_alt && (
+                  <span className="text-[var(--color-oasis-orange)]/70 font-semibold text-sm">
+                    {item.price_alt}
+                  </span>
+                )}
+              </div>
             </div>
           </li>
         );
