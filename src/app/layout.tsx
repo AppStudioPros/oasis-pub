@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getOasisSettings } from "@/lib/supabase";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -60,11 +61,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await getOasisSettings();
   return (
     <html lang="en">
       <head>
@@ -88,16 +90,13 @@ export default function RootLayout({
               logo: "https://oasisnewlondon.com/images/logo-white.png",
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+18604473929",
+                telephone: settings.phone ? `+1${settings.phone.replace(/[^\d]/g, "").slice(-10)}` : "+18604473929",
                 contactType: "customer service",
-                email: "oasisnewlondon@gmail.com",
+                email: settings.email || "oasisnewlondon@gmail.com",
                 areaServed: "US",
                 availableLanguage: "English",
               },
-              sameAs: [
-                "https://www.facebook.com/theoasispub",
-                "https://www.instagram.com/oasispub",
-              ],
+              sameAs: Object.values(settings.social).filter(Boolean),
             }),
           }}
         />
@@ -115,8 +114,8 @@ export default function RootLayout({
               image: "https://oasisnewlondon.com/images/heroes/poster-collage.jpg",
               description:
                 "New London CT's rock club and music venue. Emerging bands, 20+ craft beers, live music 365 nights a year at 16 Bank Street.",
-              telephone: "+18604473929",
-              email: "oasisnewlondon@gmail.com",
+              telephone: settings.phone ? `+1${settings.phone.replace(/[^\d]/g, "").slice(-10)}` : "+18604473929",
+              email: settings.email || "oasisnewlondon@gmail.com",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "16 Bank Street",
@@ -148,10 +147,7 @@ export default function RootLayout({
               priceRange: "$",
               currenciesAccepted: "USD",
               paymentAccepted: "Cash, Credit Card",
-              sameAs: [
-                "https://www.facebook.com/theoasispub",
-                "https://www.instagram.com/oasispub",
-              ],
+              sameAs: Object.values(settings.social).filter(Boolean),
               amenityFeature: [
                 { "@type": "LocationFeatureSpecification", name: "Live Music", value: true },
                 { "@type": "LocationFeatureSpecification", name: "Craft Beer", value: true },

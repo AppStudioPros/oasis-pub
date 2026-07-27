@@ -6,7 +6,7 @@ import UpcomingShows from "@/components/home/UpcomingShows";
 import HappyHourBanner from "@/components/home/HappyHourBanner";
 import FindUs from "@/components/home/FindUs";
 import SectionDivider from "@/components/SectionDivider";
-import { getHomepageEvents, toEasternDate, toEasternTime } from "@/lib/supabase";
+import { getHomepageEvents, toEasternDate, toEasternTime, getOasisSettings } from "@/lib/supabase";
 import { getNextOccurrence } from "@/lib/server-recurrence";
 import staticEvents from "@/data/events.json";
 
@@ -52,7 +52,7 @@ function isLiveMusic(event: { genre: string }) {
 
 export default async function HomePage() {
   // Fetch all upcoming events from DB, fall back to static JSON
-  const liveEvents = await getHomepageEvents();
+  const [liveEvents, settings] = await Promise.all([getHomepageEvents(), getOasisSettings()]);
   const allEvents =
     liveEvents.length > 0
       ? liveEvents.map(mapEvent)
@@ -102,7 +102,7 @@ export default async function HomePage() {
 
       <HappyHourBanner />
 
-      <FindUs />
+      <FindUs settings={settings} />
 
       {/* FAQ schema — AEO / AI answer engine optimization */}
       <script

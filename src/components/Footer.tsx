@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MapPin, Mail } from "lucide-react";
+import { getOasisSettings } from "@/lib/supabase";
 
 function FacebookIcon({ size = 18 }: { size?: number }) {
   return (
@@ -19,7 +20,38 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-export default function Footer() {
+const DAY_ORDER = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+const DAY_LABEL: Record<string,string> = { monday:"Mon – Thu",tuesday:"Tue",wednesday:"Wed",thursday:"Thu",friday:"Fri",saturday:"Sat",sunday:"Sun" };
+// Grouped display: Mon-Thu if all identical, else individual days
+function HoursList({ hours }: { hours: Record<string,string> }) {
+  const days = DAY_ORDER.filter(d => hours[d]);
+  if (days.length === 0) return null;
+
+  // Try to group Mon-Thu if all have same value
+  const grouped: { label: string; value: string }[] = [];
+  const weekdays = ["monday","tuesday","wednesday","thursday"];
+  const allSame = weekdays.every(d => hours[d] && hours[d] === hours["monday"]);
+
+  if (allSame && hours["monday"]) {
+    grouped.push({ label: "Mon – Thu", value: hours["monday"] });
+    ["friday","saturday","sunday"].filter(d => hours[d]).forEach(d => grouped.push({ label: d.charAt(0).toUpperCase()+d.slice(1), value: hours[d] }));
+  } else {
+    days.forEach(d => grouped.push({ label: DAY_LABEL[d] || d, value: hours[d] }));
+  }
+
+  return (
+    <ul className="text-white/80 text-sm space-y-1">
+      {grouped.map(({ label, value }) => (
+        <li key={label}>{label}: {value}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default async function Footer() {
+  const settings = await getOasisSettings();
+  const { address, email, hours, social } = settings;
+
   return (
     <footer className="bg-[var(--color-oasis-black)] border-t-4 border-[var(--color-oasis-orange)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -33,24 +65,20 @@ export default function Footer() {
               A New London staple. Craft beer. Live music. 21+ only.
             </p>
             <div className="flex gap-3 mt-5">
-              <a
-                href="https://facebook.com/theoasispub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center border border-white/20 rounded-full hover:bg-[var(--color-oasis-orange)] hover:border-[var(--color-oasis-orange)] transition-colors"
-                aria-label="Facebook"
-              >
-                <FacebookIcon size={18} />
-              </a>
-              <a
-                href="https://instagram.com/oasispub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center border border-white/20 rounded-full hover:bg-[var(--color-oasis-orange)] hover:border-[var(--color-oasis-orange)] transition-colors"
-                aria-label="Instagram"
-              >
-                <InstagramIcon size={18} />
-              </a>
+              {social.facebook && (
+                <a href={social.facebook} target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center border border-white/20 rounded-full hover:bg-[var(--color-oasis-orange)] hover:border-[var(--color-oasis-orange)] transition-colors"
+                  aria-label="Facebook">
+                  <FacebookIcon size={18} />
+                </a>
+              )}
+              {social.instagram && (
+                <a href={social.instagram} target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center border border-white/20 rounded-full hover:bg-[var(--color-oasis-orange)] hover:border-[var(--color-oasis-orange)] transition-colors"
+                  aria-label="Instagram">
+                  <InstagramIcon size={18} />
+                </a>
+              )}
             </div>
           </div>
 
@@ -60,12 +88,7 @@ export default function Footer() {
               Hours
             </h4>
             <p className="text-white/70 text-sm mb-3">Open 365 days a year</p>
-            <ul className="text-white/80 text-sm space-y-1">
-              <li>Mon – Thu: 5pm – 1am</li>
-              <li>Fri: 5pm – 2am</li>
-              <li>Sat: 7pm – 2am</li>
-              <li>Sun: 7pm – 1am</li>
-            </ul>
+            <HoursList hours={hours} />
           </div>
 
           {/* Contact */}
@@ -76,17 +99,17 @@ export default function Footer() {
             <ul className="text-white/80 text-sm space-y-2">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-0.5 flex-shrink-0 text-[var(--color-oasis-orange)]" />
-                <span>16 Bank Street<br />New London, CT 06320</span>
+                <span>{address}</span>
               </li>
-              <li className="flex items-start gap-2">
-                <Mail size={16} className="mt-0.5 flex-shrink-0 text-[var(--color-oasis-orange)]" />
-                <div>
-                  <div className="text-white/40 text-[10px] uppercase tracking-wider font-bold mb-0.5">Email</div>
-                  <a href="mailto:oasisnewlondon@gmail.com" className="hover:text-[var(--color-oasis-orange)]">
-                    oasisnewlondon@gmail.com
-                  </a>
-                </div>
-              </li>
+              {email && (
+                <li className="flex items-start gap-2">
+                  <Mail size={16} className="mt-0.5 flex-shrink-0 text-[var(--color-oasis-orange)]" />
+                  <div>
+                    <div className="text-white/40 text-[10px] uppercase tracking-wider font-bold mb-0.5">Email</div>
+                    <a href={`mailto:${email}`} className="hover:text-[var(--color-oasis-orange)]">{email}</a>
+                  </div>
+                </li>
+              )}
               <li className="flex items-start gap-2">
                 <Mail size={16} className="mt-0.5 flex-shrink-0 text-[var(--color-oasis-orange)]" />
                 <div>
@@ -97,10 +120,7 @@ export default function Footer() {
                 </div>
               </li>
             </ul>
-            <Link
-              href="/contact"
-              className="inline-block mt-4 text-sm font-bold uppercase tracking-wider text-[var(--color-oasis-orange)] hover:underline"
-            >
+            <Link href="/contact" className="inline-block mt-4 text-sm font-bold uppercase tracking-wider text-[var(--color-oasis-orange)] hover:underline">
               More Info →
             </Link>
           </div>

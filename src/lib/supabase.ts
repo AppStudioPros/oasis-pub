@@ -174,3 +174,24 @@ export async function getEventBySlug(slug: string): Promise<OasisEvent | null> {
   if (error) return null;
   return data;
 }
+
+export interface OasisSettings {
+  business_name: string;
+  address: string;
+  phone: string;
+  email: string;
+  hours: Record<string, string>;
+  social: Record<string, string>;
+}
+
+export async function getOasisSettings(): Promise<OasisSettings> {
+  const { data } = await supabase.from("settings").select("*").eq("id", 2).single();
+  return {
+    business_name: data?.business_name || "The Oasis Pub",
+    address: data?.address || "16 Bank Street, New London, CT 06320",
+    phone: data?.phone || "(860) 941-5822",
+    email: data?.email || "oasisnewlondon@gmail.com",
+    hours: data?.hours || {},
+    social: data?.social || {},
+  };
+}

@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import type { OasisSettings } from "@/lib/supabase";
 import { motion } from "framer-motion";
 import { MapPin, Mail, ArrowRight } from "lucide-react";
 
-export default function FindUs() {
+const DAY_ORDER = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+const DAY_LABEL: Record<string,string> = { monday:"Mon",tuesday:"Tue",wednesday:"Wed",thursday:"Thu",friday:"Fri",saturday:"Sat",sunday:"Sun" };
+
+export default function FindUs({ settings }: { settings: OasisSettings }) {
   return (
     <section className="relative bg-[var(--color-oasis-ink)] py-20 md:py-28 overflow-hidden border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,8 +25,7 @@ export default function FindUs() {
               ✦ Find Us ✦
             </p>
             <h2 className="poster-title text-5xl md:text-7xl text-white leading-[0.9] mb-8">
-              16 Bank Street.<br />
-              <span className="text-[var(--color-oasis-orange)]">New London, CT.</span>
+              {settings.address || "16 Bank Street, New London, CT"}
             </h2>
 
             {/* Neon-style hours sign */}
@@ -36,33 +39,25 @@ export default function FindUs() {
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4 text-white">
-                <div className="text-center">
-                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Mon – Thu</div>
-                  <div className="poster-title text-2xl">5pm – 1am</div>
-                </div>
-                <div className="text-center border-l border-white/10 pl-4">
-                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Fri</div>
-                  <div className="poster-title text-2xl">5pm – 2am</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Sat</div>
-                  <div className="poster-title text-2xl">7pm – 2am</div>
-                </div>
-                <div className="text-center border-l border-white/10 pl-4">
-                  <div className="text-[var(--color-oasis-orange)]/80 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Sun</div>
-                  <div className="poster-title text-2xl text-[var(--color-oasis-orange)]">7pm – 1am</div>
-                </div>
+                {DAY_ORDER.filter(d => settings.hours?.[d]).map((d, i) => (
+                  <div key={d} className={`text-center${i % 2 === 1 ? " border-l border-white/10 pl-4" : ""}`}>
+                    <div className="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{DAY_LABEL[d]}</div>
+                    <div className="poster-title text-2xl">{settings.hours[d]}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Contact bits */}
             <div className="space-y-3 mb-8">
-              <a href="mailto:oasisnewlondon@gmail.com" className="flex items-center gap-3 text-white/80 hover:text-[var(--color-oasis-orange)] transition-colors group">
-                <div className="w-10 h-10 border border-white/20 group-hover:border-[var(--color-oasis-orange)] flex items-center justify-center transition-colors">
-                  <Mail size={16} />
-                </div>
-                <span className="text-base">oasisnewlondon@gmail.com</span>
-              </a>
+              {settings.email && (
+                <a href={`mailto:${settings.email}`} className="flex items-center gap-3 text-white/80 hover:text-[var(--color-oasis-orange)] transition-colors group">
+                  <div className="w-10 h-10 border border-white/20 group-hover:border-[var(--color-oasis-orange)] flex items-center justify-center transition-colors">
+                    <Mail size={16} />
+                  </div>
+                  <span className="text-base">{settings.email}</span>
+                </a>
+              )}
             </div>
 
             <Link
