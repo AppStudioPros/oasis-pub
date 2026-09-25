@@ -221,7 +221,7 @@ export default function AboutClient({ staff }: { staff: StaffMember[] }) {
               The Oasis Pub is a neighborhood bar in the heart of downtown New London. It&apos;s the kind of place where you can stop in alone and strike up a conversation at the bar, meet friends for a night out or spend an evening discovering a new band.
             </p>
             <p>
-              For more than two decades, the Oasis has served as a gathering place for locals, visitors, musicians, artists and anyone looking for a getaway from the average bar. The bar focuses on craft beer, with an ever-changing selection that highlights many local and independent breweries alongside unique canned offerings and a wide selection of non-alcoholic options, including CBD and nootropic beverages. Whether you&apos;re drinking alcohol or not, the Oasis is a place where you can feel comfortable settling in and being part of the room.
+              For more than two decades, the Oasis has served as a gathering place for locals, visitors, musicians, artists and anyone looking for a getaway from the average bar. The bar focuses on craft beer, with an ever-changing selection that highlights many local and independent breweries alongside unique canned offerings and a wide selection of non-alcoholic options, and a wide selection of alcohol-free options. Whether you&apos;re drinking alcohol or not, the Oasis is a place where you can feel comfortable settling in and being part of the room.
             </p>
             <p>
               Beyond the bar, the Oasis offers plenty of ways to spend an evening — challenge friends to shuffleboard, board games, video games and Jackbox, catch live music on weekends, or join us for our popular Bad Movie Night every Wednesday.
@@ -230,7 +230,7 @@ export default function AboutClient({ staff }: { staff: StaffMember[] }) {
               The Oasis has also played an important role in New London&apos;s music community, hosting hundreds of local, regional, and touring artists over the years. Notable performers who have appeared on the Oasis stage include MGMT, Future Islands, Dr. Dog, Matt &amp; Kim, The Twilight Sad, Ra Ra Riot, Headlights, Large Professor, Sadat X, and many others.
             </p>
             <p>
-              At its core, the Oasis is simply a neighborhood pub—a place for conversation, community, music, and good drinks, whether you&apos;re stopping by for a couple beers, a non-alcoholic social tonic or an entire evening with friends.
+              At its core, the Oasis is simply a neighborhood pub—a place for conversation, community, music, and good drinks, whether you&apos;re stopping by for a couple beers, a non-alcoholic option, or an entire evening with friends.
             </p>
           </motion.div>
         </div>

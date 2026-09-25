@@ -65,7 +65,7 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
           "COCKTAILS",
           "CIDERS",
           "SELTZERS",
-          "SOCIAL TONICS",
+          "WINE",
         ]}
         pixelsPerSecond={214}
       />
@@ -73,7 +73,7 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
       {/* Tab nav */}
       <section className="bg-[var(--color-oasis-ink)] sticky top-16 md:top-20 z-30 border-b-2 border-[var(--color-oasis-orange)]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-1 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-1 overflow-x-auto scrollbar-hide justify-center">
             {tabs.map((tab) => (
               <button
                 key={tab}

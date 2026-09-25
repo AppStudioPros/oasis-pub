@@ -157,7 +157,7 @@ export default async function HomePage() {
                 name: "What beer does The Oasis Pub serve?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "The Oasis Pub has 20 rotating craft beers on draft, 60+ cans, canned cocktails, CBD and mushroom drinks, social tonics, and alcohol-free options.",
+                  text: "The Oasis Pub has 20 rotating craft beers on draft, 60+ cans, canned cocktails, wine, and alcohol-free options.",
                 },
               },
               {
