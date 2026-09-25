@@ -132,16 +132,25 @@ export default function DrinksGrid() {
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto space-y-4 md:space-y-5">
-          {/* Top row — always 3 */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            {topRow.map((tile, i) => <Tile key={tile.label} tile={tile} i={i} />)}
-          </div>
-          {/* Bottom row — 2 tiles centered under the top 3 */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-            <div className="hidden md:block" />
-            {bottomRow.map((tile, i) => <Tile key={tile.label} tile={tile} i={i + 3} />)}
-          </div>
+        {/* Mobile: plain 2-col grid */}
+        <div className="grid grid-cols-2 gap-4 md:hidden max-w-5xl mx-auto">
+          {TILES.map((tile, i) => <Tile key={tile.label} tile={tile} i={i} />)}
+        </div>
+
+        {/* Desktop: 6-col grid — top 3 each span 2 cols, bottom 2 centered in cols 2-3 and 4-5 */}
+        <div className="hidden md:grid md:grid-cols-6 md:gap-5 max-w-5xl mx-auto">
+          {topRow.map((tile, i) => (
+            <div key={tile.label} className="col-span-2">
+              <Tile tile={tile} i={i} />
+            </div>
+          ))}
+          <div className="col-span-1" />
+          {bottomRow.map((tile, i) => (
+            <div key={tile.label} className="col-span-2">
+              <Tile tile={tile} i={i + 3} />
+            </div>
+          ))}
+          <div className="col-span-1" />
         </div>
       </div>
     </section>
