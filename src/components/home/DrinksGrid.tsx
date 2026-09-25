@@ -68,7 +68,7 @@ export default function DrinksGrid() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-5 max-w-5xl mx-auto">
           {TILES.map((tile, i) => (
             <motion.div
               key={tile.label}
@@ -76,10 +76,11 @@ export default function DrinksGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="w-full md:w-[calc(33.333%-11px)]"
             >
               <Link
                 href="/drinks"
-                className={`group relative block w-full ${tile.rotation} hover:rotate-0 transition-transform duration-500`}
+                className={`group relative block w-full ${tile.rotation} hover:rotate-0 transition-transform duration-500 md:w-[calc(33.333%-14px)]`}
               >
                 <div
                   className="relative bg-white aspect-[4/3] border-2 border-black shadow-[5px_5px_0_0_#000] group-hover:shadow-[7px_7px_0_0_#000] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all overflow-hidden p-4 md:p-5 flex flex-col justify-between"
