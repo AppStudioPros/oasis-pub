@@ -19,12 +19,6 @@ const TILES = [
     icon: "/images/icons/seltzers.png",
   },
   {
-    label: "CBD & Social Tonics",
-    sample: "CBD · Adaptogens",
-    rotation: "-rotate-2",
-    icon: "/images/icons/cbd.png",
-  },
-  {
     label: "Wine",
     sample: "Malbec · Rose · Sauv Blanc",
     rotation: "rotate-2",
@@ -70,7 +64,7 @@ export default function DrinksGrid() {
             The Drinks
           </h2>
           <p className="text-black/70 text-sm md:text-base mt-4 max-w-xl mx-auto">
-            20 drafts. 60+ cans. Canned cocktails. CBD & mushroom drinks. Social tonics. Whatever your night needs.
+            20 drafts. 60+ cans. Canned cocktails. Whatever your night needs.
           </p>
         </motion.div>
 

@@ -4,7 +4,6 @@ import { getOasisMenuTabs } from "@/lib/supabase";
 // JSON fallbacks (used if Supabase returns empty)
 import craftBeerFallback from "@/data/drinks/craft-beer.json";
 import seltzersFallback from "@/data/drinks/seltzers.json";
-import chillFallback from "@/data/drinks/chill.json";
 import wineFallback from "@/data/drinks/wine.json";
 import alcoholFreeFallback from "@/data/drinks/alcohol-free.json";
 import kidsMenuFallback from "@/data/drinks/kids-menu.json";
@@ -12,16 +11,15 @@ import kidsMenuFallback from "@/data/drinks/kids-menu.json";
 export const revalidate = 60;
 
 export const metadata = {
-  title: "Drinks — Craft Beer, Cocktails, Wine, CBD & More",
+  title: "Drinks — Craft Beer, Cocktails, Wine & More",
   description:
-    "20 drafts, 60+ cans, canned cocktails, CBD & mushroom drinks, social tonics and alcohol-free options at The Oasis Pub in New London, CT.",
+    "20 drafts, 60+ cans, canned cocktails, wine, and alcohol-free options at The Oasis Pub in New London, CT.",
   alternates: { canonical: "https://oasisnewlondon.com/drinks" },
 };
 
 const FALLBACK_MENUS = {
   "Craft Beer": craftBeerFallback,
   "Canned Drinks": seltzersFallback,
-  "CBD & Social Tonics": chillFallback,
   "Wine": wineFallback,
   "Alcohol-Free": alcoholFreeFallback,
   "Kids Menu": kidsMenuFallback,

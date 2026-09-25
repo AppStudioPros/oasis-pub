@@ -55,7 +55,7 @@ export default function DrinksClient({ data }: { data: DrinksData }) {
       <PageHero
         eyebrow="Pick Your Poison"
         title="The Drinks"
-        subtitle="20 drafts. 60+ cans. Canned cocktails. CBD & mushroom drinks. Social tonics. Whatever your night needs."
+        subtitle="20 drafts. 60+ cans. Canned cocktails. Whatever your night needs."
       />
 
       <SectionDivider
