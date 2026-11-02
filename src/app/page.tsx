@@ -23,7 +23,7 @@ function mapEvent(e: Awaited<ReturnType<typeof getHomepageEvents>>[number]) {
     slug: e.slug,
     title: e.title,
     date: toEasternDate(nextISO),
-    startTime: toEasternTime(nextISO),
+    startTime: e.display_time ?? toEasternTime(nextISO),
     endTime: e.end_date ? toEasternTime(e.end_date) : "",
     image: e.image_url ?? "/images/heroes/poster-collage.jpg",
     description: e.description ?? "",

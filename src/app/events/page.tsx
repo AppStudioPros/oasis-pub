@@ -16,7 +16,7 @@ function mapEvent(e: Awaited<ReturnType<typeof getUpcomingEvents>>[number]) {
     slug: e.slug,
     title: e.title,
     date: toEasternDate(e.start_date),
-    startTime: toEasternTime(e.start_date),
+    startTime: e.display_time ?? toEasternTime(e.start_date),
     endTime: e.end_date ? toEasternTime(e.end_date) : "",
     endDate: e.end_date ?? null,
     image: e.image_url ?? "/images/heroes/poster-collage.jpg",

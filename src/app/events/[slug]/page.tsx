@@ -50,7 +50,7 @@ function mapLive(e: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>) {
     slug: e.slug,
     title: e.title,
     date: toEasternDate(nextDateISO),
-    startTime: toEasternTime(nextDateISO),
+    startTime: e.display_time ?? toEasternTime(nextDateISO),
     endTime: e.end_date ? toEasternTime(e.end_date) : "",
     endDate: e.end_date ?? null,
     image: e.image_url ?? "/images/heroes/poster-collage.jpg",
